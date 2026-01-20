@@ -38,6 +38,6 @@ jobs:
         run: npm test
 
       - name: Publish to npm
+        # Uses npm Trusted Publishing (OIDC) - no token needed
+        # Configure at: https://www.npmjs.com/package/pm-skills-mcp/access
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
