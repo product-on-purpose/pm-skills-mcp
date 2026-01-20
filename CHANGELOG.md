@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes._
 
+## [0.1.1] - 2026-01-20
+
+### Added
+- **GitHub Actions CI/CD**
+  - CI workflow (`.github/workflows/ci.yml`): runs tests, lint, and type check on PR/push to main
+  - Publish workflow (`.github/workflows/publish.yml`): auto-publishes to npm on GitHub release
+  - Tests run on Node.js 18, 20, and 22 matrix
+- **ESLint + Prettier configuration**
+  - ESLint with TypeScript support (`eslint.config.js`)
+  - Prettier for code formatting (`.prettierrc`, `.prettierignore`)
+  - New scripts: `npm run lint`, `npm run format`, `npm run format:check`
+- **Internal documentation**
+  - `_NOTES/npm-github-cicd.md` - CI/CD setup guide and npm token instructions
+
+### Changed
+- Removed unused imports to fix ESLint warnings
+- Code formatting applied across all source files
+
 ## [0.1.0] - 2026-01-20
 
 ### Added
