@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Clone pm-skills
+        run: git clone --depth 1 https://github.com/product-on-purpose/pm-skills.git ../pm-skills
+
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -24,6 +27,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Embed skills
+        run: npm run embed-skills ../pm-skills/skills
 
       - name: Build
         run: npm run build

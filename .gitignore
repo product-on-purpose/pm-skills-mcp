@@ -46,5 +46,5 @@ build/
 .env.local
 .env.*.local
 
-# Skills are now committed to the repo for CI/CD
-# skills/
+# Skills are embedded at build time from pm-skills repo
+skills/
