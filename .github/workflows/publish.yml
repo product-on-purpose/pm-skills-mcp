@@ -25,14 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Embed skills
+        run: npm run embed-skills
+
       - name: Build
         run: npm run build
 
       - name: Run tests
         run: npm test
-
-      - name: Embed skills
-        run: npm run embed-skills
 
       - name: Publish to npm
         run: npm publish --provenance --access public
