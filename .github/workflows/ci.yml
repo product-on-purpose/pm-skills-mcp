@@ -21,7 +21,7 @@ jobs:
         run: git clone --depth 1 https://github.com/product-on-purpose/pm-skills.git ../pm-skills
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Use Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: 'npm'
