@@ -1,0 +1,50 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for the MCP server
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement!
+
+        **Note:** For new PM skills or skill improvements, please contribute to [pm-skills](https://github.com/product-on-purpose/pm-skills).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem would this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request Type
+      options:
+        - New MCP tool
+        - New MCP resource
+        - Enhancement to existing tool
+        - Performance improvement
+        - Developer experience
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions you've considered?
+    validations:
+      required: false

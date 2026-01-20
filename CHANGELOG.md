@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes._
+### Added
+- **Community Governance Files**
+  - `SECURITY.md` - Vulnerability reporting policy (48h/72h SLA)
+  - `CONTRIBUTING.md` - Contribution guidelines for MCP server development
+  - `CODE_OF_CONDUCT.md` - Contributor Covenant v2.1
+  - `CLAUDE.md` - Claude Code instructions for project context
+- **GitHub Issue & PR Templates**
+  - `.github/ISSUE_TEMPLATE/config.yml` - Disables blank issues, links to upstream pm-skills
+  - `.github/ISSUE_TEMPLATE/bug_report.yml` - Structured bug report form
+  - `.github/ISSUE_TEMPLATE/feature_request.yml` - Feature request form
+  - `.github/PULL_REQUEST_TEMPLATE.md` - PR checklist with TypeScript requirements
+- **Security Scanning**
+  - `.github/workflows/codeql.yml` - JavaScript/TypeScript CodeQL analysis
+
+### Changed
+- **Dependabot Configuration**
+  - Fixed npm package ecosystem directory from `/.github/scripts` to `/` (root)
+  - Added `open-pull-requests-limit: 10` for npm updates
+- **Git Configuration**
+  - Updated `.gitignore` with `.obsidian`, `.claude/settings.local.json`, `AGENTS/*/` patterns, `coverage/`
+  - Fixed stale git upstream tracking (removed reference to deleted `origin/master`)
 
 ## [0.1.2] - 2026-01-20
 

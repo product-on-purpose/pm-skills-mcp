@@ -35,7 +35,15 @@ temp/
 
 # Personal notes
 _NOTES/
+.obsidian
 
+# Claude Code local settings
+.claude/settings.local.json
+
+# Agent working files
+AGENTS/*/SESSION-LOG/
+AGENTS/*/TODO.md
+AGENTS/*/PLANNING/
 
 # Node.js
 node_modules/
@@ -45,6 +53,9 @@ build/
 .env
 .env.local
 .env.*.local
+
+# Test coverage
+coverage/
 
 # Skills are embedded at build time from pm-skills repo
 skills/
