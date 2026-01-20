@@ -22,7 +22,7 @@
     <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
   </a>
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/releases">
-    <img src="https://img.shields.io/badge/version-0.1.1-blue.svg?style=flat-square" alt="Version">
+    <img src="https://img.shields.io/badge/version-0.1.2-blue.svg?style=flat-square" alt="Version">
   </a>
   <a href="#tools">
     <img src="https://img.shields.io/badge/tools-34-brightgreen.svg?style=flat-square" alt="Tools">

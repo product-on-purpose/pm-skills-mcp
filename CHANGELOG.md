@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes._
 
+## [0.1.2] - 2026-01-20
+
+### Changed
+- **CI/CD Infrastructure**
+  - Migrated default branch from `master` to `main`
+  - CI now clones pm-skills repo at build time (skills not duplicated in repo)
+  - Publish workflow uses npm automation token for 2FA bypass
+  - Repository made public for npm Trusted Publishing compatibility
+- **Skills Management**
+  - Skills directory (`skills/`) now gitignored (embedded at build time only)
+  - pm-skills remains the single source of truth for skill content
+
+### Fixed
+- CI/CD workflows now trigger on correct branch (`main`)
+- Publish workflow authentication with npm automation token
+
 ## [0.1.1] - 2026-01-20
 
 ### Added

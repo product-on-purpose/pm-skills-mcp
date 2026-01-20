@@ -1,7 +1,7 @@
 # PM-Skills MCP - Project Context
 
 **Last Updated:** 2026-01-20
-**Status:** v0.1.1 Published to npm with CI/CD
+**Status:** v0.1.2 Published to npm with working CI/CD
 
 ## Project Overview
 
@@ -99,7 +99,7 @@ Resources are accessible via MCP's `resources/read` with these URI patterns:
 
 ## npm Package
 
-Published to npm as `pm-skills-mcp@0.1.1` on 2026-01-20.
+Published to npm as `pm-skills-mcp@0.1.2` on 2026-01-20.
 
 ```bash
 npm install -g pm-skills-mcp
@@ -113,9 +113,14 @@ Package: https://www.npmjs.com/package/pm-skills-mcp
 
 GitHub Actions workflows configured:
 - **CI** (`ci.yml`): Runs on PR/push to main - tests, lint, type check (Node 18/20/22)
+  - Clones pm-skills repo at build time for skill embedding
 - **Publish** (`publish.yml`): Auto-publishes to npm on GitHub release
+  - Uses npm automation token (bypasses 2FA)
+  - Includes provenance attestation
 
-NPM_TOKEN secret configured in GitHub repository settings.
+NPM_TOKEN (automation token) configured in GitHub repository settings.
+
+**Repository:** Public (required for npm provenance)
 
 ## Next Steps
 

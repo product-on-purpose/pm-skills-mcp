@@ -53,6 +53,7 @@
 ### npm Publish
 - [x] Publish to npm as `pm-skills-mcp@0.1.0` (2026-01-20)
 - [x] Publish to npm as `pm-skills-mcp@0.1.1` (2026-01-20)
+- [x] Publish to npm as `pm-skills-mcp@0.1.2` (2026-01-20) - automated via GitHub release
 
 ### CI/CD & Quality
 - [x] Set up CI workflow (test on PR/push to main, Node 18/20/22)
@@ -60,6 +61,10 @@
 - [x] Add ESLint configuration with TypeScript support
 - [x] Add Prettier configuration
 - [x] Configure NPM_TOKEN secret in GitHub
+- [x] Migrate from master to main branch
+- [x] CI clones pm-skills at build time (no skill duplication)
+- [x] Make repository public
+- [x] Configure npm automation token for 2FA bypass
 
 ## Improvements (Lower Priority)
 
