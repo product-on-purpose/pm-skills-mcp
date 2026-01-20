@@ -36,6 +36,7 @@ temp/
 # Personal notes
 _NOTES/
 
+
 # Node.js
 node_modules/
 dist/

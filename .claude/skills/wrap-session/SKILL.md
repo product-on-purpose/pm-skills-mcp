@@ -118,6 +118,16 @@ project-root/
             └── <descriptive-name>.md
 ```
 
+## Documentation Rules
+
+When updating public-facing files, follow these rules:
+
+- **`_NOTES/`** is gitignored — never reference it in README, CHANGELOG, or CONTRIBUTING
+- Describe **what changed**, not where your working files are
+- Agent context files (`AGENTS/`) may reference `_NOTES/` for internal coordination
+
+See `references/documentation-rules.md` for detailed guidance.
+
 ## When NOT to Run
 
 - No meaningful work was done

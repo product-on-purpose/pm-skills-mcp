@@ -1,24 +1,42 @@
-# Technical Decisions
+# PM-Skills MCP - Technical Decisions
 
-## 2026-01-15: Project Initialization
+## 2026-01-17: Phase 1 Implementation
 
-**Status:** Accepted
+### Decision 1: Dynamic Skill Loading
 
-**Context:**
-New project initialized with agentic coding structure.
+**Context:** The implementation plan suggested individual tool files for each skill.
 
-**Decision:**
-Initialize with standard project structure including README, CHANGELOG, LICENSE, and AGENTS context files.
+**Decision:** Use dynamic loading from pm-skills repository instead.
 
-**Alternatives Considered:**
-- Minimal structure (README only) — Rejected, insufficient for AI continuity
-- Full open-source structure (with CONTRIBUTING, CODE_OF_CONDUCT) — Deferred until needed
+**Rationale:**
+- All 24 skills automatically available without manual tool creation
+- Single code path for all skills reduces maintenance
+- Easier to add new skills - just add to pm-skills repo
 
-**Consequences:**
-- Consistent structure across all projects
-- AI sessions can resume with full context
-- May have unused files for simple projects (acceptable tradeoff)
+### Decision 2: Zod Schemas for MCP SDK
 
----
+**Context:** Initial implementation used JSON Schema objects for tool parameters.
 
-*Add new decisions above this line*
+**Decision:** Use Zod schema objects directly with MCP SDK's `tool()` method.
+
+**Rationale:**
+- MCP TypeScript SDK expects `ZodRawShapeCompat` for parameter schemas
+- Zod provides runtime validation in addition to type safety
+
+### Decision 3: HTML Comment Stripping
+
+**Context:** SKILL.md files have `<!-- PM-Skills | ... -->` comments before frontmatter.
+
+**Decision:** Strip leading HTML comments before parsing with gray-matter.
+
+**Rationale:**
+- gray-matter requires frontmatter to start at beginning of file
+- Simple regex solution: `/^\s*<!--[\s\S]*?-->\s*/g`
+
+### Decision 4: Development Fallback Path
+
+**Context:** During development, embedded skills directory doesn't exist.
+
+**Decision:** Check for embedded path first, fall back to pm-skills repo path.
+
+**Note:** Hardcoded path should be removed before distribution.
