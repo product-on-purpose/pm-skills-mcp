@@ -14,20 +14,26 @@ const __dirname = path.dirname(__filename);
  * Default skills path - embedded skills directory
  * Can be overridden via PM_SKILLS_PATH environment variable
  *
- * For development, falls back to the pm-skills repo if embedded path doesn't exist
+ * Resolution order:
+ * 1. PM_SKILLS_PATH env var (explicit override)
+ * 2. Embedded skills in package (./skills relative to dist)
+ * 3. PM_SKILLS_DEV_PATH env var (for development)
  */
 const EMBEDDED_SKILLS_PATH = path.resolve(__dirname, '../skills');
-const DEV_SKILLS_PATH = 'E:/Projects/product-on-purpose/pm-skills/skills';
 
 function getDefaultSkillsPath(): string {
-  // Check if embedded skills exist
+  // Check if embedded skills exist (production mode)
   if (fs.existsSync(EMBEDDED_SKILLS_PATH)) {
     return EMBEDDED_SKILLS_PATH;
   }
-  // Fall back to dev path for development
-  if (fs.existsSync(DEV_SKILLS_PATH)) {
-    return DEV_SKILLS_PATH;
+
+  // Check for dev path via environment variable
+  const devPath = process.env.PM_SKILLS_DEV_PATH;
+  if (devPath && fs.existsSync(devPath)) {
+    return devPath;
   }
+
+  // Return embedded path even if it doesn't exist (will error later with helpful message)
   return EMBEDDED_SKILLS_PATH;
 }
 
@@ -42,7 +48,7 @@ export function loadConfig(): ServerConfig {
   // Parse enabled phases from environment if provided
   let enabledPhases: SkillPhase[] | undefined;
   if (process.env.PM_SKILLS_PHASES) {
-    enabledPhases = process.env.PM_SKILLS_PHASES.split(',').map(p => p.trim()) as SkillPhase[];
+    enabledPhases = process.env.PM_SKILLS_PHASES.split(',').map((p) => p.trim()) as SkillPhase[];
   }
 
   // Parse default format

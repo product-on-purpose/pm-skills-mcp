@@ -42,13 +42,7 @@ export interface Skill {
 /**
  * Triple Diamond phases
  */
-export type SkillPhase =
-  | 'discover'
-  | 'define'
-  | 'develop'
-  | 'deliver'
-  | 'measure'
-  | 'iterate';
+export type SkillPhase = 'discover' | 'define' | 'develop' | 'deliver' | 'measure' | 'iterate';
 
 /**
  * All valid phases as array for iteration
@@ -59,7 +53,7 @@ export const SKILL_PHASES: SkillPhase[] = [
   'develop',
   'deliver',
   'measure',
-  'iterate'
+  'iterate',
 ];
 
 /**

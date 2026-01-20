@@ -25,7 +25,7 @@
     <img src="https://img.shields.io/badge/version-0.1.0-blue.svg?style=flat-square" alt="Version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-27-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-34-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
@@ -102,9 +102,10 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **27 MCP Tools** — All 24 PM skills + 3 workflow bundles as invokable tools
-- **75+ Resources** — Templates, examples, and skill docs accessible via URI
-- **6 Prompt Templates** — Pre-built workflows for common PM scenarios
+- **34 MCP Tools** — 24 PM skills + 5 workflow bundles + 5 utility tools
+- **72 MCP Resources** — Skills, templates, and examples accessible via URI
+- **3 MCP Prompts** — Guided conversation starters for common workflows
+- **5 Workflow Bundles** — Pre-built multi-skill workflows for common scenarios
 - **Zero Configuration** — Works out of the box with embedded skills
 - **Universal Compatibility** — Claude Desktop, Cursor, Continue, and any MCP client
 - **Customizable** — Override with your own skill modifications
@@ -240,11 +241,23 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 
 *Multi-skill workflows*
 
+| Tool | Effort | Description |
+|------|--------|-------------|
+| `pm_workflow_feature_kickoff` | standard | problem → hypothesis → solution → PRD → stories |
+| `pm_workflow_lean_startup` | comprehensive | hypothesis → experiment → results → pivot decision |
+| `pm_workflow_triple_diamond` | comprehensive | Full discovery to delivery sequence |
+| `pm_workflow_quick_prd` | quick | Fast problem → PRD workflow |
+| `pm_workflow_experiment_cycle` | standard | hypothesis → experiment → results → lessons |
+
+### 🛠️ Utility Tools
+
 | Tool | Description |
 |------|-------------|
-| `pm_workflow_feature_kickoff` | problem → hypothesis → PRD → stories → launch |
-| `pm_workflow_lean_startup` | hypothesis → experiment → results → pivot |
-| `pm_workflow_triple_diamond` | Complete product development cycle |
+| `pm_list_skills` | List all available PM skill tools |
+| `pm_list_resources` | List all available MCP resources |
+| `pm_list_workflows` | List all workflow bundles with steps |
+| `pm_list_prompts` | List available conversation prompts |
+| `pm_validate` | Validate artifact against skill template |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -276,16 +289,19 @@ pm-skills://bundles/feature-kickoff
 
 ## Prompts
 
-Pre-built prompt templates for common PM workflows:
+MCP prompts provide guided conversation starters for common workflows. Use `prompts/get` with the prompt name and a topic to begin.
 
 | Prompt | Description |
 |--------|-------------|
-| `feature-kickoff` | Complete feature kickoff from problem to launch plan |
-| `lean-validation` | Build-Measure-Learn cycle for rapid validation |
-| `full-diamond` | End-to-end Triple Diamond process |
-| `quick-prd` | Fast PRD generation with minimal input |
-| `experiment-cycle` | From hypothesis through results documentation |
-| `retrospective-complete` | Full retrospective workflow |
+| `feature-kickoff` | Complete feature kickoff: Problem → Hypothesis → Solution → PRD → Stories |
+| `lean-validation` | Build-Measure-Learn cycle: Hypothesis → Experiment → Results → Pivot |
+| `quick-prd` | Fast PRD creation when requirements are clear: Problem → PRD |
+
+**Usage example:**
+
+```
+prompts/get name="feature-kickoff" arguments={"topic": "dark mode support"}
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -337,12 +353,12 @@ Override embedded skills with your customized versions:
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   27 Tools  │   │ 75 Resources│   │  6 Prompts  │       │
+│   │   34 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
-│   │ • prd       │   │ • templates │   │ • kickoff   │       │
-│   │ • hypothesis│   │ • examples  │   │ • validation│       │
-│   │ • adr       │   │ • skills    │   │ • diamond   │       │
-│   │ • ...       │   │ • bundles   │   │ • ...       │       │
+│   │ • 24 skills │   │ • templates │   │ • kickoff   │       │
+│   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
+│   │ • 5 utils   │   │ • skills    │   │ • quick-prd │       │
+│   │             │   │             │   │             │       │
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
 │                                                             │
 │   ┌─────────────────────────────────────────────────────┐   │

@@ -2,7 +2,7 @@
  * Generic tool handler for skill tools
  */
 
-import type { Skill, OutputFormat, SkillToolResponse } from '../types/index.js';
+import type { Skill, SkillToolResponse } from '../types/index.js';
 import type { SkillToolInputType } from './schemas.js';
 
 /**
@@ -29,11 +29,8 @@ function extractChecklist(instructions: string): string[] {
 /**
  * Format skill response based on format preference
  */
-export function formatSkillResponse(
-  skill: Skill,
-  input: SkillToolInputType
-): SkillToolResponse {
-  const { topic, context, format, includeExample } = input;
+export function formatSkillResponse(skill: Skill, input: SkillToolInputType): SkillToolResponse {
+  const { format, includeExample } = input;
 
   // Build content based on format
   const content: SkillToolResponse['content'] = {
@@ -69,10 +66,7 @@ export function formatSkillResponse(
 /**
  * Build formatted text output for tool response
  */
-export function buildToolOutput(
-  skill: Skill,
-  input: SkillToolInputType
-): string {
+export function buildToolOutput(skill: Skill, input: SkillToolInputType): string {
   const { topic, context, format, includeExample } = input;
   const lines: string[] = [];
 
@@ -145,7 +139,9 @@ export function buildToolOutput(
   // Footer with metadata
   lines.push('');
   lines.push('---');
-  lines.push(`*Skill: ${skill.name} | Phase: ${skill.phase} | Category: ${skill.metadata.metadata.category}*`);
+  lines.push(
+    `*Skill: ${skill.name} | Phase: ${skill.phase} | Category: ${skill.metadata.metadata.category}*`
+  );
 
   return lines.join('\n');
 }
@@ -153,24 +149,33 @@ export function buildToolOutput(
 /**
  * Create an error response
  */
-export function createErrorResponse(message: string): { isError: true; content: Array<{ type: 'text'; text: string }> } {
+export function createErrorResponse(message: string): {
+  isError: true;
+  content: Array<{ type: 'text'; text: string }>;
+} {
   return {
     isError: true,
-    content: [{
-      type: 'text',
-      text: `Error: ${message}`,
-    }],
+    content: [
+      {
+        type: 'text',
+        text: `Error: ${message}`,
+      },
+    ],
   };
 }
 
 /**
  * Create a success response
  */
-export function createSuccessResponse(text: string): { content: Array<{ type: 'text'; text: string }> } {
+export function createSuccessResponse(text: string): {
+  content: Array<{ type: 'text'; text: string }>;
+} {
   return {
-    content: [{
-      type: 'text',
-      text,
-    }],
+    content: [
+      {
+        type: 'text',
+        text,
+      },
+    ],
   };
 }

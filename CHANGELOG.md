@@ -7,7 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes._
+
+## [0.1.0] - 2026-01-20
+
 ### Added
+- **Phase 4 Complete: MCP Prompts**
+  - Prompts module (`src/prompts/index.ts`)
+  - 3 MCP prompts: `feature-kickoff`, `lean-validation`, `quick-prd`
+  - `pm_list_prompts` utility tool
+  - `pm_validate` output validation tool with word-based section matching
+  - Validator module (`src/tools/validator.ts`)
+- **Phase 5 Complete: Distribution**
+  - Skill embedding script (`scripts/embed-skills.js`)
+  - NPM package configuration (bin, files, prepublishOnly)
+  - Claude Desktop configuration docs in README
+  - Environment variable `PM_SKILLS_DEV_PATH` for development mode
+- **Phase 6 Complete: Testing**
+  - Vitest test framework with 47 tests
+  - Unit tests for validator, workflows, prompts, handlers, loader
+  - Integration tests for server initialization
+  - Test scripts: `npm test`, `npm run test:watch`, `npm run test:coverage`
+- Tool count: 34 (24 skills + 5 workflows + 5 utilities)
+- Prompt count: 3
+- Resource count: 72
+
+### Changed
+- Removed hardcoded DEV_SKILLS_PATH from config.ts
+- Updated README with prompts section and accurate counts
+- Improved validator fuzzy matching to prevent false positives
+
+### Previous (Phase 3 + Workflows)
+- **Phase 3 Complete: MCP Resources**
+  - Resource registration module (`src/resources/index.ts`)
+  - 72 MCP resources (24 skills × 3 types: instructions, templates, examples)
+  - URI schema: `pm-skills://skills|templates|examples/{phase}/{skill}`
+  - `pm_list_resources` utility tool
+- **Workflow Bundle Tools**
+  - Workflow definitions module (`src/workflows/index.ts`)
+  - 5 workflow bundles: feature-kickoff, lean-startup, triple-diamond, quick-prd, experiment-cycle
+  - `pm_workflow_*` tools that return execution plans
+  - `pm_list_workflows` utility tool
+- Rich tool descriptions for all 32 tools
+
+### Previous (Phase 1-2)
 - **Phase 1 Complete: Core MCP Server Implementation**
   - MCP server scaffold (`src/index.ts`, `src/server.ts`, `src/config.ts`)
   - Type definitions (`src/types/index.ts`)
@@ -22,9 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment variable configuration (`PM_SKILLS_PATH`, `PM_SKILLS_FORMAT`, etc.)
 - TypeScript strict mode with full type safety
 - Development fallback path for local pm-skills repo
-
-### Changed
-- Upgraded from planning to working implementation
 - Tools now use Zod schemas for MCP SDK compatibility
 
 ### Previous (Planning Phase)

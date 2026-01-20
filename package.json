@@ -1,21 +1,54 @@
 {
   "name": "pm-skills-mcp",
-  "version": "0.0.1",
-  "description": "MCP server exposing product management skills as tools",
+  "version": "0.1.0",
+  "description": "MCP server exposing 24 product management skills as tools, resources, and workflows",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "pm-skills-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "embed-skills": "node scripts/embed-skills.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix",
+    "format": "prettier --write src/ tests/",
+    "format:check": "prettier --check src/ tests/",
+    "prepublishOnly": "npm run embed-skills && npm run build"
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "product-management",
-    "ai-tools"
+    "pm-skills",
+    "ai-tools",
+    "claude",
+    "anthropic"
   ],
-  "author": "Jonathan",
-  "license": "MIT",
+  "author": "Product on Purpose",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/product-on-purpose/pm-skills-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/product-on-purpose/pm-skills-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/product-on-purpose/pm-skills-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
     "glob": "^13.0.0",
@@ -23,8 +56,15 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/node": "^25.0.9",
+    "@vitest/coverage-v8": "^4.0.17",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1",
+    "vitest": "^4.0.17"
   }
 }
