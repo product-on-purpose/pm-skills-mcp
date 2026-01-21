@@ -51,48 +51,51 @@
 <summary><strong>Table of Contents</strong></summary>
 
 - [The Big Idea](#the-big-idea)
-    - [Why MCP?](#why-mcp)
-    - [The Transformation](#the-transformation)
-    - [Key Features](#key-features)
-    - [Built with...](#built-with)
-    - [Works with...](#works-with)
-    - [Project Structure](#project-structure)
+  - [Why MCP?](#why-mcp)
+  - [The Transformation](#the-transformation)
+  - [Key Features](#key-features)
+  - [Built with...](#built-with)
+  - [Works with...](#works-with)
+  - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-    - [Claude Desktop](#claude-desktop)
-    - [NPM Global Install](#npm-global-install)
-    - [From Source](#from-source)
-    - [Configuration](#configuration)
+  - [NPM Global Install](#npm-global-install)
+  - [From Source](#from-source)
+  - [Claude Desktop](#claude-desktop)
+  - [Claude Code (CLI)](#claude-code-cli)
+  - [Cursor / VS Code](#cursor--vs-code)
+  - [Configuration](#configuration)
 - [Usage](#usage)
-    - [How It Works](#how-it-works)
-    - [Tools](#tools)
-    - [🔍 Discover Phase](#-discover-phase)
-    - [📋 Define Phase](#-define-phase)
-    - [💡 Develop Phase](#-develop-phase)
-    - [🚀 Deliver Phase](#-deliver-phase)
-    - [📊 Measure Phase](#-measure-phase)
-    - [🔄 Iterate Phase](#-iterate-phase)
-    - [🔗 Workflow Bundles](#-workflow-bundles)
-    - [🛠️ Utility Tools](#️-utility-tools)
-    - [Resources](#resources)
-    - [Prompts](#prompts)
+  - [How It Works](#how-it-works)
+  - [Tools](#tools)
+  - [🔍 Discover Phase](#-discover-phase)
+  - [📋 Define Phase - *Frame the problem*](#-define-phase---frame-the-problem)
+  - [💡 Develop Phase - *Explore solutions*](#-develop-phase---explore-solutions)
+  - [🚀 Deliver Phase - *Ship it*](#-deliver-phase---ship-it)
+  - [📊 Measure Phase - *Validate with data*](#-measure-phase---validate-with-data)
+  - [🔄 Iterate Phase - *Learn and improve*](#-iterate-phase---learn-and-improve)
+  - [🔗 Workflow Bundles - *Multi-skill workflows*](#-workflow-bundles---multi-skill-workflows)
+  - [🛠️ Utility Tools](#️-utility-tools)
+  - [Resources](#resources)
+  - [Prompts](#prompts)
+- [Guides](#guides)
 - [Project Status](#project-status)
-    - [Changelog](#changelog)
-    - [Roadmap](#roadmap)
+  - [Changelog](#changelog)
+  - [Roadmap](#roadmap)
 - [Development](#development)
-    - [Testing](#testing)
-    - [Code Quality](#code-quality)
-    - [CI/CD](#cicd)
+  - [Testing](#testing)
+  - [Code Quality](#code-quality)
+  - [CI/CD](#cicd)
 - [Security](#security)
 - [Comparison](#comparison)
-    - [PM-Skills vs PM-Skills MCP](#pm-skills-vs-pm-skills-mcp)
-    - [When to Use Which](#when-to-use-which)
+  - [PM-Skills vs PM-Skills MCP](#pm-skills-vs-pm-skills-mcp)
+  - [When to Use Which](#when-to-use-which)
 - [Contributing](#contributing)
-    - [How to Contribute](#how-to-contribute)
-    - [Reporting Bugs](#reporting-bugs)
+  - [How to Contribute](#how-to-contribute)
+  - [Reporting Bugs](#reporting-bugs)
 - [About](#about)
-    - [Author](#author)
-    - [License](#license)
-    - [Security](#security-1)
+  - [Author](#author)
+  - [License](#license)
+  - [Security](#security-1)
 - [Community](#community)
 
 </details>
@@ -166,126 +169,21 @@ PM-Skills MCP works with any client that supports the Model Context Protocol. He
 
 #### Platform Compatibility
 
-| Platform            | Status    | Integration Type       | Notes                           |
-| ------------------- | --------- | ---------------------- | ------------------------------- |
-| **Claude Code**     | ✅ Native | MCP Server             | Full tool access via CLI        |
-| **Claude Desktop**  | ✅ Native | MCP Server             | Recommended for best experience |
-| **Claude.ai**       | ✅ Native | MCP Server (Projects)  | Via MCP integration in Projects |
-| **Cursor**          | ✅ Native | MCP Server             | AI-powered IDE                  |
-| **VS Code**         | ✅ Native | Via Cline/Continue     | Multiple MCP-compatible extensions |
-| **Continue**        | ✅ Native | MCP Server             | Open-source coding assistant    |
-| **Cline**           | ✅ Native | MCP Server             | VS Code extension               |
-| **Windsurf**        | ✅ Native | MCP Server             | AI-native IDE                   |
-| **GitHub Copilot**  | 🔶 Indirect | Via MCP-enabled tools | Use with Copilot Chat + MCP     |
-| **ChatGPT / Codex** | 🔶 Manual | Copy skill content     | No native MCP support           |
-| **Any MCP Client**  | ✅ Universal | Protocol-level       | Full compatibility              |
+| Platform            | Status       | Integration Type      | Notes                              |
+| ------------------- | ------------ | --------------------- | ---------------------------------- |
+| **Claude Code**     | ✅ Native    | MCP Server            | Full tool access via CLI           |
+| **Claude Desktop**  | ✅ Native    | MCP Server            | Recommended for best experience    |
+| **Claude.ai**       | ✅ Native    | MCP Server (Projects) | Via MCP integration in Projects    |
+| **Cursor**          | ✅ Native    | MCP Server            | AI-powered IDE                     |
+| **VS Code**         | ✅ Native    | Via Cline/Continue    | Multiple MCP-compatible extensions |
+| **Continue**        | ✅ Native    | MCP Server            | Open-source coding assistant       |
+| **Cline**           | ✅ Native    | MCP Server            | VS Code extension                  |
+| **Windsurf**        | ✅ Native    | MCP Server            | AI-native IDE                      |
+| **GitHub Copilot**  | 🔶 Indirect | Via MCP-enabled tools | Use with Copilot Chat + MCP        |
+| **ChatGPT / Codex** | 🔶 Manual   | Copy skill content    | No native MCP support              |
+| **Any MCP Client**  | ✅ Universal | Protocol-level        | Full compatibility                 |
 
-#### Quick Start by Platform
-
-<details>
-<summary><strong>Claude Code (CLI)</strong></summary>
-
-Add to your Claude Code MCP settings (`~/.claude/claude_desktop_config.json` or project `.claude/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "pm-skills": {
-      "command": "npx",
-      "args": ["pm-skills-mcp"]
-    }
-  }
-}
-```
-
-Then use tools directly in your CLI session:
-```
-> Use the pm_prd tool to create a PRD for user authentication
-```
-
-</details>
-
-<details>
-<summary><strong>Claude Desktop</strong></summary>
-
-Add to `claude_desktop_config.json` (see [Getting Started](#claude-desktop) for path):
-
-```json
-{
-  "mcpServers": {
-    "pm-skills": {
-      "command": "npx",
-      "args": ["pm-skills-mcp"]
-    }
-  }
-}
-```
-
-Restart Claude Desktop. Tools appear in the 🔧 menu.
-
-</details>
-
-<details>
-<summary><strong>Claude.ai (Projects)</strong></summary>
-
-Claude.ai supports MCP servers in Projects. Add PM-Skills MCP as an integration in your Project settings. Once connected, all 35 tools become available in your project conversations.
-
-</details>
-
-<details>
-<summary><strong>VS Code (Cline / Continue)</strong></summary>
-
-**With Cline:**
-1. Install [Cline extension](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)
-2. Open Cline settings → MCP Servers
-3. Add pm-skills-mcp configuration
-
-**With Continue:**
-1. Install [Continue extension](https://marketplace.visualstudio.com/items?itemName=Continue.continue)
-2. Edit `~/.continue/config.json` to add MCP server
-
-</details>
-
-<details>
-<summary><strong>Cursor</strong></summary>
-
-Add to Cursor's MCP configuration in Settings → Features → MCP Servers:
-
-```json
-{
-  "pm-skills": {
-    "command": "npx",
-    "args": ["pm-skills-mcp"]
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><strong>ChatGPT / Codex (Manual)</strong></summary>
-
-ChatGPT doesn't support MCP natively. However, you can:
-
-1. Clone the [pm-skills](https://github.com/product-on-purpose/pm-skills) repository
-2. Copy the content of any `SKILL.md` file into your conversation as context
-3. Ask ChatGPT to follow the skill instructions
-
-For programmatic access, consider using MCP-compatible clients instead.
-
-</details>
-
-<details>
-<summary><strong>GitHub Copilot</strong></summary>
-
-GitHub Copilot doesn't have native MCP support, but you can:
-
-1. Use Copilot Chat in VS Code with an MCP-enabled extension (Cline, Continue)
-2. Clone [pm-skills](https://github.com/product-on-purpose/pm-skills) to your repo—Copilot will discover skills via `AGENTS.md`
-
-For full MCP tool access, use a dedicated MCP client.
-
-</details>
+See the [Integration Guide](docs/integration-guide.md) for detailed setup instructions for each platform.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -311,6 +209,14 @@ pm-skills-mcp/
 │   ├── deliver/              # Specification skills
 │   ├── measure/              # Validation skills
 │   └── iterate/              # Learning skills
+├── docs/                     # Documentation
+│   ├── getting-started.md    # Complete setup and first-use guide
+│   ├── integration-guide.md  # Client-specific configuration
+│   ├── customization.md      # Using custom skills with MCP
+│   ├── migration-guide.md    # Moving between file-based and MCP
+│   ├── architecture.md       # Technical internals for contributors
+│   └── reference/            # Reference documentation
+│       └── project-structure.md
 ├── tests/                    # Vitest test suites (47 tests)
 ├── scripts/                  # Build and utility scripts
 ├── dist/                     # Compiled JavaScript output
@@ -330,22 +236,7 @@ See [docs/reference/project-structure.md](docs/reference/project-structure.md) f
 
 ## Getting Started
 
-### Claude Desktop
-
-Add to your Claude Desktop configuration (`claude_desktop_config.json`):
-
-```json
-{
-  "mcpServers": {
-    "pm-skills": {
-      "command": "npx",
-      "args": ["pm-skills-mcp"]
-    }
-  }
-}
-```
-
-Restart Claude Desktop. You now have access to all 24 PM skills as tools.
+This section covers quick installation. For a comprehensive walkthrough including core concepts, your first tool invocation, workflows, and troubleshooting, see the **[Getting Started Guide](docs/getting-started.md)**.
 
 ### NPM Global Install
 
@@ -368,6 +259,53 @@ npm install
 npm run build
 npm start
 ```
+
+### Claude Desktop
+
+The recommended client for pm-skills-mcp. Add to your Claude Desktop configuration:
+
+**Config file location:**
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- Linux: `~/.config/Claude/claude_desktop_config.json`
+
+**Configuration:**
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+Restart Claude Desktop. You now have access to all 24 PM skills as tools.
+
+### Claude Code (CLI)
+
+Add to `.claude/settings.json` in your project or `~/.claude/settings.json` globally:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+### Cursor / VS Code
+
+**Cursor:** Settings → Features → MCP Servers
+
+**VS Code:** Use [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) or [Continue](https://marketplace.visualstudio.com/items?itemName=Continue.continue) extensions with MCP support.
+
+See the [Integration Guide](docs/integration-guide.md) for detailed instructions for all platforms.
 
 ### Configuration
 
@@ -426,8 +364,8 @@ Override embedded skills with your customized versions:
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
 │                                                             │
 │   ┌─────────────────────────────────────────────────────┐   │
-│   │              Embedded PM-Skills Library              │   │
-│   │     24 skills × (SKILL.md + TEMPLATE + EXAMPLE)      │   │
+│   │              Embedded PM-Skills Library             │   │
+│   │     24 skills × (SKILL.md + TEMPLATE + EXAMPLE)     │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -440,14 +378,30 @@ Override embedded skills with your customized versions:
 
 ### Tools
 
-PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
+PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **24 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while the **6 utility tools** (like `pm_list_skills`, `pm_search_skills`) help you discover and validate skills. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
 
-| Parameter        | Required | Description                            |
-| ---------------- | -------- | -------------------------------------- |
-| `topic`          | Yes      | What to create the artifact for        |
-| `context`        | No       | Additional requirements or constraints |
-| `format`         | No       | `full`, `concise`, or `template-only`  |
-| `includeExample` | No       | Include a worked example               |
+Every skill tool accepts these parameters:
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `topic` | **Yes** | The subject or feature to create this artifact for. Be specific—"user authentication for mobile app" is better than "auth". |
+| `context` | No | Additional requirements, constraints, or background. Use this for business context, technical constraints, or stakeholder needs. |
+| `format` | No | Output verbosity: `full` (default, includes all guidance), `concise` (template + key points), or `template-only` (just structure). |
+| `includeExample` | No | Set to `true` to include a completed example for reference. Helpful when learning a new skill. |
+
+**Example invocations:**
+
+```
+# Basic usage
+Use pm_prd with topic "user authentication for mobile app"
+
+# With context
+Use pm_hypothesis with topic "checkout abandonment" and context "We see 40%
+cart abandonment. Hypothesis: users abandon due to required account creation."
+
+# Request concise output with example
+Use pm_user_stories with topic "dark mode" format "concise" includeExample true
+```
 
 ### 🔍 Discover Phase
 
@@ -459,9 +413,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_competitive_analysis` | Map the landscape, find opportunities       |
 | `pm_stakeholder_summary`  | Understand who matters and what they need   |
 
-### 📋 Define Phase
-
-*Frame the problem*
+### 📋 Define Phase - *Frame the problem*
 
 | Tool                   | Description                               |
 | ---------------------- | ----------------------------------------- |
@@ -470,9 +422,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_opportunity_tree`  | Teresa Torres-style outcome mapping       |
 | `pm_jtbd_canvas`       | Jobs to be Done framework                 |
 
-### 💡 Develop Phase
-
-*Explore solutions*
+### 💡 Develop Phase - *Explore solutions*
 
 | Tool                  | Description                     |
 | --------------------- | ------------------------------- |
@@ -481,9 +431,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_adr`              | Architecture Decision Records   |
 | `pm_design_rationale` | Why you made that design choice |
 
-### 🚀 Deliver Phase
-
-*Ship it*
+### 🚀 Deliver Phase - *Ship it*
 
 | Tool                  | Description                                       |
 | --------------------- | ------------------------------------------------- |
@@ -493,9 +441,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_launch_checklist` | Never miss a launch step again                    |
 | `pm_release_notes`    | User-facing release communication                 |
 
-### 📊 Measure Phase
-
-*Validate with data*
+### 📊 Measure Phase - *Validate with data*
 
 | Tool                        | Description                         |
 | --------------------------- | ----------------------------------- |
@@ -504,9 +450,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_dashboard_requirements` | Analytics dashboard specs           |
 | `pm_experiment_results`     | Document learnings from experiments |
 
-### 🔄 Iterate Phase
-
-*Learn and improve*
+### 🔄 Iterate Phase - *Learn and improve*
 
 | Tool                  | Description                              |
 | --------------------- | ---------------------------------------- |
@@ -515,9 +459,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_refinement_notes` | Capture backlog refinement outcomes      |
 | `pm_pivot_decision`   | Evidence-based pivot/persevere framework |
 
-### 🔗 Workflow Bundles
-
-*Multi-skill workflows*
+### 🔗 Workflow Bundles - *Multi-skill workflows*
 
 | Tool                           | Effort        | Description                                        |
 | ------------------------------ | ------------- | -------------------------------------------------- |
@@ -577,6 +519,22 @@ MCP prompts provide guided conversation starters for common workflows. Use `prom
 ```
 prompts/get name="feature-kickoff" arguments={"topic": "dark mode support"}
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Guides
+
+Comprehensive documentation for setup, customization, and understanding pm-skills-mcp.
+
+| Guide | Description |
+|-------|-------------|
+| **[Getting Started](docs/getting-started.md)** | Complete walkthrough from installation to your first tool invocation. Covers core concepts, platform-specific setup, workflows, and troubleshooting. |
+| **[Integration Guide](docs/integration-guide.md)** | Detailed setup instructions for each MCP client (Claude Desktop, Cursor, Continue, Cline, etc.) with troubleshooting tips. |
+| **[Customization Guide](docs/customization.md)** | How to use custom skills with pm-skills-mcp. Covers environment variable overrides, forking pm-skills, and creating new skills. |
+| **[Migration Guide](docs/migration-guide.md)** | Moving between file-based pm-skills and MCP-based pm-skills-mcp. Includes command-to-tool mapping and hybrid approaches. |
+| **[Architecture](docs/architecture.md)** | Technical deep-dive for contributors. Covers server internals, data flow, extension points, and performance considerations. |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

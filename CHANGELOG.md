@@ -7,19 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-01-21
+
 ### Added
+- **Comprehensive Documentation Suite** (Issues #8, #9, #10, #11)
+  - `docs/getting-started.md` — Complete setup guide with core concepts, platform setup, first tool walkthrough, workflows, and troubleshooting
+  - `docs/integration-guide.md` — Client-specific setup for Claude Desktop, Claude Code, Cursor, Continue, Cline, Windsurf with troubleshooting
+  - `docs/customization.md` — Environment variable overrides, fork workflow, skill structure requirements, testing custom skills
+  - `docs/migration-guide.md` — File-based ↔ MCP migration, command-to-tool mapping table, hybrid approach
+  - `docs/architecture.md` — Server internals, component breakdown, data flow diagrams, extension points, performance considerations
+- **README Guides section** — New section with links and descriptions for all 5 documentation guides
 - **Platform Compatibility table** — Expanded "Works with..." section with 11 platforms, status indicators, and integration types
-- **Quick Start by Platform** — Collapsible getting-started sections for Claude Code, Desktop, Claude.ai, VS Code, Cursor, ChatGPT, and GitHub Copilot
-- **Project Structure section** — Tree diagram in README.md showing repository layout
-- **docs/reference/project-structure.md** — Comprehensive documentation with:
-  - Full `/src/` module breakdown
-  - Test suite descriptions
-  - MCP server architecture diagram
-  - File naming conventions
+- **Project Structure section** — Tree diagram in README.md showing repository layout including new docs/
+- **docs/reference/project-structure.md** — Comprehensive documentation with full `/src/` module breakdown, test suite descriptions, MCP server architecture diagram
 
 ### Changed
-- **README.md "Works with..." section** — Expanded from basic table to comprehensive platform compatibility guide
-- **Table of Contents** — Added Project Structure entry
+- **README.md Getting Started** — Added intro paragraph with link to getting-started.md, added Claude Code and Cursor/VS Code sections with config file paths
+- **README.md Usage > Tools** — Added intro explaining pm-skills relationship (24 skill tools vs 6 utility tools), enhanced parameter table with detailed descriptions and example invocations
+- **README.md "Works with..."** — Consolidated Quick Start by Platform into Getting Started, replaced with link to Integration Guide
+- **Table of Contents** — Restructured with Guides section and updated heading anchors
 
 ## [1.0.0] - 2026-01-21
 
