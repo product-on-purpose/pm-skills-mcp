@@ -25,7 +25,7 @@
     <img src="https://img.shields.io/npm/v/pm-skills-mcp?style=flat-square&color=blue" alt="npm version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-35-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-36-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
