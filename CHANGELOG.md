@@ -7,18 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- **README header callout** — Cross-reference to pm-skills for customization and slash commands
-- **README "Using Both Together" section** — Guide for using pm-skills fork with pm-skills-mcp
-- **README fork workflow** — Configuration section for using custom pm-skills fork
-- **README Acknowledgments section** — Credits for pm-skills, MCP, and Anthropic
-
-### Changed
-- **README "The Big Idea"** — Added ecosystem context explaining pm-skills relationship
-- **README Comparison section** — Expanded to "PM-Skills Ecosystem" with comprehensive feature table
-- **README Table of Contents** — Updated with new sections (Using Both Together, Acknowledgments)
-- **README formatting** — Standardized em dashes to hyphens throughout
-
 ## [1.1.0] - 2026-01-21
 
 ### Added
@@ -32,12 +20,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Platform Compatibility table** — Expanded "Works with..." section with 11 platforms, status indicators, and integration types
 - **Project Structure section** — Tree diagram in README.md showing repository layout including new docs/
 - **docs/reference/project-structure.md** — Comprehensive documentation with full `/src/` module breakdown, test suite descriptions, MCP server architecture diagram
+- **README header callout** — Cross-reference to pm-skills for customization and slash commands
+- **README "Using Both Together" section** — Guide for using pm-skills fork with pm-skills-mcp
+- **README fork workflow** — Configuration section for using custom pm-skills fork
+- **README Acknowledgments section** — Credits for pm-skills, MCP, and Anthropic
+- **README Releases section** — Added under Project Status with npm/GitHub badges
 
 ### Changed
 - **README.md Getting Started** — Added intro paragraph with link to getting-started.md, added Claude Code and Cursor/VS Code sections with config file paths
 - **README.md Usage > Tools** — Added intro explaining pm-skills relationship (24 skill tools vs 6 utility tools), enhanced parameter table with detailed descriptions and example invocations
 - **README.md "Works with..."** — Consolidated Quick Start by Platform into Getting Started, replaced with link to Integration Guide
 - **Table of Contents** — Restructured with Guides section and updated heading anchors
+- **README "The Big Idea"** — Added ecosystem context explaining pm-skills relationship
+- **README Comparison section** — Expanded to "PM-Skills Ecosystem" with comprehensive feature table
+- **README Table of Contents** — Updated with new sections (Using Both Together, Acknowledgments, Releases)
+- **README formatting** — Standardized em dashes to hyphens throughout
 
 ## [1.0.0] - 2026-01-21
 

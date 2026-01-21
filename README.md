@@ -84,6 +84,7 @@
   - [Prompts](#prompts)
 - [Guides](#guides)
 - [Project Status](#project-status)
+  - [Releases](#releases)
   - [Project Structure](#project-structure)
   - [Changelog](#changelog)
   - [Roadmap](#roadmap)
@@ -627,6 +628,19 @@ Comprehensive documentation for setup, customization, and understanding pm-skill
 ---
 
 ## Project Status
+
+### Releases
+
+All releases are available on the [GitHub Releases](https://github.com/product-on-purpose/pm-skills-mcp/releases) page.
+
+**Install the latest version:**
+
+```bash
+npm install -g pm-skills-mcp
+```
+
+[![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
+[![GitHub Release](https://img.shields.io/github/v/release/product-on-purpose/pm-skills-mcp?style=for-the-badge&label=release)](https://github.com/product-on-purpose/pm-skills-mcp/releases/latest)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
