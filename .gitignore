@@ -40,10 +40,8 @@ _NOTES/
 # Claude Code local settings
 .claude/settings.local.json
 
-# Agent working files
-AGENTS/*/SESSION-LOG/
-AGENTS/*/TODO.md
-AGENTS/*/PLANNING/
+# Agent working files (session-specific, not source code)
+AGENTS/*/
 
 # Node.js
 node_modules/
