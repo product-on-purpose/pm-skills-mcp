@@ -38,6 +38,10 @@
   </a>
 </p>
 
+<!-- ========== NEW: Skill Library Cross-Reference Callout ========== -->
+> **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills)—the open-source skill library you can fork and modify.
+<!-- ========== END NEW ========== -->
+
 <p align="center">
   <a href="#the-big-idea">About</a> •
   <a href="#getting-started">Getting Started</a> •
@@ -55,7 +59,7 @@
   - [The Transformation](#the-transformation)
   - [Key Features](#key-features)
   - [Built with...](#built-with)
-  - [Works with...](#works-with)
+  - [Works for...](#works-for)
   - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
   - [NPM Global Install](#npm-global-install)
@@ -87,8 +91,9 @@
   - [CI/CD](#cicd)
 - [Security](#security)
 - [Comparison](#comparison)
-  - [PM-Skills vs PM-Skills MCP](#pm-skills-vs-pm-skills-mcp)
+  - [PM-Skills Ecosystem](#pm-skills-ecosystem)
   - [When to Use Which](#when-to-use-which)
+  - [Using Both Together](#using-both-together)
 - [Contributing](#contributing)
   - [How to Contribute](#how-to-contribute)
   - [Reporting Bugs](#reporting-bugs)
@@ -96,6 +101,7 @@
   - [Author](#author)
   - [License](#license)
   - [Security](#security-1)
+  - [Acknowledgments](#acknowledgments)
 - [Community](#community)
 
 </details>
@@ -114,6 +120,12 @@ npm install -g pm-skills-mcp
 
 **PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)—a collection of 24 battle-tested product management skills—into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
 
+<!-- ========== ENHANCED: Additional ecosystem context ========== -->
+PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 24 battle-tested product management skills. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access.
+
+**Not sure which to use?** See the [Comparison](#comparison) section below.
+<!-- ========== END ENHANCED ========== -->
+
 **_One connection. 24 skills. Any MCP client._**
 
 ### Why MCP?
@@ -124,7 +136,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 | File-Based Approach                | MCP-Powered Approach              |
 | ---------------------------------- | --------------------------------- |
-| Clone repo, navigate to skills     | `npx pm-skills-mcp` — done        |
+| Clone repo, navigate to skills     | `npx pm-skills-mcp` - done        |
 | Copy/paste skill content into chat | AI invokes tools directly         |
 | Manual template injection          | Automatic template retrieval      |
 | Platform-specific slash commands   | Universal across all MCP clients  |
@@ -133,16 +145,16 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **35 MCP Tools** — 24 PM skills + 5 workflow bundles + 6 utility tools
-- **72 MCP Resources** — Skills, templates, and examples accessible via URI
-- **3 MCP Prompts** — Guided conversation starters for common workflows
-- **5 Workflow Bundles** — Pre-built multi-skill workflows for common scenarios
-- **47 Automated Tests** — Comprehensive test coverage with Vitest
-- **Zero Configuration** — Works out of the box with embedded skills
-- **Universal Compatibility** — Claude Desktop, Cursor, Continue, and any MCP client
-- **Customizable** — Override with your own skill modifications
-- **Lightweight** — Minimal dependencies, fast startup
-- **Security Scanning** — CodeQL analysis on every push
+- **35 MCP Tools** - 24 PM skills + 5 workflow bundles + 6 utility tools
+- **72 MCP Resources** - Skills, templates, and examples accessible via URI
+- **3 MCP Prompts** - Guided conversation starters for common workflows
+- **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
+- **47 Automated Tests** - Comprehensive test coverage with Vitest
+- **Zero Configuration** - Works out of the box with embedded skills
+- **Universal Compatibility** - Claude Desktop, Cursor, Continue, and any MCP client
+- **Customizable** - Override with your own skill modifications
+- **Lightweight** - Minimal dependencies, fast startup
+- **Security Scanning** - CodeQL analysis on every push
 
 ### Built with...
 
@@ -158,12 +170,12 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
   </a>
 </p>
 
-- **[Model Context Protocol](https://modelcontextprotocol.io)** — Open standard for AI tool connectivity
-- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** — The 24 PM skills this server exposes
-- **[TypeScript](https://www.typescriptlang.org/)** — Type-safe implementation
-- **[Vitest](https://vitest.dev/)** — Fast, modern testing framework
+- **[Model Context Protocol](https://modelcontextprotocol.io)** - Open standard for AI tool connectivity
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The 24 PM skills this server exposes
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe implementation
+- **[Vitest](https://vitest.dev/)** - Fast, modern testing framework
 
-### Works with...
+### Works for...
 
 PM-Skills MCP works with any client that supports the Model Context Protocol. Here's a quick overview:
 
@@ -334,6 +346,32 @@ Override embedded skills with your customized versions:
   }
 }
 ```
+
+<!-- ========== NEW: Fork Workflow ========== -->
+#### Using Custom Skills from a pm-skills Fork
+
+If you've forked [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills:
+
+1. Clone your fork locally
+2. Make changes to skills in `skills/{phase}/{skill-name}/`
+3. Point pm-skills-mcp to your fork:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"],
+      "env": {
+        "PM_SKILLS_PATH": "/path/to/my-pm-skills-fork/skills"
+      }
+    }
+  }
+}
+```
+
+See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-skills/blob/main/docs/guides/authoring-pm-skills.md) for skill modification guidelines.
+<!-- ========== END NEW ========== -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -642,9 +680,9 @@ The project uses GitHub Actions for continuous integration and deployment:
 
 We take security seriously. This project includes:
 
-- **CodeQL Analysis** — Automated security scanning on every push
-- **Dependabot** — Automated dependency updates for npm and GitHub Actions
-- **Vulnerability Reporting** — See [SECURITY.md](SECURITY.md) for our security policy
+- **CodeQL Analysis** - Automated security scanning on every push
+- **Dependabot** - Automated dependency updates for npm and GitHub Actions
+- **Vulnerability Reporting** - See [SECURITY.md](SECURITY.md) for our security policy
 
 To report a vulnerability, please email security concerns privately rather than opening a public issue. See [SECURITY.md](SECURITY.md) for details.
 
@@ -652,35 +690,64 @@ To report a vulnerability, please email security concerns privately rather than 
 
 ---
 
+<!-- ========== ENHANCED: Expanded Comparison Section ========== -->
 ## Comparison
 
-### PM-Skills vs PM-Skills MCP
+### PM-Skills Ecosystem
 
-| Aspect               | pm-skills                        | pm-skills-mcp                 |
-| -------------------- | -------------------------------- | ----------------------------- |
-| **Access method**    | Git clone, file upload           | MCP server connection         |
-| **Setup time**       | 2-5 minutes                      | 30 seconds                    |
-| **Client support**   | Claude Code, manual upload       | Any MCP client                |
-| **Skill invocation** | Slash commands, manual reference | Programmatic tool calls       |
-| **Template access**  | Navigate file system             | URI-based resources           |
-| **Workflow bundles** | Manual orchestration             | Tool-based execution          |
-| **Customization**    | Fork and modify                  | Environment variable override |
-| **Updates**          | Git pull                         | npm update                    |
+PM-Skills is available in two complementary forms:
+
+|  | [pm-skills](https://github.com/product-on-purpose/pm-skills) | pm-skills-mcp (this repo) |
+|---|---|---|
+| **What it is** | Skill library as markdown files | MCP server wrapping the skill library |
+| **Access method** | Git clone, ZIP upload | `npx pm-skills-mcp` |
+| **Setup time** | 2-5 minutes | 30 seconds |
+| **Skill invocation** | Slash commands (Claude Code) | MCP tool calls |
+| **Auto-discovery** | AGENTS.md (Copilot, Cursor, Windsurf) | MCP protocol (Claude Desktop, Cursor) |
+| **Template access** | Navigate file system | URI-based resources |
+| **Workflow bundles** | Manual orchestration | Tool-based execution |
+| **Customization** | Edit files directly | Set `PM_SKILLS_PATH` to custom folder |
+| **Updates** | `git pull` | `npm update pm-skills-mcp` |
 
 ### When to Use Which
 
-**Use PM-Skills (file-based) when:**
+**Use pm-skills-mcp (this repo) when:**
 
-- You prefer slash commands in Claude Code
-- You want to browse and read skill files directly
-- You're customizing skills heavily
+- You want instant setup with `npx pm-skills-mcp`
+- You're using Claude Desktop, Cursor, or any MCP client
+- You want programmatic tool access without managing files
+- You prefer consistent interfaces across different AI clients
 
-**Use PM-Skills MCP when:**
+**Use pm-skills (file-based) when:**
 
-- You want instant setup with zero file management
-- You're using Claude Desktop, Cursor, or other MCP clients
-- You want programmatic access to skills
-- You want consistent tool interfaces across clients
+- You prefer slash commands in Claude Code (`/prd`, `/hypothesis`)
+- You want to browse, read, and customize skill files directly
+- You're using GitHub Copilot or Windsurf with AGENTS.md discovery
+- You want to fork and heavily customize skills for your team
+
+### Using Both Together
+
+You can use both! For example:
+
+1. Fork [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills
+2. Point pm-skills-mcp to your fork for MCP access to your customized skills
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"],
+      "env": {
+        "PM_SKILLS_PATH": "/path/to/my/forked/pm-skills/skills"
+      }
+    }
+  }
+}
+```
+
+This gives you the best of both worlds: custom skills + programmatic MCP access.
+<!-- ========== END ENHANCED ========== -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -706,10 +773,10 @@ Contributions are what make the open-source community such an amazing place to l
 
 Please try to create bug reports that are:
 
-- **Reproducible** — Include steps to reproduce the problem
-- **Specific** — Include as much detail as possible (version, environment, etc.)
-- **Unique** — Do not duplicate existing opened issues
-- **Scoped** — One bug per report
+- **Reproducible** - Include steps to reproduce the problem
+- **Specific** - Include as much detail as possible (version, environment, etc.)
+- **Unique** - Do not duplicate existing opened issues
+- **Scoped** - One bug per report
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -748,11 +815,19 @@ The only requirements are attribution and including the license notice.
 
 We take security seriously. This project includes:
 
-- **CodeQL Analysis** — Automated security scanning on every push
-- **Dependabot** — Automated dependency updates for npm and GitHub Actions
-- **Vulnerability Reporting** — See [SECURITY.md](SECURITY.md) for our security policy
+- **CodeQL Analysis** - Automated security scanning on every push
+- **Dependabot** - Automated dependency updates for npm and GitHub Actions
+- **Vulnerability Reporting** - See [SECURITY.md](SECURITY.md) for our security policy
 
 To report a vulnerability, please email security concerns privately rather than opening a public issue.
+
+<!-- ========== NEW: Acknowledgments ========== -->
+### Acknowledgments
+
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The skill library that powers this MCP server. All 24 PM skills, templates, and examples come from pm-skills.
+- **[Model Context Protocol](https://modelcontextprotocol.io)** - The protocol that makes this possible
+- **[Anthropic](https://anthropic.com)** - For creating MCP and Claude
+<!-- ========== END NEW ========== -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
