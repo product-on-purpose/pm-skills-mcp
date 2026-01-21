@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Platform Compatibility table** — Expanded "Works with..." section with 11 platforms, status indicators, and integration types
+- **Quick Start by Platform** — Collapsible getting-started sections for Claude Code, Desktop, Claude.ai, VS Code, Cursor, ChatGPT, and GitHub Copilot
+- **Project Structure section** — Tree diagram in README.md showing repository layout
+- **docs/reference/project-structure.md** — Comprehensive documentation with:
+  - Full `/src/` module breakdown
+  - Test suite descriptions
+  - MCP server architecture diagram
+  - File naming conventions
+
+### Changed
+- **README.md "Works with..." section** — Expanded from basic table to comprehensive platform compatibility guide
+- **Table of Contents** — Added Project Structure entry
+
 ## [1.0.0] - 2026-01-21
 
 First stable release of pm-skills-mcp with all 24 PM skills, performance caching, and complete infrastructure.
