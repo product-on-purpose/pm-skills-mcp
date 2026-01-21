@@ -40,7 +40,10 @@
 
 <!-- ========== NEW: Skill Library Cross-Reference Callout ========== -->
 > **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills)—the open-source skill library you can fork and modify.
+
 <!-- ========== END NEW ========== -->
+
+---
 
 <p align="center">
   <a href="#the-big-idea">About</a> •
@@ -64,9 +67,7 @@
 - [Getting Started](#getting-started)
   - [NPM Global Install](#npm-global-install)
   - [From Source](#from-source)
-  - [Claude Desktop](#claude-desktop)
-  - [Claude Code (CLI)](#claude-code-cli)
-  - [Cursor / VS Code](#cursor--vs-code)
+  - [Quick Start by Platform](#quick-start-by-platform)
   - [Configuration](#configuration)
 - [Usage](#usage)
   - [How It Works](#how-it-works)
@@ -272,7 +273,10 @@ npm run build
 npm start
 ```
 
-### Claude Desktop
+### Quick Start by Platform
+
+<details>
+<summary><strong>Claude Desktop (Recommended)</strong></summary>
 
 The recommended client for pm-skills-mcp. Add to your Claude Desktop configuration:
 
@@ -296,7 +300,10 @@ The recommended client for pm-skills-mcp. Add to your Claude Desktop configurati
 
 Restart Claude Desktop. You now have access to all 24 PM skills as tools.
 
-### Claude Code (CLI)
+</details>
+
+<details>
+<summary><strong>Claude Code (CLI)</strong></summary>
 
 Add to `.claude/settings.json` in your project or `~/.claude/settings.json` globally:
 
@@ -311,13 +318,59 @@ Add to `.claude/settings.json` in your project or `~/.claude/settings.json` glob
 }
 ```
 
-### Cursor / VS Code
+</details>
 
-**Cursor:** Settings → Features → MCP Servers
+<details>
+<summary><strong>Cursor</strong></summary>
 
-**VS Code:** Use [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) or [Continue](https://marketplace.visualstudio.com/items?itemName=Continue.continue) extensions with MCP support.
+Navigate to Settings → Features → MCP Servers, then add:
+
+```json
+{
+  "pm-skills": {
+    "command": "npx",
+    "args": ["pm-skills-mcp"]
+  }
+}
+```
+
+Restart Cursor. The 24 PM skill tools will be available in AI chat.
+
+</details>
+
+<details>
+<summary><strong>VS Code (Cline / Continue)</strong></summary>
+
+**With Cline:**
+1. Install [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) from VS Code Marketplace
+2. Open Cline settings and configure MCP server:
+   ```json
+   {
+     "pm-skills": {
+       "command": "npx",
+       "args": ["pm-skills-mcp"]
+     }
+   }
+   ```
+
+**With Continue:**
+1. Install [Continue](https://marketplace.visualstudio.com/items?itemName=Continue.continue) from VS Code Marketplace
+2. Configure MCP in Continue settings
+
+</details>
+
+<details>
+<summary><strong>Other MCP Clients</strong></summary>
+
+Any MCP-compatible client can use pm-skills-mcp. The general pattern:
+
+1. Configure an MCP server with command `npx` and args `["pm-skills-mcp"]`
+2. Restart the client
+3. All 24 PM skills become available as tools
 
 See the [Integration Guide](docs/integration-guide.md) for detailed instructions for all platforms.
+
+</details>
 
 ### Configuration
 
