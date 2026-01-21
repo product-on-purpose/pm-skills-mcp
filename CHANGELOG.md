@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **README header callout** — Cross-reference to pm-skills for customization and slash commands
+- **README "Using Both Together" section** — Guide for using pm-skills fork with pm-skills-mcp
+- **README fork workflow** — Configuration section for using custom pm-skills fork
+- **README Acknowledgments section** — Credits for pm-skills, MCP, and Anthropic
+
+### Changed
+- **README "The Big Idea"** — Added ecosystem context explaining pm-skills relationship
+- **README Comparison section** — Expanded to "PM-Skills Ecosystem" with comprehensive feature table
+- **README Table of Contents** — Updated with new sections (Using Both Together, Acknowledgments)
+- **README formatting** — Standardized em dashes to hyphens throughout
+
 ## [1.1.0] - 2026-01-21
 
 ### Added
