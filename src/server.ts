@@ -7,7 +7,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import type { Skill, ServerConfig } from './types/index.js';
-import { loadAllSkills, listSkills } from './skills/loader.js';
+import { loadAllSkills, listSkills, getCacheStats } from './skills/loader.js';
 import { SERVER_INFO, TOOL_CONFIG } from './config.js';
 import { SkillToolInputSchema } from './tools/schemas.js';
 import { buildToolOutput, createErrorResponse, createSuccessResponse } from './tools/handler.js';
@@ -68,6 +68,7 @@ export class PMSkillsServer {
     this.registerListResourcesTool();
     this.registerValidateTool();
     this.registerSearchSkillsTool();
+    this.registerCacheStatsTool();
 
     // Register workflow bundle tools
     this.workflowCount = this.registerWorkflowTools();
@@ -77,9 +78,9 @@ export class PMSkillsServer {
     this.promptCount = registerPrompts(this.server);
     this.registerListPromptsTool();
 
-    const totalTools = this.skills.size + 6 + this.workflowCount; // skills + utilities (6) + workflows
+    const totalTools = this.skills.size + 7 + this.workflowCount; // skills + utilities (7) + workflows
     console.error(
-      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 6 utilities)`
+      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 7 utilities)`
     );
     console.error(`Registered ${this.promptCount} prompts`);
 
@@ -409,6 +410,39 @@ Returns:
   }
 
   /**
+   * Register a tool to show cache statistics
+   */
+  private registerCacheStatsTool(): void {
+    const description = `Get PM-Skills cache statistics.
+
+Shows performance metrics for the skill content cache including hit rate, cache size, and TTL settings.
+
+Useful for monitoring server performance and debugging cache behavior.
+
+Returns:
+  Markdown formatted cache statistics.`;
+
+    this.server.tool(`${TOOL_CONFIG.prefix}cache_stats`, description, async () => {
+      const stats = getCacheStats();
+
+      const lines: string[] = [];
+      lines.push('# PM-Skills Cache Statistics');
+      lines.push('');
+      lines.push(`| Metric | Value |`);
+      lines.push(`|--------|-------|`);
+      lines.push(`| Cache Size | ${stats.size} entries |`);
+      lines.push(`| Cache Hits | ${stats.hits} |`);
+      lines.push(`| Cache Misses | ${stats.misses} |`);
+      lines.push(`| Hit Rate | ${stats.hitRate.toFixed(1)}% |`);
+      lines.push(`| TTL | ${Math.round(stats.ttlMs / 1000)}s |`);
+      lines.push('');
+      lines.push('*Cache reduces filesystem reads during a session.*');
+
+      return createSuccessResponse(lines.join('\n'));
+    });
+  }
+
+  /**
    * Register all workflow bundle tools
    */
   private registerWorkflowTools(): number {
@@ -571,5 +605,12 @@ Returns:
    */
   getPromptsCount(): number {
     return this.promptCount;
+  }
+
+  /**
+   * Get cache statistics
+   */
+  getCacheStats() {
+    return getCacheStats();
   }
 }

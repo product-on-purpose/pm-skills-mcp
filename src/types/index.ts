@@ -108,6 +108,18 @@ export interface SkillToolResponse {
 }
 
 /**
+ * Cache configuration
+ */
+export interface CacheConfig {
+  /** Time-to-live in milliseconds (default: 5 minutes) */
+  ttlMs?: number;
+  /** Maximum cache entries (default: 100) */
+  maxEntries?: number;
+  /** Enable cache (default: true) */
+  enabled?: boolean;
+}
+
+/**
  * Server configuration
  */
 export interface ServerConfig {
@@ -119,4 +131,6 @@ export interface ServerConfig {
   defaultFormat?: OutputFormat;
   /** Include examples by default */
   includeExamplesByDefault?: boolean;
+  /** Cache configuration for performance optimization */
+  cache?: CacheConfig;
 }

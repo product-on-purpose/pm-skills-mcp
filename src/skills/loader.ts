@@ -8,6 +8,7 @@ import matter from 'gray-matter';
 import { glob } from 'glob';
 import type { Skill, SkillMetadata, SkillPhase, ServerConfig } from '../types/index.js';
 import { SKILL_PHASES } from '../types/index.js';
+import { getSkillCache } from '../cache.js';
 
 /**
  * Parse a SKILL.md file and extract frontmatter and content
@@ -106,6 +107,9 @@ export async function loadAllSkills(config: ServerConfig): Promise<Map<string, S
   const skills = new Map<string, Skill>();
   const skillsPath = config.skillsPath;
 
+  // Initialize the skill cache with config
+  const cache = getSkillCache(config.cache);
+
   // Check if skills directory exists
   try {
     await fs.access(skillsPath);
@@ -118,11 +122,21 @@ export async function loadAllSkills(config: ServerConfig): Promise<Map<string, S
   const pattern = path.join(skillsPath, '**', 'SKILL.md').replace(/\\/g, '/');
   const skillFiles = await glob(pattern);
 
-  // Load each skill
+  // Load each skill (checking cache first)
   for (const skillFile of skillFiles) {
     const skillDir = path.dirname(skillFile);
+    const skillName = path.basename(skillDir);
+
     try {
-      const skill = await loadSkill(skillDir);
+      // Check cache first
+      let skill = cache.getSkill(skillName);
+
+      if (!skill) {
+        // Cache miss - load from disk
+        skill = await loadSkill(skillDir);
+        // Store in cache for future requests
+        cache.setSkill(skill);
+      }
 
       // Filter by enabled phases if configured
       if (config.enabledPhases && !config.enabledPhases.includes(skill.phase)) {
@@ -133,6 +147,14 @@ export async function loadAllSkills(config: ServerConfig): Promise<Map<string, S
     } catch (error) {
       console.error(`Failed to load skill from ${skillDir}:`, error);
     }
+  }
+
+  // Log cache stats on load
+  const stats = cache.getStats();
+  if (stats.hits > 0 || stats.misses > 0) {
+    console.error(
+      `Cache stats: ${stats.hits} hits, ${stats.misses} misses (${stats.hitRate.toFixed(1)}% hit rate)`
+    );
   }
 
   return skills;
@@ -170,4 +192,44 @@ export function groupSkillsByPhase(skills: Map<string, Skill>): Map<SkillPhase, 
   }
 
   return grouped;
+}
+
+/**
+ * Reload a single skill from disk, invalidating cache
+ */
+export async function reloadSkill(skillDir: string): Promise<Skill> {
+  const cache = getSkillCache();
+  const skillName = path.basename(skillDir);
+
+  // Invalidate cache entry
+  cache.invalidateSkill(skillName);
+
+  // Load fresh from disk
+  const skill = await loadSkill(skillDir);
+
+  // Store in cache
+  cache.setSkill(skill);
+
+  return skill;
+}
+
+/**
+ * Get cache statistics
+ */
+export function getCacheStats(): import('../cache.js').CacheStats {
+  return getSkillCache().getStats();
+}
+
+/**
+ * Clear the skill cache
+ */
+export function clearSkillCache(): void {
+  getSkillCache().clear();
+}
+
+/**
+ * Prune expired entries from cache
+ */
+export function pruneSkillCache(): number {
+  return getSkillCache().prune();
 }

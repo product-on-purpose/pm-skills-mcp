@@ -5,7 +5,7 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import type { ServerConfig, SkillPhase, OutputFormat } from './types/index.js';
+import type { ServerConfig, SkillPhase, OutputFormat, CacheConfig } from './types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,11 +63,23 @@ export function loadConfig(): ServerConfig {
   // Parse include examples default
   const includeExamplesByDefault = process.env.PM_SKILLS_INCLUDE_EXAMPLES === 'true';
 
+  // Parse cache configuration
+  const cache: CacheConfig = {
+    enabled: process.env.PM_SKILLS_CACHE_DISABLED !== 'true',
+    ttlMs: process.env.PM_SKILLS_CACHE_TTL_MS
+      ? parseInt(process.env.PM_SKILLS_CACHE_TTL_MS, 10)
+      : 5 * 60 * 1000, // 5 minutes default
+    maxEntries: process.env.PM_SKILLS_CACHE_MAX_ENTRIES
+      ? parseInt(process.env.PM_SKILLS_CACHE_MAX_ENTRIES, 10)
+      : 100,
+  };
+
   return {
     skillsPath,
     enabledPhases,
     defaultFormat,
     includeExamplesByDefault,
+    cache,
   };
 }
 
@@ -76,7 +88,7 @@ export function loadConfig(): ServerConfig {
  */
 export const SERVER_INFO = {
   name: 'pm-skills-mcp',
-  version: '0.1.0',
+  version: '1.0.0',
   description: 'MCP server exposing 24 product management skills as tools',
 } as const;
 

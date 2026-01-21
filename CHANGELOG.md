@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-01-21
+
+First stable release of pm-skills-mcp with all 24 PM skills, performance caching, and complete infrastructure.
+
 ### Added
+- **Performance Caching** (Issue #5)
+  - In-memory LRU cache for skill content with 5-minute TTL
+  - `pm_cache_stats` utility tool for monitoring cache performance
+  - Configurable via environment variables (`PM_SKILLS_CACHE_*`)
+  - Reduces filesystem reads during sessions
 - **Community Governance Files**
   - `SECURITY.md` - Vulnerability reporting policy (48h/72h SLA)
   - `CONTRIBUTING.md` - Contribution guidelines for MCP server development
@@ -22,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `.github/workflows/codeql.yml` - JavaScript/TypeScript CodeQL analysis
 
 ### Changed
+- **Tool Count**: 36 tools (24 skills + 5 workflows + 7 utilities)
+- **Test Count**: 66 tests (added 19 cache tests)
 - **Dependabot Configuration**
   - Fixed npm package ecosystem directory from `/.github/scripts` to `/` (root)
   - Added `open-pull-requests-limit: 10` for npm updates
