@@ -63,7 +63,7 @@
   - [Key Features](#key-features)
   - [Built with...](#built-with)
   - [Works for...](#works-for)
-  - [Project Structure](#project-structure)
+  - [Comparison: pm-skills-mcp (this repo) vs. pm-skills](#comparison-pm-skills-mcp-this-repo-vs-pm-skills)
 - [Getting Started](#getting-started)
   - [NPM Global Install](#npm-global-install)
   - [From Source](#from-source)
@@ -72,7 +72,7 @@
 - [Usage](#usage)
   - [How It Works](#how-it-works)
   - [Tools](#tools)
-  - [🔍 Discover Phase](#-discover-phase)
+  - [🔍 Discover Phase - *Find the right problem*](#-discover-phase---find-the-right-problem)
   - [📋 Define Phase - *Frame the problem*](#-define-phase---frame-the-problem)
   - [💡 Develop Phase - *Explore solutions*](#-develop-phase---explore-solutions)
   - [🚀 Deliver Phase - *Ship it*](#-deliver-phase---ship-it)
@@ -80,10 +80,11 @@
   - [🔄 Iterate Phase - *Learn and improve*](#-iterate-phase---learn-and-improve)
   - [🔗 Workflow Bundles - *Multi-skill workflows*](#-workflow-bundles---multi-skill-workflows)
   - [🛠️ Utility Tools](#️-utility-tools)
-  - [Resources](#resources)
+  - [MCP Resources](#mcp-resources)
   - [Prompts](#prompts)
 - [Guides](#guides)
 - [Project Status](#project-status)
+  - [Project Structure](#project-structure)
   - [Changelog](#changelog)
   - [Roadmap](#roadmap)
 - [Development](#development)
@@ -91,10 +92,6 @@
   - [Code Quality](#code-quality)
   - [CI/CD](#cicd)
 - [Security](#security)
-- [Comparison](#comparison)
-  - [PM-Skills Ecosystem](#pm-skills-ecosystem)
-  - [When to Use Which](#when-to-use-which)
-  - [Using Both Together](#using-both-together)
 - [Contributing](#contributing)
   - [How to Contribute](#how-to-contribute)
   - [Reporting Bugs](#reporting-bugs)
@@ -150,7 +147,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 - **72 MCP Resources** - Skills, templates, and examples accessible via URI
 - **3 MCP Prompts** - Guided conversation starters for common workflows
 - **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
-- **47 Automated Tests** - Comprehensive test coverage with Vitest
+- **66 Automated Tests** - Comprehensive test coverage with Vitest
 - **Zero Configuration** - Works out of the box with embedded skills
 - **Universal Compatibility** - Claude Desktop, Cursor, Continue, and any MCP client
 - **Customizable** - Override with your own skill modifications
@@ -198,50 +195,50 @@ PM-Skills MCP works with any client that supports the Model Context Protocol. He
 
 See the [Integration Guide](docs/integration-guide.md) for detailed setup instructions for each platform.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Comparison: pm-skills-mcp (this repo) vs. pm-skills
 
-### Project Structure
+PM-Skills is available in two complementary forms:
 
+|  | pm-skills-mcp (this repo) | [pm-skills](https://github.com/product-on-purpose/pm-skills) |
+|---|---|---|
+| **What it is** | MCP server wrapping the skill library | Skill library as markdown files |
+| **Access method** | `npx pm-skills-mcp` | Git clone, ZIP upload |
+| **Setup time** | 30 seconds | 2-5 minutes |
+| **Skill invocation** | MCP tool calls | Slash commands (Claude Code) |
+| **Auto-discovery** | MCP protocol (Claude Desktop, Cursor) | AGENTS.md (Copilot, Cursor, Windsurf) |
+| **Template access** | URI-based resources | Navigate file system |
+| **Workflow bundles** | Tool-based execution | Manual orchestration |
+| **Customization** | Set `PM_SKILLS_PATH` to custom folder | Edit files directly |
+| **Updates** | `npm update pm-skills-mcp` | `git pull` |
+
+**Use pm-skills-mcp (this repo) when:**
+- You want instant setup with `npx pm-skills-mcp`
+- You're using Claude Desktop, Cursor, or any MCP client
+- You want programmatic tool access without managing files
+- You prefer consistent interfaces across different AI clients
+
+**Use pm-skills (file-based) when:**
+- You prefer slash commands in Claude Code (`/prd`, `/hypothesis`)
+- You want to browse, read, and customize skill files directly
+- You're using GitHub Copilot or Windsurf with AGENTS.md discovery
+- You want to fork and heavily customize skills for your team
+
+**Using Both Together:**
+Fork [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills, then point pm-skills-mcp to your fork:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"],
+      "env": {
+        "PM_SKILLS_PATH": "/path/to/my/forked/pm-skills/skills"
+      }
+    }
+  }
+}
 ```
-pm-skills-mcp/
-├── src/                      # TypeScript source code
-│   ├── index.ts              # Entry point
-│   ├── server.ts             # MCP server implementation
-│   ├── config.ts             # Configuration management
-│   ├── cache.ts              # Skill caching layer
-│   ├── skills/               # Skill loader and parser
-│   ├── tools/                # MCP tool handlers (35 tools)
-│   ├── resources/            # MCP resource handlers (72 resources)
-│   ├── prompts/              # MCP prompt definitions (3 prompts)
-│   ├── workflows/            # Workflow bundle logic
-│   └── types/                # TypeScript type definitions
-├── skills/                   # Embedded PM skills (copied from pm-skills)
-│   ├── discover/             # Research phase skills
-│   ├── define/               # Problem framing skills
-│   ├── develop/              # Solution exploration skills
-│   ├── deliver/              # Specification skills
-│   ├── measure/              # Validation skills
-│   └── iterate/              # Learning skills
-├── docs/                     # Documentation
-│   ├── getting-started.md    # Complete setup and first-use guide
-│   ├── integration-guide.md  # Client-specific configuration
-│   ├── customization.md      # Using custom skills with MCP
-│   ├── migration-guide.md    # Moving between file-based and MCP
-│   ├── architecture.md       # Technical internals for contributors
-│   └── reference/            # Reference documentation
-│       └── project-structure.md
-├── tests/                    # Vitest test suites (47 tests)
-├── scripts/                  # Build and utility scripts
-├── dist/                     # Compiled JavaScript output
-├── .github/                  # CI/CD workflows
-│   └── workflows/            # ci.yml, publish.yml, codeql.yml
-├── AGENTS.md                 # Agent discovery file
-├── CONTRIBUTING.md           # Contribution guidelines
-├── SECURITY.md               # Security policy
-└── CHANGELOG.md              # Version history
-```
-
-See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -276,7 +273,7 @@ npm start
 ### Quick Start by Platform
 
 <details>
-<summary><strong>Claude Desktop (Recommended)</strong></summary>
+<summary><strong>Claude Desktop</strong></summary>
 
 The recommended client for pm-skills-mcp. Add to your Claude Desktop configuration:
 
@@ -494,9 +491,7 @@ cart abandonment. Hypothesis: users abandon due to required account creation."
 Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 ```
 
-### 🔍 Discover Phase
-
-*Find the right problem*
+### 🔍 Discover Phase - *Find the right problem*
 
 | Tool                      | Description                                 |
 | ------------------------- | ------------------------------------------- |
@@ -573,7 +568,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Resources
+### MCP Resources
 
 Access skill content directly via MCP resources:
 
@@ -633,13 +628,61 @@ Comprehensive documentation for setup, customization, and understanding pm-skill
 
 ## Project Status
 
+### Project Structure
+See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
+
+```
+pm-skills-mcp/
+├── src/                      # TypeScript source code
+│   ├── index.ts              # Entry point
+│   ├── server.ts             # MCP server implementation
+│   ├── config.ts             # Configuration management
+│   ├── cache.ts              # Skill caching layer
+│   ├── skills/               # Skill loader and parser
+│   ├── tools/                # MCP tool handlers (35 tools)
+│   ├── resources/            # MCP resource handlers (72 resources)
+│   ├── prompts/              # MCP prompt definitions (3 prompts)
+│   ├── workflows/            # Workflow bundle logic
+│   └── types/                # TypeScript type definitions
+├── skills/                   # Embedded PM skills (copied from pm-skills)
+│   ├── discover/             # Research phase skills
+│   ├── define/               # Problem framing skills
+│   ├── develop/              # Solution exploration skills
+│   ├── deliver/              # Specification skills
+│   ├── measure/              # Validation skills
+│   └── iterate/              # Learning skills
+├── docs/                     # Documentation
+│   ├── getting-started.md    # Complete setup and first-use guide
+│   ├── integration-guide.md  # Client-specific configuration
+│   ├── customization.md      # Using custom skills with MCP
+│   ├── migration-guide.md    # Moving between file-based and MCP
+│   ├── architecture.md       # Technical internals for contributors
+│   └── reference/            # Reference documentation
+│       └── project-structure.md
+├── tests/                    # Vitest test suites (66 tests)
+├── scripts/                  # Build and utility scripts
+├── dist/                     # Compiled JavaScript output
+├── .github/                  # CI/CD workflows
+│   └── workflows/            # ci.yml, publish.yml, codeql.yml
+├── AGENTS.md                 # Agent discovery file
+├── CONTRIBUTING.md           # Contribution guidelines
+├── SECURITY.md               # Security policy
+└── CHANGELOG.md              # Version history
+```
+
+
+
 ### Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
-| Version   | Highlights                                             |
-| --------- | ------------------------------------------------------ |
-| **1.0.0** | Initial release with 35 tools, 72 resources, 3 prompts |
+| Version   | Date       | Highlights                                                    |
+| --------- | ---------- | ------------------------------------------------------------- |
+| **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
+| **1.0.0** | 2026-01-21 | First stable release with 36 tools, 72 resources, caching     |
+| **0.1.2** | 2026-01-20 | CI/CD infrastructure, branch migration to main                |
+| **0.1.1** | 2026-01-20 | GitHub Actions CI/CD, ESLint + Prettier, npm package setup    |
+| **0.1.0** | 2026-01-20 | Initial implementation with all 24 PM skills as MCP tools     |
 
 ### Roadmap
 
@@ -662,7 +705,7 @@ See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues
 
 ### Testing
 
-The project uses [Vitest](https://vitest.dev/) for testing with 47 tests across 6 test files.
+The project uses [Vitest](https://vitest.dev/) for testing with 66 tests across multiple test files.
 
 ```bash
 # Run all tests
@@ -738,69 +781,6 @@ We take security seriously. This project includes:
 - **Vulnerability Reporting** - See [SECURITY.md](SECURITY.md) for our security policy
 
 To report a vulnerability, please email security concerns privately rather than opening a public issue. See [SECURITY.md](SECURITY.md) for details.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-<!-- ========== ENHANCED: Expanded Comparison Section ========== -->
-## Comparison
-
-### PM-Skills Ecosystem
-
-PM-Skills is available in two complementary forms:
-
-|  | [pm-skills](https://github.com/product-on-purpose/pm-skills) | pm-skills-mcp (this repo) |
-|---|---|---|
-| **What it is** | Skill library as markdown files | MCP server wrapping the skill library |
-| **Access method** | Git clone, ZIP upload | `npx pm-skills-mcp` |
-| **Setup time** | 2-5 minutes | 30 seconds |
-| **Skill invocation** | Slash commands (Claude Code) | MCP tool calls |
-| **Auto-discovery** | AGENTS.md (Copilot, Cursor, Windsurf) | MCP protocol (Claude Desktop, Cursor) |
-| **Template access** | Navigate file system | URI-based resources |
-| **Workflow bundles** | Manual orchestration | Tool-based execution |
-| **Customization** | Edit files directly | Set `PM_SKILLS_PATH` to custom folder |
-| **Updates** | `git pull` | `npm update pm-skills-mcp` |
-
-### When to Use Which
-
-**Use pm-skills-mcp (this repo) when:**
-
-- You want instant setup with `npx pm-skills-mcp`
-- You're using Claude Desktop, Cursor, or any MCP client
-- You want programmatic tool access without managing files
-- You prefer consistent interfaces across different AI clients
-
-**Use pm-skills (file-based) when:**
-
-- You prefer slash commands in Claude Code (`/prd`, `/hypothesis`)
-- You want to browse, read, and customize skill files directly
-- You're using GitHub Copilot or Windsurf with AGENTS.md discovery
-- You want to fork and heavily customize skills for your team
-
-### Using Both Together
-
-You can use both! For example:
-
-1. Fork [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills
-2. Point pm-skills-mcp to your fork for MCP access to your customized skills
-
-```json
-{
-  "mcpServers": {
-    "pm-skills": {
-      "command": "npx",
-      "args": ["pm-skills-mcp"],
-      "env": {
-        "PM_SKILLS_PATH": "/path/to/my/forked/pm-skills/skills"
-      }
-    }
-  }
-}
-```
-
-This gives you the best of both worlds: custom skills + programmatic MCP access.
-<!-- ========== END ENHANCED ========== -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
