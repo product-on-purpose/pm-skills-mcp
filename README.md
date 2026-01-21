@@ -19,19 +19,22 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Project Status: Active">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://github.com/product-on-purpose/pm-skills-mcp/releases">
-    <img src="https://img.shields.io/badge/version-0.1.2-blue.svg?style=flat-square" alt="Version">
+  <a href="https://www.npmjs.com/package/pm-skills-mcp">
+    <img src="https://img.shields.io/npm/v/pm-skills-mcp?style=flat-square&color=blue" alt="npm version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-34-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-35-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
   </a>
   <a href="https://github.com/product-on-purpose/pm-skills">
     <img src="https://img.shields.io/badge/powered_by-pm--skills-orange.svg?style=flat-square" alt="PM-Skills">
+  </a>
+  <a href="https://github.com/product-on-purpose/pm-skills-mcp/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/product-on-purpose/pm-skills-mcp/ci.yml?style=flat-square&label=CI" alt="CI Status">
   </a>
 </p>
 
@@ -64,10 +67,16 @@
   - [Measure Phase](#-measure-phase)
   - [Iterate Phase](#-iterate-phase)
   - [Workflow Bundles](#-workflow-bundles)
+  - [Utility Tools](#%EF%B8%8F-utility-tools)
 - [Resources](#resources)
 - [Prompts](#prompts)
 - [Configuration](#configuration)
 - [How It Works](#how-it-works)
+- [Development](#development)
+  - [Testing](#testing)
+  - [Code Quality](#code-quality)
+  - [CI/CD](#cicd)
+- [Security](#security)
 - [Comparison](#comparison)
 - [Contributing](#contributing)
 - [Acknowledgments](#acknowledgments)
@@ -102,14 +111,16 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **34 MCP Tools** — 24 PM skills + 5 workflow bundles + 5 utility tools
+- **35 MCP Tools** — 24 PM skills + 5 workflow bundles + 6 utility tools
 - **72 MCP Resources** — Skills, templates, and examples accessible via URI
 - **3 MCP Prompts** — Guided conversation starters for common workflows
 - **5 Workflow Bundles** — Pre-built multi-skill workflows for common scenarios
+- **47 Automated Tests** — Comprehensive test coverage with Vitest
 - **Zero Configuration** — Works out of the box with embedded skills
 - **Universal Compatibility** — Claude Desktop, Cursor, Continue, and any MCP client
 - **Customizable** — Override with your own skill modifications
-- **Lightweight** — Single dependency, fast startup
+- **Lightweight** — Minimal dependencies, fast startup
+- **Security Scanning** — CodeQL analysis on every push
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -258,6 +269,7 @@ PM-Skills MCP exposes each skill as an invokable tool. Every tool accepts:
 | `pm_list_workflows` | List all workflow bundles with steps |
 | `pm_list_prompts` | List available conversation prompts |
 | `pm_validate` | Validate artifact against skill template |
+| `pm_search_skills` | Search skills by keyword across names, descriptions, and content |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -353,11 +365,11 @@ Override embedded skills with your customized versions:
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   34 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
+│   │   35 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
 │   │ • 24 skills │   │ • templates │   │ • kickoff   │       │
 │   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
-│   │ • 5 utils   │   │ • skills    │   │ • quick-prd │       │
+│   │ • 6 utils   │   │ • skills    │   │ • quick-prd │       │
 │   │             │   │             │   │             │       │
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
 │                                                             │
@@ -373,6 +385,87 @@ Override embedded skills with your customized versions:
 2. **AI invokes** the appropriate `pm_*` tool via MCP
 3. **Server returns** skill instructions, template, and optionally an example
 4. **AI generates** a professional-quality artifact following the skill framework
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Development
+
+### Testing
+
+The project uses [Vitest](https://vitest.dev/) for testing with 47 tests across 6 test files.
+
+```bash
+# Run all tests
+npm test
+
+# Watch mode for development
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+**Test coverage includes:**
+- Skill loader and parser
+- Tool handler and response formatting
+- Workflow bundle execution
+- Prompt registration
+- Output validation
+- Server initialization
+
+### Code Quality
+
+```bash
+# Lint with ESLint
+npm run lint
+
+# Auto-fix lint issues
+npm run lint:fix
+
+# Format with Prettier
+npm run format
+
+# Check formatting
+npm run format:check
+
+# Type check
+npx tsc --noEmit
+```
+
+### CI/CD
+
+The project uses GitHub Actions for continuous integration and deployment:
+
+**CI Workflow** (`.github/workflows/ci.yml`)
+- Triggers on push/PR to `main`
+- Tests on Node.js 18, 20, and 22
+- Runs lint, format check, type check, and tests
+- Clones pm-skills and embeds skills for testing
+
+**Publish Workflow** (`.github/workflows/publish.yml`)
+- Triggers on GitHub release creation
+- Auto-publishes to npm with provenance
+- Uses npm automation token for authentication
+
+**CodeQL Workflow** (`.github/workflows/codeql.yml`)
+- Security scanning for JavaScript/TypeScript
+- Runs on push to main and weekly schedule
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Security
+
+We take security seriously. This project includes:
+
+- **CodeQL Analysis** — Automated security scanning on every push
+- **Dependabot** — Automated dependency updates for npm and GitHub Actions
+- **Vulnerability Reporting** — See [SECURITY.md](SECURITY.md) for our security policy
+
+To report a vulnerability, please email security concerns privately rather than opening a public issue. See [SECURITY.md](SECURITY.md) for details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -438,7 +531,7 @@ Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 
 ## License
 
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
+Distributed under the **Apache License 2.0**. See [LICENSE](LICENSE) for more information.
 
 ---
 

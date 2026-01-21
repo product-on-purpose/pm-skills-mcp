@@ -67,6 +67,7 @@ export class PMSkillsServer {
     this.registerListSkillsTool();
     this.registerListResourcesTool();
     this.registerValidateTool();
+    this.registerSearchSkillsTool();
 
     // Register workflow bundle tools
     this.workflowCount = this.registerWorkflowTools();
@@ -76,9 +77,9 @@ export class PMSkillsServer {
     this.promptCount = registerPrompts(this.server);
     this.registerListPromptsTool();
 
-    const totalTools = this.skills.size + 5 + this.workflowCount; // skills + utilities (5) + workflows
+    const totalTools = this.skills.size + 6 + this.workflowCount; // skills + utilities (6) + workflows
     console.error(
-      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 5 utilities)`
+      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 6 utilities)`
     );
     console.error(`Registered ${this.promptCount} prompts`);
 
@@ -283,6 +284,120 @@ Returns:
           const formatted = formatValidationResult(result);
 
           return createSuccessResponse(formatted);
+        } catch (error) {
+          if (error instanceof Error) {
+            return createErrorResponse(error.message);
+          }
+          return createErrorResponse('An unexpected error occurred');
+        }
+      }
+    );
+  }
+
+  /**
+   * Register a tool to search skills by keyword
+   */
+  private registerSearchSkillsTool(): void {
+    const description = `Search PM-Skills by keyword.
+
+Searches across skill names, descriptions, and content to find relevant skills for your needs.
+
+Args:
+  - query (string, required): Search term(s) to find matching skills
+  - searchContent (boolean, default: false): Also search within skill instructions
+
+Returns:
+  Markdown formatted list of matching skills with relevance context.`;
+
+    const searchSchema = {
+      query: z.string().describe('Search term(s) to find matching skills'),
+      searchContent: z
+        .boolean()
+        .optional()
+        .describe('Also search within skill instructions (slower but more thorough)'),
+    };
+
+    this.server.tool(
+      `${TOOL_CONFIG.prefix}search_skills`,
+      description,
+      searchSchema,
+      async (params) => {
+        try {
+          const query = params.query.toLowerCase().trim();
+          const searchContent = params.searchContent ?? false;
+
+          if (!query) {
+            return createErrorResponse('Search query cannot be empty');
+          }
+
+          const results: Array<{
+            skill: Skill;
+            matchType: 'name' | 'description' | 'content';
+            matchContext?: string;
+          }> = [];
+
+          // Search through all skills
+          for (const skill of this.skills.values()) {
+            // Check name match
+            if (skill.name.toLowerCase().includes(query)) {
+              results.push({ skill, matchType: 'name' });
+              continue;
+            }
+
+            // Check description match
+            if (skill.description.toLowerCase().includes(query)) {
+              results.push({ skill, matchType: 'description' });
+              continue;
+            }
+
+            // Check content match (if enabled)
+            if (searchContent && skill.instructions.toLowerCase().includes(query)) {
+              // Extract context around the match
+              const lowerInstructions = skill.instructions.toLowerCase();
+              const matchIndex = lowerInstructions.indexOf(query);
+              const start = Math.max(0, matchIndex - 50);
+              const end = Math.min(skill.instructions.length, matchIndex + query.length + 50);
+              const matchContext = '...' + skill.instructions.slice(start, end).trim() + '...';
+              results.push({ skill, matchType: 'content', matchContext });
+            }
+          }
+
+          // Build output
+          const lines: string[] = [];
+          lines.push(`# Search Results for "${params.query}"`);
+          lines.push('');
+
+          if (results.length === 0) {
+            lines.push('No skills found matching your search.');
+            lines.push('');
+            lines.push('**Suggestions:**');
+            lines.push('- Try broader search terms');
+            lines.push('- Use `pm_list_skills` to see all available skills');
+            lines.push('- Enable `searchContent: true` for deeper search');
+          } else {
+            lines.push(`Found ${results.length} matching skill${results.length === 1 ? '' : 's'}:`);
+            lines.push('');
+
+            for (const result of results) {
+              const toolName = `${TOOL_CONFIG.prefix}${result.skill.name}`;
+              lines.push(`## ${result.skill.name}`);
+              lines.push('');
+              lines.push(`**Tool:** \`${toolName}\``);
+              lines.push(`**Phase:** ${result.skill.phase}`);
+              lines.push(`**Match:** ${result.matchType}`);
+              lines.push('');
+              lines.push(result.skill.description);
+
+              if (result.matchContext) {
+                lines.push('');
+                lines.push(`**Context:** ${result.matchContext}`);
+              }
+
+              lines.push('');
+            }
+          }
+
+          return createSuccessResponse(lines.join('\n'));
         } catch (error) {
           if (error instanceof Error) {
             return createErrorResponse(error.message);
