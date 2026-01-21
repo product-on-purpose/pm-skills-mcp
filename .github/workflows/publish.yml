@@ -13,7 +13,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Clone pm-skills
         run: git clone --depth 1 https://github.com/product-on-purpose/pm-skills.git ../pm-skills
