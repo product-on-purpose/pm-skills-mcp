@@ -1,12 +1,11 @@
 <a id="readme-top"></a>
 
 <h1 align="center">
-  <br>
   <a href="https://github.com/product-on-purpose/pm-skills-mcp">PM-Skills MCP</a>
   <br>
 </h1>
 
-<h4 align="center">24 professional PM skills, instantly accessible to any AI via the Model Context Protocol.</h4>
+<h4 align="center">Open-source MCP with /pm-skills included 24 best-practice product management skills plus workflows, instantly accessible to any AI via Model Context Protocol.</h4>
 
 <p align="center">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/issues/new?labels=bug">Report a Bug</a>
@@ -63,7 +62,7 @@
   - [Key Features](#key-features)
   - [Built with...](#built-with)
   - [Works for...](#works-for)
-  - [Comparison: pm-skills-mcp (this repo) vs. pm-skills](#comparison-pm-skills-mcp-this-repo-vs-pm-skills)
+  - [Comparison: `pm-skills-mcp` (this repo) vs. `pm-skills`](#comparison-pm-skills-mcp-this-repo-vs-pm-skills)
 - [Getting Started](#getting-started)
   - [NPM Global Install](#npm-global-install)
   - [From Source](#from-source)
@@ -72,12 +71,7 @@
 - [Usage](#usage)
   - [How It Works](#how-it-works)
   - [Tools](#tools)
-  - [🔍 Discover Phase - *Find the right problem*](#-discover-phase---find-the-right-problem)
-  - [📋 Define Phase - *Frame the problem*](#-define-phase---frame-the-problem)
-  - [💡 Develop Phase - *Explore solutions*](#-develop-phase---explore-solutions)
-  - [🚀 Deliver Phase - *Ship it*](#-deliver-phase---ship-it)
-  - [📊 Measure Phase - *Validate with data*](#-measure-phase---validate-with-data)
-  - [🔄 Iterate Phase - *Learn and improve*](#-iterate-phase---learn-and-improve)
+  - [The Skills](#the-skills)
   - [🔗 Workflow Bundles - *Multi-skill workflows*](#-workflow-bundles---multi-skill-workflows)
   - [🛠️ Utility Tools](#️-utility-tools)
   - [MCP Resources](#mcp-resources)
@@ -196,9 +190,9 @@ PM-Skills MCP works with any client that supports the Model Context Protocol. He
 
 See the [Integration Guide](docs/integration-guide.md) for detailed setup instructions for each platform.
 
-### Comparison: pm-skills-mcp (this repo) vs. pm-skills
+### Comparison: `pm-skills-mcp` (this repo) vs. `pm-skills`
 
-PM-Skills is available in two complementary forms:
+`PM-Skills` is available in two complementary forms:
 
 |  | pm-skills-mcp (this repo) | [pm-skills](https://github.com/product-on-purpose/pm-skills) |
 |---|---|---|
@@ -212,20 +206,22 @@ PM-Skills is available in two complementary forms:
 | **Customization** | Set `PM_SKILLS_PATH` to custom folder | Edit files directly |
 | **Updates** | `npm update pm-skills-mcp` | `git pull` |
 
-**Use pm-skills-mcp (this repo) when:**
+**Use `pm-skills-mcp` (this repo) when:**
+
 - You want instant setup with `npx pm-skills-mcp`
 - You're using Claude Desktop, Cursor, or any MCP client
 - You want programmatic tool access without managing files
 - You prefer consistent interfaces across different AI clients
 
-**Use pm-skills (file-based) when:**
+**Use [pm-skills](https://github.com/product-on-purpose/pm-skills) (file-based) when:**
+
 - You prefer slash commands in Claude Code (`/prd`, `/hypothesis`)
 - You want to browse, read, and customize skill files directly
 - You're using GitHub Copilot or Windsurf with AGENTS.md discovery
 - You want to fork and heavily customize skills for your team
 
 **Using Both Together:**
-Fork [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills, then point pm-skills-mcp to your fork:
+Fork [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills, then point `pm-skills-mcp` to your fork:
 
 ```json
 {
@@ -492,7 +488,9 @@ cart abandonment. Hypothesis: users abandon due to required account creation."
 Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 ```
 
-### 🔍 Discover Phase - *Find the right problem*
+### The Skills
+
+#### 🔍 Discover Phase - *Find the right problem*
 
 | Tool                      | Description                                 |
 | ------------------------- | ------------------------------------------- |
@@ -500,7 +498,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_competitive_analysis` | Map the landscape, find opportunities       |
 | `pm_stakeholder_summary`  | Understand who matters and what they need   |
 
-### 📋 Define Phase - *Frame the problem*
+#### 📋 Define Phase - *Frame the problem*
 
 | Tool                   | Description                               |
 | ---------------------- | ----------------------------------------- |
@@ -509,7 +507,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_opportunity_tree`  | Teresa Torres-style outcome mapping       |
 | `pm_jtbd_canvas`       | Jobs to be Done framework                 |
 
-### 💡 Develop Phase - *Explore solutions*
+#### 💡 Develop Phase - *Explore solutions*
 
 | Tool                  | Description                     |
 | --------------------- | ------------------------------- |
@@ -518,7 +516,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_adr`              | Architecture Decision Records   |
 | `pm_design_rationale` | Why you made that design choice |
 
-### 🚀 Deliver Phase - *Ship it*
+#### 🚀 Deliver Phase - *Ship it*
 
 | Tool                  | Description                                       |
 | --------------------- | ------------------------------------------------- |
@@ -528,7 +526,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_launch_checklist` | Never miss a launch step again                    |
 | `pm_release_notes`    | User-facing release communication                 |
 
-### 📊 Measure Phase - *Validate with data*
+#### 📊 Measure Phase - *Validate with data*
 
 | Tool                        | Description                         |
 | --------------------------- | ----------------------------------- |
@@ -537,7 +535,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_dashboard_requirements` | Analytics dashboard specs           |
 | `pm_experiment_results`     | Document learnings from experiments |
 
-### 🔄 Iterate Phase - *Learn and improve*
+#### 🔄 Iterate Phase - *Learn and improve*
 
 | Tool                  | Description                              |
 | --------------------- | ---------------------------------------- |
