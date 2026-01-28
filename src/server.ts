@@ -17,6 +17,27 @@ import { listWorkflowBundles, formatWorkflowOutput } from './workflows/index.js'
 import { registerPrompts, listPrompts } from './prompts/index.js';
 
 /**
+ * Derive tool name from skill name
+ * Strips phase prefix and converts hyphens to underscores
+ * e.g., "deliver-prd" → "pm_prd"
+ *       "define-hypothesis" → "pm_hypothesis"
+ */
+function deriveToolName(skillName: string): string {
+  const phases = ['discover', 'define', 'develop', 'deliver', 'measure', 'iterate'];
+  let stripped = skillName;
+
+  for (const phase of phases) {
+    if (skillName.startsWith(`${phase}-`)) {
+      stripped = skillName.slice(phase.length + 1);
+      break;
+    }
+  }
+
+  // Convert remaining hyphens to underscores for MCP tool naming
+  return `${TOOL_CONFIG.prefix}${stripped.replace(/-/g, '_')}`;
+}
+
+/**
  * Zod schema for skill tool parameters (for MCP SDK)
  */
 const SkillToolParamsSchema = {
@@ -92,7 +113,7 @@ export class PMSkillsServer {
    * Register a single skill as an MCP tool
    */
   private registerSkillTool(skill: Skill): void {
-    const toolName = `${TOOL_CONFIG.prefix}${skill.name}`;
+    const toolName = deriveToolName(skill.name);
     const description = `${skill.description}
 
 Use this tool to get guidance and a template for creating a ${skill.name.toUpperCase()} artifact.
@@ -171,7 +192,7 @@ Returns:
         lines.push(`## ${phase.charAt(0).toUpperCase() + phase.slice(1)} Phase`);
         lines.push('');
         for (const skill of skills) {
-          lines.push(`- **${TOOL_CONFIG.prefix}${skill.name}**: ${skill.description}`);
+          lines.push(`- **${deriveToolName(skill.name)}**: ${skill.description}`);
         }
         lines.push('');
       }
@@ -189,9 +210,9 @@ Returns:
 Returns a categorized list of all skill instructions, templates, and examples available as MCP resources.
 
 Resources can be accessed via \`resources/read\` using URIs like:
-- pm-skills://skills/{phase}/{skill} - Full skill instructions
-- pm-skills://templates/{phase}/{skill} - Blank template
-- pm-skills://examples/{phase}/{skill} - Completed example
+- pm-skills://skills/{skill} - Full skill instructions
+- pm-skills://templates/{skill} - Blank template
+- pm-skills://examples/{skill} - Completed example
 
 Returns:
   Markdown formatted list of all resources organized by type with their URIs.`;
@@ -380,7 +401,7 @@ Returns:
             lines.push('');
 
             for (const result of results) {
-              const toolName = `${TOOL_CONFIG.prefix}${result.skill.name}`;
+              const toolName = deriveToolName(result.skill.name);
               lines.push(`## ${result.skill.name}`);
               lines.push('');
               lines.push(`**Tool:** \`${toolName}\``);

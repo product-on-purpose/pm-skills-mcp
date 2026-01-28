@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-01-27
+
+### Breaking Changes
+- **Resource URIs flattened** - URIs now use `pm-skills://skills/{skill}` format (was `pm-skills://skills/{phase}/{skill}`)
+- **Internal skill directory structure** - Now flat `skills/{phase-skill}/` matching pm-skills v2.x
+
+### Changed
+- Skill loader now reads `phase` from SKILL.md frontmatter instead of directory path
+- Tool metadata includes phase information for programmatic access
+- Updated `embed-skills.js` for flat pm-skills v2.x source layout
+- All 36 tools verified (24 skills + 5 workflows + 7 utilities)
+- Tool names remain stable (`pm_prd`, `pm_hypothesis`, etc.) derived from full skill names
+
+### Fixed
+- Aligns with pm-skills v2.0.2+ flat structure
+- Workflow bundle skill lookups updated for new naming convention
+
 ## [1.1.0] - 2026-01-21
 
 ### Added

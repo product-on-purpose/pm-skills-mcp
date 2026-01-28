@@ -31,9 +31,6 @@ const DEST_PATH = path.resolve(PROJECT_ROOT, 'skills');
 const ROOT_FILES = ['SKILL.md'];
 const REFERENCE_FILES = ['TEMPLATE.md', 'EXAMPLE.md'];
 
-// Phase directories (Triple Diamond phases)
-const PHASES = ['discover', 'define', 'develop', 'deliver', 'measure', 'iterate'];
-
 /**
  * Copy a file if it exists
  */
@@ -46,96 +43,87 @@ function copyFileIfExists(src, dest) {
 }
 
 /**
- * Recursively copy skill directories
+ * Copy skills from flat pm-skills v2.x structure
+ * Source: skills/{phase-skill}/SKILL.md (e.g., skills/deliver-prd/SKILL.md)
+ * Dest: skills/{phase-skill}/SKILL.md (preserved flat)
  */
 function copySkills(sourcePath, destPath) {
   let skillCount = 0;
   let fileCount = 0;
 
-  for (const phase of PHASES) {
-    const phaseSource = path.join(sourcePath, phase);
-    const phaseDest = path.join(destPath, phase);
+  // Scan flat skills directory
+  const skillDirs = fs.readdirSync(sourcePath, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .filter(dirent => !dirent.name.startsWith('.'))
+    .map(dirent => dirent.name);
 
-    if (!fs.existsSync(phaseSource)) {
-      console.log(`  Skipping ${phase}/ (not found)`);
-      continue;
+  for (const skillDir of skillDirs) {
+    // skillDir is like "deliver-prd", "define-hypothesis"
+    const skillSource = path.join(sourcePath, skillDir);
+    const skillDest = path.join(destPath, skillDir);
+
+    // Create skill directory
+    fs.mkdirSync(skillDest, { recursive: true });
+
+    // Copy root files (SKILL.md)
+    let copiedFiles = 0;
+    for (const file of ROOT_FILES) {
+      if (copyFileIfExists(
+        path.join(skillSource, file),
+        path.join(skillDest, file)
+      )) {
+        copiedFiles++;
+        fileCount++;
+      }
     }
 
-    // Create phase directory
-    fs.mkdirSync(phaseDest, { recursive: true });
+    // Copy reference files (TEMPLATE.md, EXAMPLE.md)
+    // Preserve references/ directory structure as expected by loader
+    const srcRefDir = path.join(skillSource, 'references');
+    const destRefDir = path.join(skillDest, 'references');
 
-    // Get skill directories within the phase
-    const skills = fs.readdirSync(phaseSource, { withFileTypes: true })
-      .filter(dirent => dirent.isDirectory())
-      .map(dirent => dirent.name);
-
-    for (const skill of skills) {
-      const skillSource = path.join(phaseSource, skill);
-      const skillDest = path.join(phaseDest, skill);
-
-      // Create skill directory
-      fs.mkdirSync(skillDest, { recursive: true });
-
-      // Copy root files (SKILL.md)
-      let copiedFiles = 0;
-      for (const file of ROOT_FILES) {
+    if (fs.existsSync(srcRefDir)) {
+      // Source has references/ subfolder - preserve structure
+      fs.mkdirSync(destRefDir, { recursive: true });
+      for (const file of REFERENCE_FILES) {
         if (copyFileIfExists(
-          path.join(skillSource, file),
-          path.join(skillDest, file)
+          path.join(srcRefDir, file),
+          path.join(destRefDir, file)
         )) {
           copiedFiles++;
           fileCount++;
         }
       }
-
-      // Copy reference files (TEMPLATE.md, EXAMPLE.md)
-      // Preserve references/ directory structure as expected by loader
-      const srcRefDir = path.join(skillSource, 'references');
-      const destRefDir = path.join(skillDest, 'references');
-
-      if (fs.existsSync(srcRefDir)) {
-        // Source has references/ subfolder - preserve structure
+    } else {
+      // Fallback: try root files if no references folder
+      // Copy to references/ to match loader expectations
+      let foundAny = false;
+      for (const file of REFERENCE_FILES) {
+        if (fs.existsSync(path.join(skillSource, file))) {
+          foundAny = true;
+          break;
+        }
+      }
+      if (foundAny) {
         fs.mkdirSync(destRefDir, { recursive: true });
         for (const file of REFERENCE_FILES) {
           if (copyFileIfExists(
-            path.join(srcRefDir, file),
+            path.join(skillSource, file),
             path.join(destRefDir, file)
           )) {
             copiedFiles++;
             fileCount++;
           }
         }
-      } else {
-        // Fallback: try root files if no references folder
-        // Copy to references/ to match loader expectations
-        let foundAny = false;
-        for (const file of REFERENCE_FILES) {
-          if (fs.existsSync(path.join(skillSource, file))) {
-            foundAny = true;
-            break;
-          }
-        }
-        if (foundAny) {
-          fs.mkdirSync(destRefDir, { recursive: true });
-          for (const file of REFERENCE_FILES) {
-            if (copyFileIfExists(
-              path.join(skillSource, file),
-              path.join(destRefDir, file)
-            )) {
-              copiedFiles++;
-              fileCount++;
-            }
-          }
-        }
-      }
-
-      if (copiedFiles > 0) {
-        skillCount++;
       }
     }
 
-    console.log(`  ${phase}/: ${skills.length} skills`);
+    if (copiedFiles > 0) {
+      skillCount++;
+    }
   }
+
+  console.log(`  Found ${skillDirs.length} skill directories`);
 
   return { skillCount, fileCount };
 }

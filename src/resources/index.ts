@@ -1,10 +1,12 @@
 /**
  * MCP Resources - URI-based access to skills, templates, and examples
  *
- * Resource URI Schema:
- * - pm-skills://skills/{phase}/{skill}     - Full skill instructions
- * - pm-skills://templates/{phase}/{skill}  - Template only
- * - pm-skills://examples/{phase}/{skill}   - Example only
+ * Resource URI Schema (v2.1 flat format):
+ * - pm-skills://skills/{skill}     - Full skill instructions
+ * - pm-skills://templates/{skill}  - Template only
+ * - pm-skills://examples/{skill}   - Example only
+ *
+ * Phase information is available in resource metadata.
  */
 
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -27,24 +29,24 @@ export interface ResourceInfo {
 }
 
 /**
- * Build a resource URI
+ * Build a resource URI (flat format)
  */
-export function buildResourceUri(type: ResourceType, phase: string, skillName: string): string {
+export function buildResourceUri(type: ResourceType, skillName: string): string {
   const typeMap: Record<ResourceType, string> = {
     skill: 'skills',
     template: 'templates',
     example: 'examples',
   };
-  return `pm-skills://${typeMap[type]}/${phase}/${skillName}`;
+  return `pm-skills://${typeMap[type]}/${skillName}`;
 }
 
 /**
- * Parse a resource URI to extract type, phase, and skill
+ * Parse a resource URI to extract type and skill (flat format)
  */
 export function parseResourceUri(
   uri: string
-): { type: ResourceType; phase: string; skill: string } | null {
-  const match = uri.match(/^pm-skills:\/\/(skills|templates|examples)\/([^/]+)\/([^/]+)$/);
+): { type: ResourceType; skill: string } | null {
+  const match = uri.match(/^pm-skills:\/\/(skills|templates|examples)\/([a-z0-9-]+)$/);
   if (!match) return null;
 
   const typeMap: Record<string, ResourceType> = {
@@ -55,8 +57,7 @@ export function parseResourceUri(
 
   return {
     type: typeMap[match[1]],
-    phase: match[2],
-    skill: match[3],
+    skill: match[2],
   };
 }
 
@@ -64,7 +65,7 @@ export function parseResourceUri(
  * Build resource info for a skill
  */
 function buildResourceInfo(skill: Skill, type: ResourceType): ResourceInfo {
-  const uri = buildResourceUri(type, skill.phase, skill.name);
+  const uri = buildResourceUri(type, skill.name);
   const typeDescriptions: Record<ResourceType, string> = {
     skill: `Full instructions for creating a ${skill.name.toUpperCase()} artifact`,
     template: `Blank template for ${skill.name.toUpperCase()} artifact`,
@@ -124,8 +125,8 @@ export function registerResources(server: McpServer, skills: Map<string, Skill>)
     }
   }
 
-  // Register the resource list handler
-  server.resource('pm-skills-resources', 'pm-skills://{type}/{phase}/{skill}', async (uri) => {
+  // Register the resource list handler (flat URI format)
+  server.resource('pm-skills-resources', 'pm-skills://{type}/{skill}', async (uri) => {
     const parsed = parseResourceUri(uri.href);
     if (!parsed) {
       throw new Error(`Invalid resource URI: ${uri.href}`);
@@ -135,13 +136,6 @@ export function registerResources(server: McpServer, skills: Map<string, Skill>)
     const skill = skills.get(parsed.skill);
     if (!skill) {
       throw new Error(`Skill not found: ${parsed.skill}`);
-    }
-
-    // Verify phase matches
-    if (skill.phase !== parsed.phase) {
-      throw new Error(
-        `Skill '${parsed.skill}' is in phase '${skill.phase}', not '${parsed.phase}'`
-      );
     }
 
     // Get the content

@@ -30,6 +30,7 @@ async function parseSkillFile(filePath: string): Promise<{ metadata: SkillMetada
   const metadata: SkillMetadata = {
     name: data.name,
     description: data.description,
+    phase: data.phase as SkillPhase | undefined, // Read phase from frontmatter
     license: data.license || 'Apache-2.0',
     metadata: {
       category: data.metadata?.category || 'general',
@@ -55,17 +56,20 @@ async function loadOptionalFile(filePath: string): Promise<string | null> {
 }
 
 /**
- * Determine phase from directory path
+ * Extract phase from skill metadata (frontmatter or name prefix)
  */
-function extractPhase(skillPath: string): SkillPhase {
-  const normalizedPath = skillPath.replace(/\\/g, '/');
+function extractPhaseFromMetadata(metadata: SkillMetadata): SkillPhase {
+  // First check explicit phase field from frontmatter
+  if (metadata.phase && SKILL_PHASES.includes(metadata.phase)) {
+    return metadata.phase;
+  }
+  // Fallback: derive from skill name (e.g., "deliver-prd" → "deliver")
   for (const phase of SKILL_PHASES) {
-    if (normalizedPath.includes(`/${phase}/`) || normalizedPath.includes(`\\${phase}\\`)) {
+    if (metadata.name.startsWith(`${phase}-`)) {
       return phase;
     }
   }
-  // Default to 'deliver' if phase cannot be determined
-  return 'deliver';
+  throw new Error(`Cannot determine phase for skill: ${metadata.name}`);
 }
 
 /**
@@ -85,8 +89,8 @@ async function loadSkill(skillDir: string): Promise<Skill> {
     loadOptionalFile(examplePath),
   ]);
 
-  // Extract phase from path
-  const phase = extractPhase(skillDir);
+  // Extract phase from metadata (frontmatter or name)
+  const phase = extractPhaseFromMetadata(metadata);
 
   return {
     name: metadata.name,

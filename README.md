@@ -400,7 +400,7 @@ Override embedded skills with your customized versions:
 If you've forked [pm-skills](https://github.com/product-on-purpose/pm-skills) to customize skills:
 
 1. Clone your fork locally
-2. Make changes to skills in `skills/{phase}/{skill-name}/`
+2. Make changes to skills in `skills/{phase-skill}/` (e.g., `skills/deliver-prd/`)
 3. Point pm-skills-mcp to your fork:
 
 ```json
@@ -572,20 +572,20 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 Access skill content directly via MCP resources:
 
 ```
-pm-skills://skills/{phase}/{skill}      → Full skill instructions
-pm-skills://templates/{phase}/{skill}   → Template only
-pm-skills://examples/{phase}/{skill}    → Worked example
-pm-skills://bundles/{bundle-name}       → Workflow bundle
+pm-skills://skills/{skill}      → Full skill instructions
+pm-skills://templates/{skill}   → Template only
+pm-skills://examples/{skill}    → Worked example
 ```
 
 **Examples:**
 
 ```
-pm-skills://skills/deliver/prd
-pm-skills://templates/define/hypothesis
-pm-skills://examples/measure/experiment-design
-pm-skills://bundles/feature-kickoff
+pm-skills://skills/deliver-prd
+pm-skills://templates/define-hypothesis
+pm-skills://examples/measure-experiment-design
 ```
+
+> **Note:** Phase information is available in resource metadata.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -656,13 +656,11 @@ pm-skills-mcp/
 │   ├── prompts/              # MCP prompt definitions (3 prompts)
 │   ├── workflows/            # Workflow bundle logic
 │   └── types/                # TypeScript type definitions
-├── skills/                   # Embedded PM skills (copied from pm-skills)
-│   ├── discover/             # Research phase skills
-│   ├── define/               # Problem framing skills
-│   ├── develop/              # Solution exploration skills
-│   ├── deliver/              # Specification skills
-│   ├── measure/              # Validation skills
-│   └── iterate/              # Learning skills
+├── skills/                   # Embedded PM skills (flat, copied from pm-skills v2.x)
+│   ├── deliver-prd/          # Example: phase-prefixed skill directories
+│   ├── define-hypothesis/    # Each skill has SKILL.md + references/
+│   ├── discover-interview-synthesis/
+│   └── ...                   # 24 skills total
 ├── docs/                     # Documentation
 │   ├── getting-started.md    # Complete setup and first-use guide
 │   ├── integration-guide.md  # Client-specific configuration
@@ -690,6 +688,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
 | **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
 | **1.0.0** | 2026-01-21 | First stable release with 36 tools, 72 resources, caching     |
 | **0.1.2** | 2026-01-20 | CI/CD infrastructure, branch migration to main                |

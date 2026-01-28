@@ -354,7 +354,15 @@ export function formatWorkflowOutput(
   lines.push('');
 
   for (const step of bundle.steps) {
-    const skill = skills.get(step.skillName.replace(/-/g, '_'));
+    // Find skill by matching the short name (after phase prefix)
+    // e.g., step.skillName="problem-statement" matches skill.name="define-problem-statement"
+    let skill: Skill | undefined;
+    for (const [, s] of skills) {
+      if (s.name.endsWith(`-${step.skillName}`) || s.name === step.skillName) {
+        skill = s;
+        break;
+      }
+    }
     const optionalTag = step.optional ? ' *(optional)*' : '';
 
     lines.push(`### Step ${step.order}: ${step.skillName}${optionalTag}`);

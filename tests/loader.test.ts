@@ -70,9 +70,9 @@ describe('getSkill', () => {
   });
 
   it('should return skill by name', () => {
-    const skill = getSkill(skills, 'prd');
+    const skill = getSkill(skills, 'deliver-prd');
     expect(skill).toBeDefined();
-    expect(skill?.name).toBe('prd');
+    expect(skill?.name).toBe('deliver-prd');
   });
 
   it('should return undefined for unknown skill', () => {

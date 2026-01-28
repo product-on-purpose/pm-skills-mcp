@@ -8,6 +8,8 @@
 export interface SkillMetadata {
   name: string;
   description: string;
+  /** Phase from frontmatter (optional, can be derived from name) */
+  phase?: SkillPhase;
   license: string;
   metadata: {
     category: string;
@@ -16,6 +18,11 @@ export interface SkillMetadata {
     version: string;
   };
 }
+
+/**
+ * Triple Diamond phases
+ */
+export type SkillPhase = 'discover' | 'define' | 'develop' | 'deliver' | 'measure' | 'iterate';
 
 /**
  * Parsed skill with all content
@@ -38,11 +45,6 @@ export interface Skill {
   /** Example content (EXAMPLE.md) */
   example: string | null;
 }
-
-/**
- * Triple Diamond phases
- */
-export type SkillPhase = 'discover' | 'define' | 'develop' | 'deliver' | 'measure' | 'iterate';
 
 /**
  * All valid phases as array for iteration
