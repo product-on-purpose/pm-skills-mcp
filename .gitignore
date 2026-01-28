@@ -37,8 +37,8 @@ temp/
 _NOTES/
 .obsidian
 
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code configuration (personal/local)
+.claude/
 
 # Agent working files
 # Note: CONTEXT.md and DECISIONS.md are intentionally tracked for continuity
