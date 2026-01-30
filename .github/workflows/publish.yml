@@ -19,7 +19,7 @@ jobs:
         run: git clone --depth 1 https://github.com/product-on-purpose/pm-skills.git ../pm-skills
 
       - name: Use Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: 'npm'
