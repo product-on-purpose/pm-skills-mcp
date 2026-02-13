@@ -44,7 +44,7 @@ PM-Skills MCP is a Model Context Protocol server that exposes product management
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
 │   │ Tool Handler│   │Resource Srv │   │ Prompt Srv  │       │
-│   │  (35 tools) │   │(72 resources│   │ (3 prompts) │       │
+│   │  (36 tools) │   │(72 resources│   │ (3 prompts) │       │
 │   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘       │
 │          │                 │                 │              │
 │          └─────────────────┼─────────────────┘              │
@@ -146,7 +146,7 @@ await server.getServer().connect(transport);
 
 **Initialization sequence:**
 1. Load all skills via `loadAllSkills()`
-2. Register a tool for each skill (`pm_{skill-name}`)
+2. Register a tool for each skill using stable `pm_*` names derived from skill names (phase prefix removed)
 3. Register utility tools (list, search, validate)
 4. Register workflow bundle tools
 5. Register MCP prompts
@@ -155,7 +155,7 @@ await server.getServer().connect(transport);
 **Tool registration pattern:**
 ```typescript
 registerSkillTool(skill: Skill): void {
-  const toolName = `pm_${skill.name}`;
+  const toolName = deriveToolName(skill.name); // e.g., deliver-prd -> pm_prd
   this.server.tool(toolName, schema, async (args) => {
     // Build and return skill output
   });
@@ -181,13 +181,14 @@ registerSkillTool(skill: Skill): void {
 | `getCacheStats()` | Return cache hit/miss statistics |
 
 **Skill discovery:**
-1. Scan `{skillsPath}/{phase}/{skill-name}/` directories
+1. Recursively scan `{skillsPath}/**/SKILL.md`
 2. For each skill directory:
    - Parse `SKILL.md` (required)
-   - Parse `references/TEMPLATE.md` (required)
-   - Parse `references/EXAMPLE.md` (required)
+   - Parse `references/TEMPLATE.md` (optional)
+   - Parse `references/EXAMPLE.md` (optional)
 3. Extract YAML frontmatter from SKILL.md
-4. Build `Skill` object with all content
+4. Derive phase from frontmatter (fallback: skill-name prefix)
+5. Build `Skill` object with parsed content
 
 **YAML frontmatter parsing:**
 ```yaml
@@ -243,10 +244,9 @@ buildToolOutput(skill: Skill, input: SkillToolInput): string {
 
 **URI scheme:**
 ```
-pm-skills://skills/{phase}/{skill}      → Full skill instructions
-pm-skills://templates/{phase}/{skill}   → Template only
-pm-skills://examples/{phase}/{skill}    → Example only
-pm-skills://bundles/{bundle-name}       → Workflow bundle
+pm-skills://skills/{skill}      → Full skill instructions
+pm-skills://templates/{skill}   → Template only
+pm-skills://examples/{skill}    → Example only
 ```
 
 **Registration:**
@@ -357,7 +357,7 @@ interface SkillCache {
 ```typescript
 export const SERVER_INFO = {
   name: 'pm-skills-mcp',
-  version: '1.0.0',
+  version: '2.1.0',
 };
 ```
 
@@ -433,7 +433,7 @@ interface ToolInput {
 │  MCP Client  │
 │  (resource)  │
 └──────┬───────┘
-       │ resources/read: pm-skills://templates/deliver/prd
+       │ resources/read: pm-skills://templates/deliver-prd
        ▼
 ┌──────────────────────────────────────────────────────────┐
 │                    PMSkillsServer                         │
@@ -522,7 +522,7 @@ Client                              Server
   │◄── initializeResult ───────────────┤
   │                                    │
   ├─── tools/list ────────────────────►│
-  │◄── tools/list result (35 tools) ───┤
+  │◄── tools/list result (36 tools) ───┤
   │                                    │
   ├─── tools/call (pm_prd) ───────────►│
   │◄── tool result (skill content) ────┤

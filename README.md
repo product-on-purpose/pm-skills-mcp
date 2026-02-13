@@ -138,7 +138,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **35 MCP Tools** - 24 PM skills + 5 workflow bundles + 6 utility tools
+- **36 MCP Tools** - 24 PM skills + 5 workflow bundles + 7 utility tools
 - **72 MCP Resources** - Skills, templates, and examples accessible via URI
 - **3 MCP Prompts** - Guided conversation starters for common workflows
 - **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
@@ -440,11 +440,11 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   35 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
+│   │   36 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
 │   │ • 24 skills │   │ • templates │   │ • kickoff   │       │
 │   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
-│   │ • 6 utils   │   │ • skills    │   │ • quick-prd │       │
+│   │ • 7 utils   │   │ • skills    │   │ • quick-prd │       │
 │   │             │   │             │   │             │       │
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
 │                                                             │
@@ -463,7 +463,7 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 
 ### Tools
 
-PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **24 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while the **6 utility tools** (like `pm_list_skills`, `pm_search_skills`) help you discover and validate skills. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
+PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **24 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while the **7 utility tools** (like `pm_list_skills`, `pm_search_skills`) help you discover and validate skills. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
 
 Every skill tool accepts these parameters:
 
@@ -651,7 +651,7 @@ pm-skills-mcp/
 │   ├── config.ts             # Configuration management
 │   ├── cache.ts              # Skill caching layer
 │   ├── skills/               # Skill loader and parser
-│   ├── tools/                # MCP tool handlers (35 tools)
+│   ├── tools/                # MCP tool handlers (36 tools)
 │   ├── resources/            # MCP resource handlers (72 resources)
 │   ├── prompts/              # MCP prompt definitions (3 prompts)
 │   ├── workflows/            # Workflow bundle logic

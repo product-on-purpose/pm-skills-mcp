@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Dedicated resource URI contract tests (`tests/resources.test.ts`) covering:
+  - URI builder/parsing for flat v2.1 format
+  - rejection of legacy nested URI format
+  - resource listing behavior with/without template/example files
+
+### Changed
+- Corrected MCP contract docs to flat resource URIs (`pm-skills://{skills|templates|examples}/{skill}`):
+  - `AGENTS.md`
+  - `docs/getting-started.md`
+  - `docs/architecture.md`
+- Updated docs to reflect current tool surface: 36 tools total (24 skills + 5 workflows + 7 utilities):
+  - `README.md`
+  - `docs/getting-started.md`
+  - `docs/architecture.md`
+- Tightened npm publish surface in `package.json` `files` to include runtime JS + type declarations, excluding source maps.
+- Hardened `.gitignore` for packaging/env hygiene (`*.tgz`, `.env.*`, allowlist `.env.example`).
+
 ## [2.1.0] - 2026-01-27
 
 ### Breaking Changes

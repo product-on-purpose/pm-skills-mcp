@@ -8,8 +8,9 @@
     "pm-skills-mcp": "dist/index.js"
   },
   "files": [
-    "dist",
-    "skills",
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "skills/**",
     "README.md",
     "LICENSE"
   ],

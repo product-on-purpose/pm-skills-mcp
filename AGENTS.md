@@ -124,6 +124,7 @@ Document strategic pivot/persevere decision with evidence and rationale.
 | `pm_list_prompts` | List available conversation prompts |
 | `pm_validate` | Validate artifact against skill template |
 | `pm_search_skills` | Search skills by keyword across names, descriptions, and content |
+| `pm_cache_stats` | Show in-memory cache statistics |
 
 ---
 
@@ -132,9 +133,9 @@ Document strategic pivot/persevere decision with evidence and rationale.
 Access skill content via MCP resources using these URI patterns:
 
 ```
-pm-skills://skills/{phase}/{skill}      → Full skill instructions
-pm-skills://templates/{phase}/{skill}   → Template only
-pm-skills://examples/{phase}/{skill}    → Worked example
+pm-skills://skills/{skill}      → Full skill instructions
+pm-skills://templates/{skill}   → Template only
+pm-skills://examples/{skill}    → Worked example
 ```
 
 **72 total resources:** 24 skills × 3 types (instructions, templates, examples)
