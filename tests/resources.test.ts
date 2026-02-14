@@ -1,9 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  buildResourceUri,
-  parseResourceUri,
-  listResources,
-} from '../src/resources/index.js';
+import { buildResourceUri, parseResourceUri, listResources } from '../src/resources/index.js';
 import type { Skill } from '../src/types/index.js';
 
 const baseSkill: Skill = {

@@ -43,9 +43,7 @@ export function buildResourceUri(type: ResourceType, skillName: string): string 
 /**
  * Parse a resource URI to extract type and skill (flat format)
  */
-export function parseResourceUri(
-  uri: string
-): { type: ResourceType; skill: string } | null {
+export function parseResourceUri(uri: string): { type: ResourceType; skill: string } | null {
   const match = uri.match(/^pm-skills:\/\/(skills|templates|examples)\/([a-z0-9-]+)$/);
   if (!match) return null;
 
