@@ -26,6 +26,7 @@ tmp/
 temp/
 *.tmp
 *.temp
+*.tgz
 
 # Archives
 *.zip
@@ -54,7 +55,9 @@ build/
 .npm
 .env
 .env.local
+.env.*
 .env.*.local
+!.env.example
 
 # Test coverage
 coverage/

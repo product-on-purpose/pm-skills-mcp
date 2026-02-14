@@ -45,7 +45,7 @@ Add this to your MCP client configuration:
 }
 ```
 
-Restart your AI assistant. Done! You now have access to 24 PM skills, 5 workflow bundles, and 6 utility tools.
+Restart your AI assistant. Done! You now have access to 24 PM skills, 5 workflow bundles, and 7 utility tools.
 
 **Try it:**
 > "Use the pm_prd tool to create a PRD for adding dark mode to our app"
@@ -105,7 +105,7 @@ When you configure an MCP server, your AI gains new capabilities—in this case,
 
 MCP exposes three types of capabilities:
 
-#### Tools (35 total)
+#### Tools (36 total)
 
 Tools are **actions the AI can invoke**. Each PM skill is exposed as a tool:
 
@@ -124,9 +124,9 @@ Plus workflow bundles (`pm_workflow_feature_kickoff`, etc.) and utility tools (`
 Resources are **content the AI can read** via URI:
 
 ```
-pm-skills://skills/deliver/prd        → Full skill instructions
-pm-skills://templates/deliver/prd     → Output template only
-pm-skills://examples/deliver/prd      → Worked example
+pm-skills://skills/deliver-prd        → Full skill instructions
+pm-skills://templates/deliver-prd     → Output template only
+pm-skills://examples/deliver-prd      → Worked example
 ```
 
 Useful when you want the AI to reference a template without invoking the full skill.
@@ -255,7 +255,7 @@ Claude.ai supports MCP servers in **Projects**:
 2. Open or create a Project
 3. Go to Project Settings → Integrations
 4. Add PM-Skills MCP as an MCP server integration
-5. All 35 tools become available in project conversations
+5. All 36 tools become available in project conversations
 
 **Note:** MCP integration availability may vary by plan. Check Claude.ai documentation for current support.
 
@@ -417,19 +417,17 @@ Sometimes you want the template or example without invoking the full skill.
 ### Resource URI Patterns
 
 ```
-pm-skills://skills/{phase}/{skill}      → Full skill instructions
-pm-skills://templates/{phase}/{skill}   → Template structure only
-pm-skills://examples/{phase}/{skill}    → Worked example only
-pm-skills://bundles/{bundle-name}       → Workflow bundle definition
+pm-skills://skills/{skill}      → Full skill instructions
+pm-skills://templates/{skill}   → Template structure only
+pm-skills://examples/{skill}    → Worked example only
 ```
 
 ### Examples
 
 ```
-pm-skills://skills/deliver/prd
-pm-skills://templates/define/hypothesis
-pm-skills://examples/measure/experiment-design
-pm-skills://bundles/feature-kickoff
+pm-skills://skills/deliver-prd
+pm-skills://templates/define-hypothesis
+pm-skills://examples/measure-experiment-design
 ```
 
 ### When to Use Resources
@@ -478,13 +476,12 @@ Your custom skills directory should follow the same structure:
 
 ```
 my-skills/
-├── discover/
-│   └── interview-synthesis/
-│       ├── SKILL.md
-│       └── references/
-│           ├── TEMPLATE.md
-│           └── EXAMPLE.md
-├── define/
+├── discover-interview-synthesis/
+│   ├── SKILL.md
+│   └── references/
+│       ├── TEMPLATE.md
+│       └── EXAMPLE.md
+├── define-hypothesis/
 │   └── ...
 └── ...
 ```
