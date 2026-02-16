@@ -111,7 +111,7 @@ npm install -g pm-skills-mcp
 
 ## The Big Idea
 
-**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)—a collection of 24 battle-tested product management skills—into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
+**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)... a collection of 24 battle-tested product management skills... into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
 
 <!-- ========== ENHANCED: Additional ecosystem context ========== -->
 PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 24 battle-tested product management skills. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access.
