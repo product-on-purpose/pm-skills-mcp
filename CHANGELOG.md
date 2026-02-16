@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Release Notes
 - Patch release for governance and documentation alignment with `pm-skills v2.4.2`.
 - No MCP tool/resource/prompt surface changes from `v2.4.1`.
+- Published GitHub release: `https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.2`.
+- Published npm package: `pm-skills-mcp@2.4.2`.
 
 ## [2.4.1] - 2026-02-16
 

@@ -639,6 +639,12 @@ All releases are available on the [GitHub Releases](https://github.com/product-o
 npm install -g pm-skills-mcp
 ```
 
+**Install a pinned release:**
+
+```bash
+npm install -g pm-skills-mcp@2.4.2
+```
+
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
 [![GitHub Release](https://img.shields.io/github/v/release/product-on-purpose/pm-skills-mcp?style=for-the-badge&label=release)](https://github.com/product-on-purpose/pm-skills-mcp/releases/latest)
 
@@ -649,6 +655,7 @@ Latest release notes:
 - [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
+- Published release tag: [`v2.4.2`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.2)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.

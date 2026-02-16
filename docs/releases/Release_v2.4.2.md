@@ -7,6 +7,11 @@ Status: Shipped
 
 `v2.4.2` is a governance-and-docs alignment patch that keeps `pm-skills-mcp` pinned to `pm-skills v2.4.2` and clarifies tracked vs local repository policy.
 
+## Published Artifacts
+
+- GitHub release: `https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.2`
+- npm package: `https://www.npmjs.com/package/pm-skills-mcp/v/2.4.2`
+
 ## What Was Delivered
 
 1. MCP package/runtime patch release:
