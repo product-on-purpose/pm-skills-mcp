@@ -94,23 +94,28 @@ Contains the 24 PM skills from [pm-skills](https://github.com/product-on-purpose
 
 ### Organization
 
-Skills are organized by **Triple Diamond phase**:
+Skills use a **flat phase-prefixed layout**:
 
-| Directory | Phase | Purpose | Skills |
-|-----------|-------|---------|--------|
-| `skills/discover/` | Discover | Research & understanding | 3 |
-| `skills/define/` | Define | Problem framing | 4 |
-| `skills/develop/` | Develop | Solution exploration | 4 |
-| `skills/deliver/` | Deliver | Specification & shipping | 5 |
-| `skills/measure/` | Measure | Validation & data | 4 |
-| `skills/iterate/` | Iterate | Learning & improvement | 4 |
+| Prefix | Phase | Skills |
+|--------|-------|--------|
+| `discover-` | Discover | 3 |
+| `define-` | Define | 4 |
+| `develop-` | Develop | 4 |
+| `deliver-` | Deliver | 5 |
+| `measure-` | Measure | 4 |
+| `iterate-` | Iterate | 4 |
+
+Examples:
+- `skills/discover-interview-synthesis/`
+- `skills/deliver-prd/`
+- `skills/measure-experiment-design/`
 
 ### Skill Structure
 
 Each skill follows the [Agent Skills Specification](https://agentskills.io/specification):
 
 ```
-skills/{phase}/{skill-name}/
+skills/{phase-skill-name}/
 ├── SKILL.md              # Instructions for AI (required)
 └── references/
     ├── TEMPLATE.md       # Output structure (required)
@@ -135,7 +140,7 @@ Comprehensive test coverage using [Vitest](https://vitest.dev/).
 | `cache.test.ts` | Caching behavior | Cache hits/misses, invalidation, TTL |
 | `server.test.ts` | Server initialization | MCP protocol compliance, tool registration |
 
-**Total tests:** 47
+**Total tests:** 76
 
 ### Running Tests
 
@@ -174,9 +179,15 @@ dist/
 
 ```
 docs/
-├── releases/               # Shipped release notes
+├── getting-started.md
+├── integration-guide.md
+├── customization.md
+├── migration-guide.md
+├── architecture.md
+├── releases/                 # Shipped release notes
 └── reference/
-    └── project-structure.md  # This file
+    ├── project-structure.md   # This file
+    └── repository-governance.md
 ```
 
 ---
@@ -187,12 +198,16 @@ Session continuity for AI coding assistants.
 
 ```
 AGENTS/
-└── claude-opus-4.5/
-    ├── CONTEXT.md            # Current project state
-    └── ...
+├── claude-opus-4.5/
+│   ├── CONTEXT.md            # Tracked continuity state
+│   └── DECISIONS.md          # Tracked durable decisions
+└── [other agent dirs]
+    ├── CONTEXT.md
+    └── DECISIONS.md
 ```
 
-This directory helps AI assistants maintain context across sessions. Not required for using PM-Skills MCP.
+High-churn agent working files (`SESSION-LOG`, `TODO`, `PLANNING`) are ignored by policy.
+`CONTEXT.md` and `DECISIONS.md` are intentionally trackable for continuity.
 
 ---
 
@@ -307,5 +322,6 @@ This directory helps AI assistants maintain context across sessions. Not require
 
 - [README.md](../../README.md) — Project overview and usage
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — How to contribute
+- [repository-governance.md](./repository-governance.md) — Tracked-vs-local ownership and persistence policy
 - [PM-Skills Repository](https://github.com/product-on-purpose/pm-skills) — Source skill files
 - [Model Context Protocol](https://modelcontextprotocol.io) — MCP specification

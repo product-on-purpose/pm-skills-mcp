@@ -110,40 +110,16 @@ cd pm-skills
 
 ### Step 2: Understand the Structure
 
-Skills live in `skills/{phase}/{skill-name}/`:
+Skills live in `skills/{phase-skill}/`:
 
 ```
 skills/
-├── discover/
-│   ├── interview-synthesis/
-│   ├── competitive-analysis/
-│   └── stakeholder-summary/
-├── define/
-│   ├── problem-statement/
-│   ├── hypothesis/
-│   ├── opportunity-tree/
-│   └── jtbd-canvas/
-├── develop/
-│   ├── solution-brief/
-│   ├── spike-summary/
-│   ├── adr/
-│   └── design-rationale/
-├── deliver/
-│   ├── prd/
-│   ├── user-stories/
-│   ├── edge-cases/
-│   ├── launch-checklist/
-│   └── release-notes/
-├── measure/
-│   ├── experiment-design/
-│   ├── instrumentation-spec/
-│   ├── dashboard-requirements/
-│   └── experiment-results/
-└── iterate/
-    ├── retrospective/
-    ├── lessons-log/
-    ├── refinement-notes/
-    └── pivot-decision/
+├── discover-interview-synthesis/
+├── discover-competitive-analysis/
+├── define-problem-statement/
+├── deliver-prd/
+├── measure-experiment-design/
+└── ... (24 phase-prefixed skill directories)
 ```
 
 Each skill folder contains:
@@ -159,7 +135,7 @@ skill-name/
 
 **Example: Adding a company section to PRD template**
 
-Edit `skills/deliver/prd/references/TEMPLATE.md`:
+Edit `skills/deliver-prd/references/TEMPLATE.md`:
 
 ```markdown
 # Product Requirements Document
@@ -217,7 +193,7 @@ Point to your forked skills directory:
 ### Step 6: Commit and Share
 
 ```bash
-git add skills/deliver/prd/references/TEMPLATE.md
+git add skills/deliver-prd/references/TEMPLATE.md
 git commit -m "Add company compliance section to PRD template"
 git push origin main
 ```
@@ -234,12 +210,11 @@ pm-skills-mcp expects skills to follow a specific structure.
 
 ```
 skills/
-└── {phase}/                    # discover, define, develop, deliver, measure, iterate
-    └── {skill-name}/           # lowercase with hyphens
-        ├── SKILL.md            # Required
-        └── references/
-            ├── TEMPLATE.md     # Required
-            └── EXAMPLE.md      # Required
+└── {phase-skill}/              # lowercase, hyphenated, phase-prefixed
+    ├── SKILL.md                # Required
+    └── references/
+        ├── TEMPLATE.md         # Required
+        └── EXAMPLE.md          # Required
 ```
 
 ### SKILL.md Requirements
@@ -380,7 +355,7 @@ Use pm_validate to check if this PRD follows the template:
 
 ### Example 1: Adding Company Branding
 
-Modify `skills/deliver/release-notes/references/TEMPLATE.md`:
+Modify `skills/deliver-release-notes/references/TEMPLATE.md`:
 
 ```markdown
 # Release Notes
@@ -401,7 +376,7 @@ Modify `skills/deliver/release-notes/references/TEMPLATE.md`:
 
 Change PRD from sections to a more compact format.
 
-Edit `skills/deliver/prd/SKILL.md`:
+Edit `skills/deliver-prd/SKILL.md`:
 
 ```markdown
 ## Output Format
@@ -418,10 +393,10 @@ Generate a concise PRD using this structure:
 Create a new skill for your organization's specific artifact:
 
 ```bash
-mkdir -p skills/deliver/launch-brief/references
+mkdir -p skills/deliver-launch-brief/references
 ```
 
-Create `skills/deliver/launch-brief/SKILL.md`:
+Create `skills/deliver-launch-brief/SKILL.md`:
 
 ```markdown
 ---
@@ -465,7 +440,7 @@ Single page with:
 - Clear call to action
 ```
 
-Create `skills/deliver/launch-brief/references/TEMPLATE.md`:
+Create `skills/deliver-launch-brief/references/TEMPLATE.md`:
 
 ```markdown
 # Launch Brief: [Product/Feature Name]
@@ -508,7 +483,7 @@ Create `skills/deliver/launch-brief/references/TEMPLATE.md`:
 - [ ] Executive Sponsor
 ```
 
-Create `skills/deliver/launch-brief/references/EXAMPLE.md`:
+Create `skills/deliver-launch-brief/references/EXAMPLE.md`:
 
 ```markdown
 # Launch Brief: Dark Mode Support
@@ -609,7 +584,7 @@ echo $PM_SKILLS_PATH
 **Check 2:** Verify directory structure
 ```bash
 ls -la $PM_SKILLS_PATH
-# Should show: discover/ define/ develop/ deliver/ measure/ iterate/
+# Should show phase-prefixed directories such as discover-interview-synthesis, deliver-prd, iterate-retrospective
 ```
 
 **Check 3:** Verify skill has required files
@@ -637,7 +612,7 @@ Use an online YAML validator to check syntax.
 
 **Check:** Ensure TEMPLATE.md exists in references/
 ```bash
-cat $PM_SKILLS_PATH/deliver/prd/references/TEMPLATE.md
+cat $PM_SKILLS_PATH/deliver-prd/references/TEMPLATE.md
 ```
 
 ### Changes not taking effect

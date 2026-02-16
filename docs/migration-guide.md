@@ -186,7 +186,7 @@ In Claude Code:
 Or reference skills directly:
 
 ```
-Use the prd skill from skills/deliver/prd to create requirements for...
+Use the prd skill from skills/deliver-prd to create requirements for...
 ```
 
 #### Step 5: (Optional) Uninstall pm-skills-mcp
@@ -332,7 +332,7 @@ Use pm_prd for the following feature:
 
 ### Scenario 1: Modified Templates
 
-You edited `skills/deliver/prd/references/TEMPLATE.md`.
+You edited `skills/deliver-prd/references/TEMPLATE.md`.
 
 **Migration approach:**
 1. Copy your modified files to a persistent location

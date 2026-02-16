@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- No unreleased changes documented yet.
+
+## [2.4.2] - 2026-02-16
+
+### Added
+- Release note artifact: `docs/releases/Release_v2.4.2.md`.
+- Repository governance reference:
+  - `docs/reference/repository-governance.md`
+
+### Changed
+- Package and runtime version advanced to `2.4.2`:
+  - `package.json`
+  - `package-lock.json`
+  - `src/config.ts`
+- Upstream pin metadata updated for direct tracking with `pm-skills v2.4.2`:
+  - `pm-skills-source.json`
+  - `pmSkillsRef` pinned to `0c76a76550faa9adea5cf9ba21b03817c67cc076`
+  - `pmSkillsVersion`, `outputContractVersion`, and `configContractVersion` set to `2.4.2`
+- Repository structure/governance docs aligned with current policy and layout:
+  - `README.md`
+  - `docs/customization.md`
+  - `docs/migration-guide.md`
+  - `docs/reference/project-structure.md`
+  - `.gitignore`
+
+### Release Notes
+- Patch release for governance and documentation alignment with `pm-skills v2.4.2`.
+- No MCP tool/resource/prompt surface changes from `v2.4.1`.
+
 ## [2.4.1] - 2026-02-16
 
 ### Added
@@ -171,7 +201,7 @@ First stable release of pm-skills-mcp with all 24 PM skills, performance caching
   - Prettier for code formatting (`.prettierrc`, `.prettierignore`)
   - New scripts: `npm run lint`, `npm run format`, `npm run format:check`
 - **Internal documentation**
-  - `_NOTES/npm-github-cicd.md` - CI/CD setup guide and npm token instructions
+  - Local CI/CD setup notes for npm token and workflow onboarding
 
 ### Changed
 - Removed unused imports to fix ESLint warnings

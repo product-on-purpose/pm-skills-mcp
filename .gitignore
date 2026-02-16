@@ -46,6 +46,10 @@ _NOTES/
 AGENTS/*/SESSION-LOG/
 AGENTS/*/TODO.md
 AGENTS/*/PLANNING/
+!AGENTS/*/CONTEXT.md
+!AGENTS/*/DECISIONS.md
+!AGENTS/DECISIONS.md
+# Repo-local codex workspace remains non-canonical
 AGENTS/codex/
 
 # Node.js

@@ -621,6 +621,7 @@ Comprehensive documentation for setup, customization, and understanding pm-skill
 | **[Customization Guide](docs/customization.md)** | How to use custom skills with pm-skills-mcp. Covers environment variable overrides, forking pm-skills, and creating new skills. |
 | **[Migration Guide](docs/migration-guide.md)** | Moving between file-based pm-skills and MCP-based pm-skills-mcp. Includes command-to-tool mapping and hybrid approaches. |
 | **[Architecture](docs/architecture.md)** | Technical deep-dive for contributors. Covers server internals, data flow, extension points, and performance considerations. |
+| **[Repository Governance](docs/reference/repository-governance.md)** | Top-level ownership and tracked-vs-local persistence policy for contributors. |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -645,6 +646,7 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
 
@@ -677,7 +679,8 @@ pm-skills-mcp/
 │   ├── architecture.md       # Technical internals for contributors
 │   ├── releases/             # Shipped release notes
 │   └── reference/            # Reference documentation
-│       └── project-structure.md
+│       ├── project-structure.md
+│       └── repository-governance.md
 ├── tests/                    # Vitest test suites (76 tests)
 ├── scripts/                  # Build and utility scripts
 ├── dist/                     # Compiled JavaScript output
@@ -698,6 +701,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.4.2** | 2026-02-16 | Governance + structure-doc alignment with pm-skills `v2.4.2` |
 | **2.4.1** | 2026-02-16 | Patch version/pin parity with pm-skills `v2.4.1` |
 | **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
 | **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
