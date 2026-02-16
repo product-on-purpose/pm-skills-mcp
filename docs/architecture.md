@@ -357,7 +357,7 @@ interface SkillCache {
 ```typescript
 export const SERVER_INFO = {
   name: 'pm-skills-mcp',
-  version: '2.4.2',
+  version: '2.4.3',
 };
 ```
 

@@ -642,7 +642,7 @@ npm install -g pm-skills-mcp
 **Install a pinned release:**
 
 ```bash
-npm install -g pm-skills-mcp@2.4.2
+npm install -g pm-skills-mcp@2.4.3
 ```
 
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
@@ -652,10 +652,11 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md)
 - [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
-- Published release tag: [`v2.4.2`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.2)
+- Published release tag: [`v2.4.3`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.3)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -708,6 +709,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.4.3** | 2026-02-16 | Patch release to include post-`v2.4.2` documentation/release-link updates |
 | **2.4.2** | 2026-02-16 | Governance + structure-doc alignment with pm-skills `v2.4.2` |
 | **2.4.1** | 2026-02-16 | Patch version/pin parity with pm-skills `v2.4.1` |
 | **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
