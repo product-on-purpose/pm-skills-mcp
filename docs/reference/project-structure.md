@@ -174,6 +174,7 @@ dist/
 
 ```
 docs/
+├── releases/               # Shipped release notes
 └── reference/
     └── project-structure.md  # This file
 ```
@@ -225,6 +226,7 @@ This directory helps AI assistants maintain context across sessions. Not require
 | `README.md` | Project overview, installation, usage |
 | `AGENTS.md` | Universal agent discovery file |
 | `CHANGELOG.md` | Version history ([Keep a Changelog](https://keepachangelog.com/) format) |
+| `pm-skills-source.json` | Pinned `pm-skills` repository/ref/version metadata for release alignment |
 | `CONTRIBUTING.md` | Contribution guidelines |
 | `CODE_OF_CONDUCT.md` | Community standards |
 | `SECURITY.md` | Vulnerability reporting policy |

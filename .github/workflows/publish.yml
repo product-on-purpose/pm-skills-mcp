@@ -15,8 +15,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Clone pm-skills
-        run: git clone --depth 1 https://github.com/product-on-purpose/pm-skills.git ../pm-skills
+      - name: Resolve pinned pm-skills source
+        id: source
+        run: |
+          echo "repo=$(node -p 'require(\"./pm-skills-source.json\").pmSkillsRepository')" >> "$GITHUB_OUTPUT"
+          echo "ref=$(node -p 'require(\"./pm-skills-source.json\").pmSkillsRef')" >> "$GITHUB_OUTPUT"
+
+      - name: Clone pm-skills (pinned ref)
+        run: |
+          set -euo pipefail
+          git init ../pm-skills
+          cd ../pm-skills
+          git remote add origin "https://github.com/${{ steps.source.outputs.repo }}.git"
+          git fetch --depth 1 origin "${{ steps.source.outputs.ref }}"
+          git checkout FETCH_HEAD
+          echo "Pinned pm-skills ref: $(git rev-parse --short HEAD)"
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4

@@ -7,13 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-02-16
+
 ### Added
+- Release note artifact: `docs/releases/Release_v2.4.0.md`.
+- Source-tracking metadata file for deterministic upstream alignment:
+  - `pm-skills-source.json`
 - Dedicated resource URI contract tests (`tests/resources.test.ts`) covering:
-  - URI builder/parsing for flat v2.1 format
+  - URI builder/parsing for flat format
   - rejection of legacy nested URI format
   - resource listing behavior with/without template/example files
 
 ### Changed
+- Adopted direct version tracking with `pm-skills` beginning at `v2.4.0` for `pm-skills-mcp`.
+- Package and runtime version advanced to `2.4.0`:
+  - `package.json`
+  - `package-lock.json`
+  - `src/config.ts`
+- Corrected server-info version example in architecture docs:
+  - `docs/architecture.md`
+- CI and publish workflows now clone `pm-skills` from the pinned source metadata in `pm-skills-source.json` instead of floating `main`.
+- Added explicit `pm-skills-source.json` compatibility metadata (repo/ref/version + contract versions) for reproducible embeds and release traceability.
 - Corrected MCP contract docs to flat resource URIs (`pm-skills://{skills|templates|examples}/{skill}`):
   - `AGENTS.md`
   - `docs/getting-started.md`
@@ -22,6 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `README.md`
   - `docs/getting-started.md`
   - `docs/architecture.md`
+  - `docs/integration-guide.md`
+- Updated release/project docs for v2.4 direct tracking policy:
+  - `README.md`
 - Tightened npm publish surface in `package.json` `files` to include runtime JS + type declarations, excluding source maps.
 - Hardened `.gitignore` for packaging/env hygiene (`*.tgz`, `.env.*`, allowlist `.env.example`).
 

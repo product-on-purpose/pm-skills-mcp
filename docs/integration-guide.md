@@ -216,7 +216,7 @@ Claude.ai supports MCP servers through the Projects feature.
 
 ### Usage
 
-All 35 tools are available within project conversations:
+All 36 tools are available within project conversations:
 ```
 Use pm_prd to create a PRD for adding dark mode support
 ```
@@ -473,7 +473,7 @@ The server advertises these MCP capabilities:
 
 | Capability | Description |
 |------------|-------------|
-| `tools` | 35 invokable tools (24 skills + 5 workflows + 6 utilities) |
+| `tools` | 36 invokable tools (24 skills + 5 workflows + 7 utilities) |
 | `resources` | 72 readable resources (skills, templates, examples) |
 | `prompts` | 3 conversation prompts |
 
@@ -545,8 +545,8 @@ After configuring any client:
 |----------|-------|----------|
 | Skill tools | 24 | `pm_prd`, `pm_hypothesis`, `pm_adr` |
 | Workflow tools | 5 | `pm_workflow_feature_kickoff` |
-| Utility tools | 6 | `pm_list_skills`, `pm_search_skills` |
-| **Total** | **35** | |
+| Utility tools | 7 | `pm_list_skills`, `pm_search_skills` |
+| **Total** | **36** | |
 
 ### What Success Looks Like
 

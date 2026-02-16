@@ -1,7 +1,7 @@
 /**
  * MCP Resources - URI-based access to skills, templates, and examples
  *
- * Resource URI Schema (v2.1 flat format):
+ * Resource URI Schema (v2.x flat format):
  * - pm-skills://skills/{skill}     - Full skill instructions
  * - pm-skills://templates/{skill}  - Template only
  * - pm-skills://examples/{skill}   - Example only

@@ -142,7 +142,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 - **72 MCP Resources** - Skills, templates, and examples accessible via URI
 - **3 MCP Prompts** - Guided conversation starters for common workflows
 - **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
-- **66 Automated Tests** - Comprehensive test coverage with Vitest
+- **76 Automated Tests** - Comprehensive test coverage with Vitest
 - **Zero Configuration** - Works out of the box with embedded skills
 - **Universal Compatibility** - Claude Desktop, Cursor, Continue, and any MCP client
 - **Customizable** - Override with your own skill modifications
@@ -564,6 +564,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_list_prompts`   | List available conversation prompts                              |
 | `pm_validate`       | Validate artifact against skill template                         |
 | `pm_search_skills`  | Search skills by keyword across names, descriptions, and content |
+| `pm_cache_stats`    | Show skill-cache hit rate, size, and TTL diagnostics            |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -640,6 +641,12 @@ npm install -g pm-skills-mcp
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
 [![GitHub Release](https://img.shields.io/github/v/release/product-on-purpose/pm-skills-mcp?style=for-the-badge&label=release)](https://github.com/product-on-purpose/pm-skills-mcp/releases/latest)
 
+From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versions.
+Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
+
+Latest release notes:
+- [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
+
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
 
@@ -667,13 +674,15 @@ pm-skills-mcp/
 │   ├── customization.md      # Using custom skills with MCP
 │   ├── migration-guide.md    # Moving between file-based and MCP
 │   ├── architecture.md       # Technical internals for contributors
+│   ├── releases/             # Shipped release notes
 │   └── reference/            # Reference documentation
 │       └── project-structure.md
-├── tests/                    # Vitest test suites (66 tests)
+├── tests/                    # Vitest test suites (76 tests)
 ├── scripts/                  # Build and utility scripts
 ├── dist/                     # Compiled JavaScript output
 ├── .github/                  # CI/CD workflows
 │   └── workflows/            # ci.yml, publish.yml, codeql.yml
+├── pm-skills-source.json     # Pinned pm-skills repo/ref/version metadata
 ├── AGENTS.md                 # Agent discovery file
 ├── CONTRIBUTING.md           # Contribution guidelines
 ├── SECURITY.md               # Security policy
@@ -688,6 +697,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
 | **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
 | **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
 | **1.0.0** | 2026-01-21 | First stable release with 36 tools, 72 resources, caching     |
@@ -704,7 +714,7 @@ See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues
 - [x] MCP resources for direct skill access
 - [x] MCP prompts for guided workflows
 - [x] Automated npm publishing
-- [ ] Skill versioning and compatibility tracking
+- [x] Skill versioning and compatibility tracking
 - [ ] Additional workflow bundles
 - [ ] Custom skill contribution support
 
@@ -716,7 +726,7 @@ See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues
 
 ### Testing
 
-The project uses [Vitest](https://vitest.dev/) for testing with 66 tests across multiple test files.
+The project uses [Vitest](https://vitest.dev/) for testing with 76 tests across multiple test files.
 
 ```bash
 # Run all tests
@@ -766,13 +776,14 @@ The project uses GitHub Actions for continuous integration and deployment:
 - Triggers on push/PR to `main`
 - Tests on Node.js 18, 20, and 22
 - Runs lint, format check, type check, and tests
-- Clones pm-skills and embeds skills for testing
+- Clones pm-skills at the pinned ref from `pm-skills-source.json` and embeds skills for testing
 
 **Publish Workflow** (`.github/workflows/publish.yml`)
 
 - Triggers on GitHub release creation
 - Auto-publishes to npm with provenance
 - Uses npm automation token for authentication
+- Embeds skills from the same pinned pm-skills ref declared in `pm-skills-source.json`
 
 **CodeQL Workflow** (`.github/workflows/codeql.yml`)
 
