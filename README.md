@@ -645,6 +645,7 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
 
 ### Project Structure
@@ -697,6 +698,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.4.1** | 2026-02-16 | Patch version/pin parity with pm-skills `v2.4.1` |
 | **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
 | **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
 | **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
