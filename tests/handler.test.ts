@@ -9,6 +9,7 @@ import type { Skill } from '../src/types/index.js';
 const mockSkill: Skill = {
   name: 'hypothesis',
   description: 'Create a testable hypothesis',
+  classification: 'domain',
   phase: 'define',
   path: '/mock/path',
   metadata: {

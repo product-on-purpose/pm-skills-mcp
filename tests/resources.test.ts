@@ -1,10 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { buildResourceUri, parseResourceUri, listResources } from '../src/resources/index.js';
+import {
+  buildResourceUri,
+  buildPersonaUri,
+  parseResourceUri,
+  listResources,
+} from '../src/resources/index.js';
 import type { Skill } from '../src/types/index.js';
 
 const baseSkill: Skill = {
   name: 'deliver-prd',
   description: 'Create a comprehensive Product Requirements Document',
+  classification: 'domain',
   phase: 'deliver',
   path: '/mock/deliver-prd',
   metadata: {
@@ -40,6 +46,12 @@ describe('buildResourceUri', () => {
       'pm-skills://examples/measure-experiment-design'
     );
   });
+
+  it('should build persona URI', () => {
+    expect(buildPersonaUri('marketing', 'sales-engineer')).toBe(
+      'pm-skills://personas/marketing/sales-engineer'
+    );
+  });
 });
 
 describe('parseResourceUri', () => {
@@ -61,6 +73,14 @@ describe('parseResourceUri', () => {
     expect(parseResourceUri('pm-skills://examples/measure-experiment-design')).toEqual({
       type: 'example',
       skill: 'measure-experiment-design',
+    });
+  });
+
+  it('should parse persona URI', () => {
+    expect(parseResourceUri('pm-skills://personas/marketing/sales-engineer')).toEqual({
+      type: 'persona',
+      category: 'marketing',
+      persona: 'sales-engineer',
     });
   });
 
@@ -101,5 +121,25 @@ describe('listResources', () => {
     expect(resources).toHaveLength(1);
     expect(resources[0].uri).toBe('pm-skills://skills/define-hypothesis');
     expect(resources[0].metadata.phase).toBe('define');
+  });
+
+  it('should include persona resources when provided', () => {
+    const skills = new Map<string, Skill>([[baseSkill.name, baseSkill]]);
+    const resources = listResources(skills, [
+      {
+        uri: 'pm-skills://personas/product/core-product-pm',
+        name: 'product-core-product-pm',
+        description: 'Core PM persona',
+        mimeType: 'text/markdown',
+        metadata: {
+          type: 'persona',
+          category: 'product',
+          persona: 'core-product-pm',
+        },
+        content: '# Core Product PM',
+      },
+    ]);
+
+    expect(resources.find((r) => r.uri === 'pm-skills://personas/product/core-product-pm')).toBeDefined();
   });
 });

@@ -152,6 +152,7 @@ describe('SkillCache', () => {
   const mockSkill: Skill = {
     name: 'prd',
     description: 'Product Requirements Document',
+    classification: 'domain',
     phase: 'deliver',
     path: '/test/path',
     metadata: {

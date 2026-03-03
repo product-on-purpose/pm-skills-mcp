@@ -10,6 +10,8 @@ export interface SkillMetadata {
   description: string;
   /** Phase from frontmatter (optional, can be derived from name) */
   phase?: SkillPhase;
+  /** Classification from frontmatter (optional, can be derived from name) */
+  classification?: SkillClassification;
   license: string;
   metadata: {
     category: string;
@@ -25,6 +27,11 @@ export interface SkillMetadata {
 export type SkillPhase = 'discover' | 'define' | 'develop' | 'deliver' | 'measure' | 'iterate';
 
 /**
+ * Taxonomy classification axis
+ */
+export type SkillClassification = 'domain' | 'foundation' | 'utility';
+
+/**
  * Parsed skill with all content
  */
 export interface Skill {
@@ -32,8 +39,10 @@ export interface Skill {
   name: string;
   /** Human-readable description */
   description: string;
-  /** Phase this skill belongs to */
-  phase: SkillPhase;
+  /** Taxonomy classification */
+  classification: SkillClassification;
+  /** Workflow phase (null for non-phase classifications like foundation/utility) */
+  phase: SkillPhase | null;
   /** Full path to skill directory */
   path: string;
   /** Parsed frontmatter metadata */
@@ -56,6 +65,15 @@ export const SKILL_PHASES: SkillPhase[] = [
   'deliver',
   'measure',
   'iterate',
+];
+
+/**
+ * All valid classifications as array for iteration
+ */
+export const SKILL_CLASSIFICATIONS: SkillClassification[] = [
+  'domain',
+  'foundation',
+  'utility',
 ];
 
 /**
@@ -103,7 +121,8 @@ export interface SkillToolResponse {
   content: SkillToolContent;
   /** Skill metadata */
   metadata: {
-    phase: SkillPhase;
+    phase: SkillPhase | null;
+    classification: SkillClassification;
     category: string;
     version: string;
   };
@@ -127,8 +146,12 @@ export interface CacheConfig {
 export interface ServerConfig {
   /** Path to skills directory (default: embedded) */
   skillsPath: string;
+  /** Path to persona library directory (default: embedded) */
+  personasPath?: string;
   /** Enable/disable specific phases */
   enabledPhases?: SkillPhase[];
+  /** Enable/disable specific classifications */
+  enabledClassifications?: SkillClassification[];
   /** Default output format */
   defaultFormat?: OutputFormat;
   /** Include examples by default */

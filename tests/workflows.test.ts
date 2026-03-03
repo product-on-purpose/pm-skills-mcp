@@ -58,6 +58,7 @@ describe('formatWorkflowOutput', () => {
   mockSkills.set('problem_statement', {
     name: 'problem_statement',
     description: 'Define the problem',
+    classification: 'domain',
     phase: 'define',
     path: '/mock',
     metadata: {

@@ -20,6 +20,9 @@ async function main(): Promise<void> {
   // Log startup info to stderr (stdout is reserved for MCP protocol)
   console.error(`Starting ${SERVER_INFO.name} v${SERVER_INFO.version}`);
   console.error(`Skills path: ${config.skillsPath}`);
+  if (config.personasPath) {
+    console.error(`Personas path: ${config.personasPath}`);
+  }
 
   // Create and initialize server
   const pmServer = new PMSkillsServer(config);

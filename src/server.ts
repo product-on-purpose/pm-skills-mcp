@@ -12,7 +12,12 @@ import { SERVER_INFO, TOOL_CONFIG } from './config.js';
 import { SkillToolInputSchema } from './tools/schemas.js';
 import { buildToolOutput, createErrorResponse, createSuccessResponse } from './tools/handler.js';
 import { validateOutput, formatValidationResult } from './tools/validator.js';
-import { registerResources, listResources } from './resources/index.js';
+import {
+  registerResources,
+  listResources,
+  loadPersonaResources,
+  type PersonaResource,
+} from './resources/index.js';
 import { listWorkflowBundles, formatWorkflowOutput } from './workflows/index.js';
 import { registerPrompts, listPrompts } from './prompts/index.js';
 
@@ -23,12 +28,21 @@ import { registerPrompts, listPrompts } from './prompts/index.js';
  *       "define-hypothesis" → "pm_hypothesis"
  */
 function deriveToolName(skillName: string): string {
-  const phases = ['discover', 'define', 'develop', 'deliver', 'measure', 'iterate'];
+  const namespacePrefixes = [
+    'discover',
+    'define',
+    'develop',
+    'deliver',
+    'measure',
+    'iterate',
+    'foundation',
+    'utility',
+  ];
   let stripped = skillName;
 
-  for (const phase of phases) {
-    if (skillName.startsWith(`${phase}-`)) {
-      stripped = skillName.slice(phase.length + 1);
+  for (const prefix of namespacePrefixes) {
+    if (skillName.startsWith(`${prefix}-`)) {
+      stripped = skillName.slice(prefix.length + 1);
       break;
     }
   }
@@ -58,6 +72,7 @@ const SkillToolParamsSchema = {
 export class PMSkillsServer {
   private server: McpServer;
   private skills: Map<string, Skill> = new Map();
+  private personas: PersonaResource[] = [];
   private config: ServerConfig;
   private resourceCount: number = 0;
   private workflowCount: number = 0;
@@ -79,14 +94,37 @@ export class PMSkillsServer {
     this.skills = await loadAllSkills(this.config);
     console.error(`Loaded ${this.skills.size} skills from ${this.config.skillsPath}`);
 
+    // Load persona library resources (if available)
+    this.personas = await loadPersonaResources(this.config.personasPath);
+    if (this.config.personasPath) {
+      console.error(
+        `Loaded ${this.personas.length} persona resources from ${this.config.personasPath}`
+      );
+    }
+
+    // Pre-validate deterministic tool derivation and fail fast on collisions
+    const toolNameToSkill = new Map<string, string>();
+    for (const skill of this.skills.values()) {
+      const toolName = deriveToolName(skill.name);
+      const existingSkill = toolNameToSkill.get(toolName);
+      if (existingSkill) {
+        throw new Error(
+          `Tool name collision detected (${toolName}): ${existingSkill} vs ${skill.name}. ` +
+            `Resolve by renaming one of the skills before release.`
+        );
+      }
+      toolNameToSkill.set(toolName, skill.name);
+    }
+
     // Register a tool for each skill
     for (const skill of this.skills.values()) {
-      this.registerSkillTool(skill);
+      this.registerSkillTool(skill, deriveToolName(skill.name));
     }
 
     // Register utility tools
     this.registerListSkillsTool();
     this.registerListResourcesTool();
+    this.registerListPersonasTool();
     this.registerValidateTool();
     this.registerSearchSkillsTool();
     this.registerCacheStatsTool();
@@ -99,21 +137,20 @@ export class PMSkillsServer {
     this.promptCount = registerPrompts(this.server);
     this.registerListPromptsTool();
 
-    const totalTools = this.skills.size + 7 + this.workflowCount; // skills + utilities (7) + workflows
+    const totalTools = this.skills.size + 8 + this.workflowCount; // skills + utilities (8) + workflows
     console.error(
-      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 7 utilities)`
+      `Registered ${totalTools} tools (${this.skills.size} skills, ${this.workflowCount} workflows, 8 utilities)`
     );
     console.error(`Registered ${this.promptCount} prompts`);
 
     // Register MCP resources
-    this.resourceCount = registerResources(this.server, this.skills);
+    this.resourceCount = registerResources(this.server, this.skills, this.personas);
   }
 
   /**
    * Register a single skill as an MCP tool
    */
-  private registerSkillTool(skill: Skill): void {
-    const toolName = deriveToolName(skill.name);
+  private registerSkillTool(skill: Skill, toolName: string): void {
     const description = `${skill.description}
 
 Use this tool to get guidance and a template for creating a ${skill.name.toUpperCase()} artifact.
@@ -127,7 +164,7 @@ Args:
 Returns:
   Markdown content with instructions, template, and optionally an example for creating the artifact.
 
-Phase: ${skill.phase} | Category: ${skill.metadata.metadata.category}`;
+Phase: ${skill.phase ?? 'n/a'} | Classification: ${skill.classification} | Category: ${skill.metadata.metadata.category}`;
 
     // Register tool with description and schema
     this.server.tool(toolName, description, SkillToolParamsSchema, async (params) => {
@@ -159,7 +196,7 @@ Phase: ${skill.phase} | Category: ${skill.metadata.metadata.category}`;
   private registerListSkillsTool(): void {
     const description = `List all available PM-Skills tools.
 
-Returns a categorized list of all 24 product management skills organized by phase (Discover, Define, Develop, Deliver, Measure, Iterate).
+Returns a categorized list of all PM-Skills tools organized by workflow phase and classification.
 
 Use this tool to discover which skills are available before invoking specific skill tools.
 
@@ -169,19 +206,28 @@ Returns:
     this.server.tool(`${TOOL_CONFIG.prefix}list_skills`, description, async () => {
       const skillList = listSkills(this.skills);
 
-      // Group by phase
+      // Group by phase (domain skills)
       const byPhase = new Map<string, Skill[]>();
+      const byClassification = new Map<string, Skill[]>();
       for (const skill of skillList) {
-        const phaseSkills = byPhase.get(skill.phase) || [];
-        phaseSkills.push(skill);
-        byPhase.set(skill.phase, phaseSkills);
+        if (skill.phase) {
+          const phaseSkills = byPhase.get(skill.phase) || [];
+          phaseSkills.push(skill);
+          byPhase.set(skill.phase, phaseSkills);
+        } else {
+          const classificationSkills = byClassification.get(skill.classification) || [];
+          classificationSkills.push(skill);
+          byClassification.set(skill.classification, classificationSkills);
+        }
       }
 
       // Build output
       const lines: string[] = [];
       lines.push('# PM-Skills Available');
       lines.push('');
-      lines.push(`Total: ${skillList.length} skills across ${byPhase.size} phases`);
+      lines.push(
+        `Total: ${skillList.length} skills (${byPhase.size} phases, ${byClassification.size} non-phase classifications)`
+      );
       lines.push('');
 
       const phaseOrder = ['discover', 'define', 'develop', 'deliver', 'measure', 'iterate'];
@@ -192,6 +238,19 @@ Returns:
         lines.push(`## ${phase.charAt(0).toUpperCase() + phase.slice(1)} Phase`);
         lines.push('');
         for (const skill of skills) {
+          lines.push(`- **${deriveToolName(skill.name)}**: ${skill.description}`);
+        }
+        lines.push('');
+      }
+
+      const classificationOrder = ['foundation', 'utility'];
+      for (const classification of classificationOrder) {
+        const classificationSkills = byClassification.get(classification);
+        if (!classificationSkills || classificationSkills.length === 0) continue;
+
+        lines.push(`## ${classification.charAt(0).toUpperCase() + classification.slice(1)} Skills`);
+        lines.push('');
+        for (const skill of classificationSkills) {
           lines.push(`- **${deriveToolName(skill.name)}**: ${skill.description}`);
         }
         lines.push('');
@@ -213,12 +272,13 @@ Resources can be accessed via \`resources/read\` using URIs like:
 - pm-skills://skills/{skill} - Full skill instructions
 - pm-skills://templates/{skill} - Blank template
 - pm-skills://examples/{skill} - Completed example
+- pm-skills://personas/{category}/{persona} - Persona library reference
 
 Returns:
   Markdown formatted list of all resources organized by type with their URIs.`;
 
     this.server.tool(`${TOOL_CONFIG.prefix}list_resources`, description, async () => {
-      const resources = listResources(this.skills);
+      const resources = listResources(this.skills, this.personas);
 
       // Group by type
       const byType = new Map<string, typeof resources>();
@@ -237,11 +297,12 @@ Returns:
       lines.push('Access resources using their URI with `resources/read`.');
       lines.push('');
 
-      const typeOrder = ['skill', 'template', 'example'];
+      const typeOrder = ['skill', 'template', 'example', 'persona'];
       const typeLabels: Record<string, string> = {
         skill: 'Skill Instructions',
         template: 'Templates',
         example: 'Examples',
+        persona: 'Persona Library',
       };
 
       for (const type of typeOrder) {
@@ -252,6 +313,56 @@ Returns:
         lines.push('');
         for (const resource of typeResources) {
           lines.push(`- \`${resource.uri}\` - ${resource.description}`);
+        }
+        lines.push('');
+      }
+
+      return createSuccessResponse(lines.join('\n'));
+    });
+  }
+
+  /**
+   * Register a tool to list persona library entries
+   */
+  private registerListPersonasTool(): void {
+    const description = `List all available persona library entries.
+
+Returns persona resources grouped by category, with resource URIs for direct retrieval via \`resources/read\`.
+
+Returns:
+  Markdown formatted list of persona references from \`pm-skills://personas/{category}/{persona}\`.`;
+
+    this.server.tool(`${TOOL_CONFIG.prefix}list_personas`, description, async () => {
+      const lines: string[] = [];
+      lines.push('# PM-Skills Persona Library');
+      lines.push('');
+
+      if (this.personas.length === 0) {
+        lines.push('No persona resources are currently available.');
+        if (this.config.personasPath) {
+          lines.push('');
+          lines.push(`Configured personas path: \`${this.config.personasPath}\``);
+        }
+        return createSuccessResponse(lines.join('\n'));
+      }
+
+      const byCategory = new Map<string, PersonaResource[]>();
+      for (const persona of this.personas) {
+        const category = persona.metadata.category;
+        const categoryPersonas = byCategory.get(category) || [];
+        categoryPersonas.push(persona);
+        byCategory.set(category, categoryPersonas);
+      }
+
+      lines.push(`Total: ${this.personas.length} persona resources`);
+      lines.push('');
+
+      for (const category of Array.from(byCategory.keys()).sort((a, b) => a.localeCompare(b))) {
+        const personas = byCategory.get(category) || [];
+        lines.push(`## ${category}`);
+        lines.push('');
+        for (const persona of personas.sort((a, b) => a.uri.localeCompare(b.uri))) {
+          lines.push(`- \`${persona.uri}\` - ${persona.description}`);
         }
         lines.push('');
       }
@@ -405,7 +516,8 @@ Returns:
               lines.push(`## ${result.skill.name}`);
               lines.push('');
               lines.push(`**Tool:** \`${toolName}\``);
-              lines.push(`**Phase:** ${result.skill.phase}`);
+              lines.push(`**Phase:** ${result.skill.phase ?? 'n/a'}`);
+              lines.push(`**Classification:** ${result.skill.classification}`);
               lines.push(`**Match:** ${result.matchType}`);
               lines.push('');
               lines.push(result.skill.description);

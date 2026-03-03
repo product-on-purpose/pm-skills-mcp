@@ -10,6 +10,7 @@ import type { Skill } from '../src/types/index.js';
 const mockSkill: Skill = {
   name: 'prd',
   description: 'Product Requirements Document',
+  classification: 'domain',
   phase: 'deliver',
   path: '/mock/path',
   metadata: {

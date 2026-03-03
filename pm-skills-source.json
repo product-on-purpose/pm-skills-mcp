@@ -1,8 +1,8 @@
 {
   "pmSkillsRepository": "product-on-purpose/pm-skills",
-  "pmSkillsRef": "b323d0d55c645009f72e22f9c437e5f21df4e61a",
-  "pmSkillsVersion": "2.4.3",
-  "outputContractVersion": "2.4.3",
-  "configContractVersion": "2.4.3",
-  "updated": "2026-02-16"
+  "pmSkillsRef": "01891fe26a456a423be6f14d4feaf6aeb95b4e4f",
+  "pmSkillsVersion": "2.5.0",
+  "outputContractVersion": "2.5.0",
+  "configContractVersion": "2.5.0",
+  "updated": "2026-03-02"
 }

@@ -5,7 +5,13 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import type { ServerConfig, SkillPhase, OutputFormat, CacheConfig } from './types/index.js';
+import type {
+  ServerConfig,
+  SkillPhase,
+  SkillClassification,
+  OutputFormat,
+  CacheConfig,
+} from './types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,11 +50,21 @@ const DEFAULT_SKILLS_PATH = getDefaultSkillsPath();
  */
 export function loadConfig(): ServerConfig {
   const skillsPath = process.env.PM_SKILLS_PATH || DEFAULT_SKILLS_PATH;
+  const personasPath =
+    process.env.PM_PERSONAS_PATH || path.resolve(skillsPath, '..', 'library', 'personas');
 
   // Parse enabled phases from environment if provided
   let enabledPhases: SkillPhase[] | undefined;
   if (process.env.PM_SKILLS_PHASES) {
     enabledPhases = process.env.PM_SKILLS_PHASES.split(',').map((p) => p.trim()) as SkillPhase[];
+  }
+
+  // Parse enabled classifications from environment if provided
+  let enabledClassifications: SkillClassification[] | undefined;
+  if (process.env.PM_SKILLS_CLASSIFICATIONS) {
+    enabledClassifications = process.env.PM_SKILLS_CLASSIFICATIONS.split(',').map((c) =>
+      c.trim()
+    ) as SkillClassification[];
   }
 
   // Parse default format
@@ -76,7 +92,9 @@ export function loadConfig(): ServerConfig {
 
   return {
     skillsPath,
+    personasPath,
     enabledPhases,
+    enabledClassifications,
     defaultFormat,
     includeExamplesByDefault,
     cache,
@@ -88,8 +106,8 @@ export function loadConfig(): ServerConfig {
  */
 export const SERVER_INFO = {
   name: 'pm-skills-mcp',
-  version: '2.4.3',
-  description: 'MCP server exposing 24 product management skills as tools',
+  version: '2.5.0',
+  description: 'MCP server exposing 25 product management skills as tools',
 } as const;
 
 /**

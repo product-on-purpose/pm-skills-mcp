@@ -20,15 +20,18 @@ describe('loadAllSkills', () => {
     skills = await loadAllSkills(config);
   });
 
-  it('should load 24 skills', () => {
-    expect(skills.size).toBe(24);
+  it('should load all embedded skills', () => {
+    expect(skills.size).toBeGreaterThanOrEqual(24);
   });
 
   it('should load skills with required properties', () => {
     for (const skill of skills.values()) {
       expect(skill.name).toBeDefined();
       expect(skill.description).toBeDefined();
-      expect(skill.phase).toBeDefined();
+      expect(skill.classification).toBeDefined();
+      if (skill.classification === 'domain') {
+        expect(skill.phase).toBeDefined();
+      }
       expect(skill.instructions).toBeDefined();
       expect(skill.metadata).toBeDefined();
     }
@@ -37,7 +40,9 @@ describe('loadAllSkills', () => {
   it('should load skills from all phases', () => {
     const phases = new Set<string>();
     for (const skill of skills.values()) {
-      phases.add(skill.phase);
+      if (skill.phase) {
+        phases.add(skill.phase);
+      }
     }
     expect(phases.size).toBe(6);
     expect(phases.has('discover')).toBe(true);
@@ -91,7 +96,7 @@ describe('listSkills', () => {
 
   it('should return all skills as array', () => {
     const skillList = listSkills(skills);
-    expect(skillList.length).toBe(24);
+    expect(skillList.length).toBe(skills.size);
     expect(Array.isArray(skillList)).toBe(true);
   });
 });
@@ -141,6 +146,22 @@ describe('loadAllSkills with phase filter', () => {
 
     for (const skill of skills.values()) {
       expect(['deliver', 'measure']).toContain(skill.phase);
+    }
+  });
+});
+
+describe('loadAllSkills with classification filter', () => {
+  it('should filter by enabled classifications', async () => {
+    const config: ServerConfig = {
+      skillsPath: SKILLS_PATH,
+      enabledClassifications: ['foundation'],
+    };
+    const skills = await loadAllSkills(config);
+
+    expect(skills.size).toBeGreaterThanOrEqual(1);
+    for (const skill of skills.values()) {
+      expect(skill.classification).toBe('foundation');
+      expect(skill.phase).toBeNull();
     }
   });
 });

@@ -57,6 +57,7 @@ export function formatSkillResponse(skill: Skill, input: SkillToolInputType): Sk
     content,
     metadata: {
       phase: skill.phase,
+      classification: skill.classification,
       category: skill.metadata.metadata.category,
       version: skill.metadata.metadata.version,
     },
@@ -140,7 +141,7 @@ export function buildToolOutput(skill: Skill, input: SkillToolInputType): string
   lines.push('');
   lines.push('---');
   lines.push(
-    `*Skill: ${skill.name} | Phase: ${skill.phase} | Category: ${skill.metadata.metadata.category}*`
+    `*Skill: ${skill.name} | Phase: ${skill.phase ?? 'n/a'} | Classification: ${skill.classification} | Category: ${skill.metadata.metadata.category}*`
   );
 
   return lines.join('\n');

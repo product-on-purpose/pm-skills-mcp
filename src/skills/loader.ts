@@ -6,8 +6,14 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { glob } from 'glob';
-import type { Skill, SkillMetadata, SkillPhase, ServerConfig } from '../types/index.js';
-import { SKILL_PHASES } from '../types/index.js';
+import type {
+  Skill,
+  SkillMetadata,
+  SkillPhase,
+  SkillClassification,
+  ServerConfig,
+} from '../types/index.js';
+import { SKILL_PHASES, SKILL_CLASSIFICATIONS } from '../types/index.js';
 import { getSkillCache } from '../cache.js';
 
 /**
@@ -31,6 +37,9 @@ async function parseSkillFile(filePath: string): Promise<{ metadata: SkillMetada
     name: data.name,
     description: data.description,
     phase: data.phase as SkillPhase | undefined, // Read phase from frontmatter
+    classification: (data.classification || data.metadata?.classification) as
+      | SkillClassification
+      | undefined,
     license: data.license || 'Apache-2.0',
     metadata: {
       category: data.metadata?.category || 'general',
@@ -56,13 +65,43 @@ async function loadOptionalFile(filePath: string): Promise<string | null> {
 }
 
 /**
+ * Extract classification from skill metadata (frontmatter or name prefix)
+ */
+function extractClassificationFromMetadata(metadata: SkillMetadata): SkillClassification {
+  // First check explicit classification field from frontmatter
+  if (metadata.classification && SKILL_CLASSIFICATIONS.includes(metadata.classification)) {
+    return metadata.classification;
+  }
+
+  // Fallback: derive from skill name prefix (e.g., "foundation-persona")
+  if (metadata.name.startsWith('foundation-')) {
+    return 'foundation';
+  }
+  if (metadata.name.startsWith('utility-')) {
+    return 'utility';
+  }
+
+  // Default classification for phase-oriented skills
+  return 'domain';
+}
+
+/**
  * Extract phase from skill metadata (frontmatter or name prefix)
  */
-function extractPhaseFromMetadata(metadata: SkillMetadata): SkillPhase {
+function extractPhaseFromMetadata(
+  metadata: SkillMetadata,
+  classification: SkillClassification
+): SkillPhase | null {
   // First check explicit phase field from frontmatter
   if (metadata.phase && SKILL_PHASES.includes(metadata.phase)) {
     return metadata.phase;
   }
+
+  // Foundation/utility are classification namespaces, not workflow phases.
+  if (classification !== 'domain') {
+    return null;
+  }
+
   // Fallback: derive from skill name (e.g., "deliver-prd" → "deliver")
   for (const phase of SKILL_PHASES) {
     if (metadata.name.startsWith(`${phase}-`)) {
@@ -89,12 +128,14 @@ async function loadSkill(skillDir: string): Promise<Skill> {
     loadOptionalFile(examplePath),
   ]);
 
-  // Extract phase from metadata (frontmatter or name)
-  const phase = extractPhaseFromMetadata(metadata);
+  // Extract classification/phase from metadata (frontmatter or name)
+  const classification = extractClassificationFromMetadata(metadata);
+  const phase = extractPhaseFromMetadata(metadata, classification);
 
   return {
     name: metadata.name,
     description: metadata.description,
+    classification,
     phase,
     path: skillDir,
     metadata,
@@ -142,8 +183,16 @@ export async function loadAllSkills(config: ServerConfig): Promise<Map<string, S
         cache.setSkill(skill);
       }
 
+      // Filter by enabled classifications if configured
+      if (
+        config.enabledClassifications &&
+        !config.enabledClassifications.includes(skill.classification)
+      ) {
+        continue;
+      }
+
       // Filter by enabled phases if configured
-      if (config.enabledPhases && !config.enabledPhases.includes(skill.phase)) {
+      if (config.enabledPhases && (!skill.phase || !config.enabledPhases.includes(skill.phase))) {
         continue;
       }
 
@@ -189,6 +238,9 @@ export function groupSkillsByPhase(skills: Map<string, Skill>): Map<SkillPhase, 
   }
 
   for (const skill of skills.values()) {
+    if (!skill.phase) {
+      continue;
+    }
     const phaseSkills = grouped.get(skill.phase);
     if (phaseSkills) {
       phaseSkills.push(skill);
