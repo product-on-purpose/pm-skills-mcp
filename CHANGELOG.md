@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Defer `F-03` and `F-04` persona-resource shipment claims from `v2.5.0` to a future release.
 - Enforce D10 embed invariants in `scripts/embed-skills.js` using `EMB-*` hard-fail/warning semantics.
 - Enforce D9 categorized drift findings in `pm-skills/.github/scripts/validate-mcp-sync.js` using `INV-*`, `CLS-*`, `NAM-*`, `CMD-*`, and `CTR-*` severities.
-- Pin `pm-skills-source.json` to `pm-skills` ref `01891fe26a456a423be6f14d4feaf6aeb95b4e4f` with `pmSkillsVersion/outputContractVersion/configContractVersion = 2.5.0`.
+- Pin `pm-skills-source.json` to published `pm-skills` ref `5586c98c0d0ca77c763440b58d266d2029ae2719` with `pmSkillsVersion/outputContractVersion/configContractVersion = 2.5.0`.
 
 ## [2.4.3] - 2026-02-16
 

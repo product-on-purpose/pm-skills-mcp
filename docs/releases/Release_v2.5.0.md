@@ -1,7 +1,7 @@
 # PM-Skills MCP v2.5.0 Release Notes
 
-Date: 2026-03-02  
-Status: Ready for release cut (pre-tag; matrix rerun 2026-03-02 17:57 PT passed)
+Date: 2026-03-03  
+Status: Released (`v2.5.0` tag + GitHub release published; npm publish succeeded)
 
 ## Summary
 
@@ -19,7 +19,7 @@ Deferred from `v2.5.0`:
 `v2.5.0` follows the approved D6 compatibility-signaling exception posture:
 1. Release labels remain aligned at `v2.5.0`.
 2. MCP contract-impacting changes are explicitly disclosed.
-3. Migration actions are required before release cut.
+3. Migration actions were completed before release cut and are now part of the published baseline.
 
 ### Contract Surfaces Impacted
 
@@ -51,7 +51,7 @@ Deferred from `v2.5.0`:
 1. Release package/version pin metadata is now aligned to `v2.5.0`:
    - `package.json` version: `2.5.0`.
    - `pm-skills-source.json`: `pmSkillsVersion/outputContractVersion/configContractVersion = 2.5.0`.
-   - `pmSkillsRef`: `01891fe26a456a423be6f14d4feaf6aeb95b4e4f` (final release-cut source ref pending `v2.5.0` tag creation).
+   - `pmSkillsRef`: `5586c98c0d0ca77c763440b58d266d2029ae2719` (published `pm-skills` `v2.5.0` commit on `origin/main`).
 
 ## Validation Matrix
 
@@ -59,7 +59,15 @@ Deferred from `v2.5.0`:
 2. In `pm-skills-mcp`: `npm run build`
 3. In `pm-skills-mcp`: `npm test`
 4. In `pm-skills`: `$env:VALIDATE_MCP_SYNC_MODE='block'; $env:PM_SKILLS_MCP_PATH='../pm-skills-mcp'; node .github/scripts/validate-mcp-sync.js`
-5. Latest rerun timestamp: `2026-03-02 17:57 PT` (all checks passed).
+5. Latest rerun timestamp: `2026-03-03` publish-recovery lane (all checks passed).
+
+## Published Artifacts
+
+1. GitHub release: `https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.5.0`.
+2. Publish workflow: `https://github.com/product-on-purpose/pm-skills-mcp/actions/runs/22634768064` (success).
+3. npm artifact verification:
+   - `npm view pm-skills-mcp version` -> `2.5.0`
+   - `npm view pm-skills-mcp dist-tags --json` -> `"latest": "2.5.0"`
 
 ## Canonical References
 
