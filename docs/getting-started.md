@@ -17,6 +17,8 @@ Welcome to PM-Skills MCP! This guide will help you set up and start using profes
   - [Claude Code (CLI)](#claude-code-cli)
   - [Claude.ai (Projects)](#claudeai-projects)
   - [Cursor](#cursor)
+  - [GitHub Copilot](#github-copilot)
+  - [OpenCode](#opencode)
   - [VS Code (Cline / Continue)](#vs-code-cline--continue)
   - [Other MCP Clients](#other-mcp-clients)
 - [Your First Tool](#your-first-tool)
@@ -45,7 +47,7 @@ Add this to your MCP client configuration:
 }
 ```
 
-Restart your AI assistant. Done! You now have access to 24 PM skills, 5 workflow bundles, and 7 utility tools.
+Restart your AI assistant. Done! You now have access to 25 PM skills, 5 workflow bundles, and 8 utility tools.
 
 **Try it:**
 > "Use the pm_prd tool to create a PRD for adding dark mode to our app"
@@ -54,7 +56,7 @@ Restart your AI assistant. Done! You now have access to 24 PM skills, 5 workflow
 
 ## What is PM-Skills MCP?
 
-**PM-Skills MCP** is an MCP server that gives AI assistants instant access to 24 professional product management skills. Instead of copying files or writing prompts, your AI can invoke tools directly to create PRDs, hypotheses, user stories, and more.
+**PM-Skills MCP** is an MCP server that gives AI assistants instant access to 25 professional product management skills. Instead of copying files or writing prompts, your AI can invoke tools directly to create PRDs, hypotheses, user stories, and more.
 
 ### The Problem It Solves
 
@@ -99,13 +101,13 @@ The **Model Context Protocol** (MCP) is an open standard that lets AI assistants
 └─────────────────┘         └─────────────────┘
 ```
 
-When you configure an MCP server, your AI gains new capabilities—in this case, 24 PM skills.
+When you configure an MCP server, your AI gains new capabilities-in this case, 25 PM skills.
 
 ### Tools, Resources, and Prompts
 
 MCP exposes three types of capabilities:
 
-#### Tools (36 total)
+#### Tools (38 total)
 
 Tools are **actions the AI can invoke**. Each PM skill is exposed as a tool:
 
@@ -115,13 +117,14 @@ Tools are **actions the AI can invoke**. Each PM skill is exposed as a tool:
 | `pm_hypothesis` | Testable hypothesis with success metrics |
 | `pm_user_stories` | INVEST-compliant user stories |
 | `pm_experiment_design` | A/B test plan |
-| ... | 20 more skills |
+| ... | 21 more skills |
 
 Plus workflow bundles (`pm_workflow_feature_kickoff`, etc.) and utility tools (`pm_list_skills`, `pm_search_skills`, etc.).
 
-#### Resources (72 total)
+#### Resources
 
-Resources are **content the AI can read** via URI:
+Resources are **content the AI can read** via URI.  
+Default builds expose skill/template/example resources, and can optionally include persona resources when enabled.
 
 ```
 pm-skills://skills/deliver-prd        → Full skill instructions
@@ -212,7 +215,7 @@ Start a conversation with a prompt for structured multi-step workflows.
 **Verify it works:**
 > "List all available PM skill tools"
 
-Claude will invoke `pm_list_skills` and show you all 24 skills.
+Claude will invoke `pm_list_skills` and show you all 25 skills.
 
 ---
 
@@ -255,7 +258,7 @@ Claude.ai supports MCP servers in **Projects**:
 2. Open or create a Project
 3. Go to Project Settings → Integrations
 4. Add PM-Skills MCP as an MCP server integration
-5. All 36 tools become available in project conversations
+5. All 38 tools become available in project conversations
 
 **Note:** MCP integration availability may vary by plan. Check Claude.ai documentation for current support.
 
@@ -278,6 +281,48 @@ Claude.ai supports MCP servers in **Projects**:
 
 4. Restart Cursor
 5. Use in Composer or Chat: "Use pm_prd for..."
+
+---
+
+### GitHub Copilot
+
+Use a Copilot environment that supports MCP server configuration and apply the same stdio pattern:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+If MCP is not available in your Copilot environment yet, use file-based
+[pm-skills](https://github.com/product-on-purpose/pm-skills) with
+[AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md) as the fallback.
+
+---
+
+### OpenCode
+
+OpenCode can use the same MCP server wiring pattern:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+If MCP is unavailable in your current OpenCode build/config, use file-based
+[pm-skills](https://github.com/product-on-purpose/pm-skills) and
+[AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md).
 
 ---
 
@@ -343,7 +388,7 @@ You're starting a new feature and need to create a problem statement.
 Ask your AI:
 > "What PM skill tools are available?"
 
-The AI should invoke `pm_list_skills` and return a list of 24 skills organized by phase.
+The AI should invoke `pm_list_skills` and return a list of 25 skills grouped by phase plus foundation classification.
 
 ### Step 2: Invoke the Tool
 
@@ -385,7 +430,7 @@ The AI maintains context and builds on previous artifacts.
 | `pm_workflow_lean_startup` | hypothesis → experiment → results → pivot | Rapid validation |
 | `pm_workflow_quick_prd` | problem → PRD | Requirements are clear |
 | `pm_workflow_experiment_cycle` | hypothesis → experiment → results → lessons | Running experiments |
-| `pm_workflow_triple_diamond` | All 24 skills in sequence | Comprehensive product development |
+| `pm_workflow_triple_diamond` | All 24 phase skills in sequence | Comprehensive product development |
 
 ### Using a Workflow
 
@@ -440,7 +485,7 @@ pm-skills://examples/measure-experiment-design
 ### How to Access
 
 Ask your AI:
-> "Read the resource at pm-skills://templates/deliver/prd and show me the template structure"
+> "Read the resource at pm-skills://templates/deliver-prd and show me the template structure"
 
 ---
 
@@ -452,7 +497,7 @@ Ask your AI:
 |----------|---------|-------------|
 | `PM_SKILLS_PATH` | (embedded) | Path to custom skills directory |
 | `PM_SKILLS_FORMAT` | `full` | Default output format (`full`, `concise`, `template-only`) |
-| `PM_SKILLS_EXAMPLES` | `false` | Include examples by default |
+| `PM_SKILLS_INCLUDE_EXAMPLES` | `false` | Include examples by default |
 
 ### Using Custom Skills
 
@@ -570,7 +615,7 @@ Every skill tool accepts these parameters:
 Use the utility tools to discover what's available:
 
 ```
-pm_list_skills      → See all 24 skills with descriptions
+pm_list_skills      → See all 25 skills with descriptions
 pm_list_workflows   → See all workflow bundles with steps
 pm_list_resources   → See all available resources
 pm_search_skills    → Search skills by keyword

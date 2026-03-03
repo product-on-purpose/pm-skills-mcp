@@ -13,6 +13,8 @@ This guide provides detailed setup instructions for integrating PM-Skills MCP wi
 - [Continue](#continue)
 - [Cline (VS Code Extension)](#cline-vs-code-extension)
 - [Windsurf](#windsurf)
+- [GitHub Copilot](#github-copilot)
+- [OpenCode](#opencode)
 - [Generic MCP Client](#generic-mcp-client)
 - [Testing Your Setup](#testing-your-setup)
 - [When to Use MCP vs AGENTS.md](#when-to-use-mcp-vs-agentsmd)
@@ -216,7 +218,7 @@ Claude.ai supports MCP servers through the Projects feature.
 
 ### Usage
 
-All 36 tools are available within project conversations:
+All 38 tools are available within project conversations:
 ```
 Use pm_prd to create a PRD for adding dark mode support
 ```
@@ -429,6 +431,58 @@ Use pm_adr to create an architecture decision record for choosing PostgreSQL
 
 ---
 
+## GitHub Copilot
+
+Use a Copilot environment that supports MCP server configuration and apply the standard `npx pm-skills-mcp` pattern.
+
+### Setup Pattern
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+### Notes
+
+1. Exact MCP configuration entry points can vary across Copilot surfaces and extensions.
+2. If MCP is unavailable in your current Copilot setup, use file-based
+   [pm-skills](https://github.com/product-on-purpose/pm-skills) with
+   [AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md).
+
+---
+
+## OpenCode
+
+OpenCode can use the same stdio MCP server wiring pattern.
+
+### Setup Pattern
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+### Notes
+
+1. If MCP is unavailable in your current OpenCode setup, use file-based
+   [pm-skills](https://github.com/product-on-purpose/pm-skills) and
+   [AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md).
+2. Keep server configuration aligned with the same command/args pair used by other MCP clients.
+
+---
+
 ## Generic MCP Client
 
 PM-Skills MCP works with any client that supports the Model Context Protocol.
@@ -473,8 +527,8 @@ The server advertises these MCP capabilities:
 
 | Capability | Description |
 |------------|-------------|
-| `tools` | 36 invokable tools (24 skills + 5 workflows + 7 utilities) |
-| `resources` | 72 readable resources (skills, templates, examples) |
+| `tools` | 38 invokable tools (25 skills + 5 workflows + 8 utilities) |
+| `resources` | Readable resources for skills/templates/examples, with optional persona resources when enabled |
 | `prompts` | 3 conversation prompts |
 
 ### Integration Example (Node.js)
@@ -523,7 +577,7 @@ After configuring any client:
    "Use pm_list_skills to show all available PM skills"
    ```
 
-   **Expected:** List of 24 skills organized by phase (Discover, Define, Develop, Deliver, Measure, Iterate)
+   **Expected:** List of 25 skills grouped by 6 phases plus foundation classification
 
 3. **Test a simple skill**
    ```
@@ -543,10 +597,10 @@ After configuring any client:
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Skill tools | 24 | `pm_prd`, `pm_hypothesis`, `pm_adr` |
+| Skill tools | 25 | `pm_prd`, `pm_hypothesis`, `pm_adr` |
 | Workflow tools | 5 | `pm_workflow_feature_kickoff` |
-| Utility tools | 7 | `pm_list_skills`, `pm_search_skills` |
-| **Total** | **36** | |
+| Utility tools | 8 | `pm_list_skills`, `pm_search_skills` |
+| **Total** | **38** | |
 
 ### What Success Looks Like
 
@@ -575,7 +629,7 @@ Both PM-Skills (file-based) and PM-Skills MCP can provide the same skills to AI 
 - **You prefer slash commands** — `/prd`, `/hypothesis` in Claude Code
 - **You want to browse skill files** — Read SKILL.md, TEMPLATE.md directly
 - **You're heavily customizing skills** — Easier to edit files in place
-- **You use GitHub Copilot** — Discovers skills via AGENTS.md
+- **You use GitHub Copilot or OpenCode without MCP support** — Discovers skills via AGENTS.md
 - **You want skills in your repo** — Submodule or copy skills into project
 
 ### Hybrid Approach

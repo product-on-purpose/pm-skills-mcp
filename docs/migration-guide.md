@@ -25,7 +25,7 @@ PM-Skills exists in two forms:
 | **File-based** | [pm-skills](https://github.com/product-on-purpose/pm-skills) | Clone repo, use slash commands or reference files |
 | **MCP-based** | [pm-skills-mcp](https://github.com/product-on-purpose/pm-skills-mcp) | Install server, AI invokes tools via MCP protocol |
 
-Both provide the same 24 PM skills—just different interfaces. You can migrate between them or use both simultaneously.
+Both provide the same 25 PM skills-just different interfaces. You can migrate between them or use both simultaneously.
 
 ---
 

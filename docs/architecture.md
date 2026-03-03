@@ -44,7 +44,7 @@ PM-Skills MCP is a Model Context Protocol server that exposes product management
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
 │   │ Tool Handler│   │Resource Srv │   │ Prompt Srv  │       │
-│   │  (36 tools) │   │(72 resources│   │ (3 prompts) │       │
+│   │  (38 tools) │   │(resources)  │   │ (3 prompts) │       │
 │   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘       │
 │          │                 │                 │              │
 │          └─────────────────┼─────────────────┘              │
@@ -308,7 +308,7 @@ registerPrompts(server: McpServer): number {
 | `lean-startup` | hypothesis → experiment-design → experiment-results → pivot-decision |
 | `quick-prd` | problem-statement → prd |
 | `experiment-cycle` | hypothesis → experiment-design → experiment-results → lessons-log |
-| `triple-diamond` | All 24 skills in order |
+| `triple-diamond` | All 24 phase skills in order |
 
 **Workflow execution:**
 ```typescript
@@ -351,7 +351,7 @@ interface SkillCache {
 |----------|---------|-------------|
 | `PM_SKILLS_PATH` | (embedded) | Path to skills directory |
 | `PM_SKILLS_FORMAT` | `full` | Default output format |
-| `PM_SKILLS_EXAMPLES` | `false` | Include examples by default |
+| `PM_SKILLS_INCLUDE_EXAMPLES` | `false` | Include examples by default |
 
 **Server info:**
 ```typescript
@@ -522,13 +522,13 @@ Client                              Server
   │◄── initializeResult ───────────────┤
   │                                    │
   ├─── tools/list ────────────────────►│
-  │◄── tools/list result (36 tools) ───┤
+  │◄── tools/list result (38 tools) ───┤
   │                                    │
   ├─── tools/call (pm_prd) ───────────►│
   │◄── tool result (skill content) ────┤
   │                                    │
   ├─── resources/list ────────────────►│
-  │◄── resources/list (72 resources) ──┤
+  │◄── resources/list (skills/templates/examples + optional personas) ──┤
   │                                    │
   ├─── resources/read (uri) ──────────►│
   │◄── resource content ───────────────┤
@@ -602,7 +602,7 @@ Override the embedded skills:
 |-----------|--------------|
 | Load config | < 1ms |
 | Scan skills directory | 10-30ms |
-| Parse 24 skills | 50-100ms |
+| Parse 25 skills | 50-100ms |
 | Register tools/resources | 10-20ms |
 | **Total startup** | **100-200ms** |
 
@@ -615,7 +615,7 @@ Override the embedded skills:
 ### Memory Usage
 
 - Base server: ~20MB
-- Cached skills: ~2-5MB (24 skills × ~100KB each)
+- Cached skills: ~2-6MB (25 skills × ~100KB each)
 - Total: ~25MB typical
 
 ### Optimization Strategies

@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center">Open-source MCP with /pm-skills included 24 best-practice product management skills plus workflows, instantly accessible to any AI via Model Context Protocol.</h4>
+<h4 align="center">Open-source MCP with /pm-skills included 25 best-practice product management skills plus workflows, instantly accessible to any AI via Model Context Protocol.</h4>
 
 <p align="center">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/issues/new?labels=bug">Report a Bug</a>
@@ -24,7 +24,7 @@
     <img src="https://img.shields.io/npm/v/pm-skills-mcp?style=flat-square&color=blue" alt="npm version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-36-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-38-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
@@ -111,15 +111,15 @@ npm install -g pm-skills-mcp
 
 ## The Big Idea
 
-**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)... a collection of 24 battle-tested product management skills... into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
+**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)... a collection of 25 battle-tested product management skills... into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
 
 <!-- ========== ENHANCED: Additional ecosystem context ========== -->
-PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 24 battle-tested product management skills. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access.
+PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 25 battle-tested product management skills. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access.
 
 **Not sure which to use?** See the [Comparison](#comparison) section below.
 <!-- ========== END ENHANCED ========== -->
 
-**_One connection. 24 skills. Any MCP client._**
+**_One connection. 25 skills. Any MCP client._**
 
 ### Why MCP?
 
@@ -138,11 +138,11 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **36 MCP Tools** - 24 PM skills + 5 workflow bundles + 7 utility tools
-- **72 MCP Resources** - Skills, templates, and examples accessible via URI
+- **38 MCP Tools** - 25 PM skills + 5 workflow bundles + 8 utility tools
+- **MCP Resources** - Skill instructions, templates, and examples via URI, with optional persona resources when enabled
 - **3 MCP Prompts** - Guided conversation starters for common workflows
 - **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
-- **76 Automated Tests** - Comprehensive test coverage with Vitest
+- **81 Automated Tests** - Comprehensive test coverage with Vitest
 - **Zero Configuration** - Works out of the box with embedded skills
 - **Universal Compatibility** - Claude Desktop, Cursor, Continue, and any MCP client
 - **Customizable** - Override with your own skill modifications
@@ -164,7 +164,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 </p>
 
 - **[Model Context Protocol](https://modelcontextprotocol.io)** - Open standard for AI tool connectivity
-- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The 24 PM skills this server exposes
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The 25 PM skills this server exposes
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe implementation
 - **[Vitest](https://vitest.dev/)** - Fast, modern testing framework
 
@@ -185,6 +185,7 @@ PM-Skills MCP works with any client that supports the Model Context Protocol. He
 | **Cline**           | ✅ Native    | MCP Server            | VS Code extension                  |
 | **Windsurf**        | ✅ Native    | MCP Server            | AI-native IDE                      |
 | **GitHub Copilot**  | 🔶 Indirect | Via MCP-enabled tools | Use with Copilot Chat + MCP        |
+| **OpenCode**        | 🔶 Indirect | Via MCP-compatible config | Use standard stdio MCP server pattern |
 | **ChatGPT / Codex** | 🔶 Manual   | Copy skill content    | No native MCP support              |
 | **Any MCP Client**  | ✅ Universal | Protocol-level        | Full compatibility                 |
 
@@ -217,7 +218,7 @@ See the [Integration Guide](docs/integration-guide.md) for detailed setup instru
 
 - You prefer slash commands in Claude Code (`/prd`, `/hypothesis`)
 - You want to browse, read, and customize skill files directly
-- You're using GitHub Copilot or Windsurf with AGENTS.md discovery
+- You're using GitHub Copilot, OpenCode, or Windsurf without reliable MCP support
 - You want to fork and heavily customize skills for your team
 
 **Using Both Together:**
@@ -292,7 +293,7 @@ The recommended client for pm-skills-mcp. Add to your Claude Desktop configurati
 }
 ```
 
-Restart Claude Desktop. You now have access to all 24 PM skills as tools.
+Restart Claude Desktop. You now have access to all 25 PM skills as tools.
 
 </details>
 
@@ -328,7 +329,51 @@ Navigate to Settings → Features → MCP Servers, then add:
 }
 ```
 
-Restart Cursor. The 24 PM skill tools will be available in AI chat.
+Restart Cursor. The 25 PM skill tools will be available in AI chat.
+
+</details>
+
+<details>
+<summary><strong>GitHub Copilot (MCP-enabled)</strong></summary>
+
+Configure your Copilot MCP extension/integration with the same stdio server pattern:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+If your Copilot surface does not currently expose MCP server configuration, use file-based
+[pm-skills](https://github.com/product-on-purpose/pm-skills) with
+[AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md) as the fallback path.
+
+</details>
+
+<details>
+<summary><strong>OpenCode (MCP-enabled)</strong></summary>
+
+Use OpenCode's MCP server configuration with the standard `npx pm-skills-mcp` pattern:
+
+```json
+{
+  "mcpServers": {
+    "pm-skills": {
+      "command": "npx",
+      "args": ["pm-skills-mcp"]
+    }
+  }
+}
+```
+
+If MCP is unavailable in your current OpenCode setup, use file-based
+[pm-skills](https://github.com/product-on-purpose/pm-skills) and
+[AGENTS.md](https://github.com/product-on-purpose/pm-skills/blob/main/AGENTS.md).
 
 </details>
 
@@ -360,7 +405,7 @@ Any MCP-compatible client can use pm-skills-mcp. The general pattern:
 
 1. Configure an MCP server with command `npx` and args `["pm-skills-mcp"]`
 2. Restart the client
-3. All 24 PM skills become available as tools
+3. All 25 PM skills become available as tools
 
 See the [Integration Guide](docs/integration-guide.md) for detailed instructions for all platforms.
 
@@ -373,8 +418,9 @@ See the [Integration Guide](docs/integration-guide.md) for detailed instructions
 | Variable             | Default    | Description                     |
 | -------------------- | ---------- | ------------------------------- |
 | `PM_SKILLS_PATH`     | (embedded) | Path to custom skills directory |
+| `PM_PERSONAS_PATH`   | (auto)     | Path to persona library resources |
 | `PM_SKILLS_FORMAT`   | `full`     | Default output format           |
-| `PM_SKILLS_EXAMPLES` | `false`    | Include examples by default     |
+| `PM_SKILLS_INCLUDE_EXAMPLES` | `false` | Include examples by default |
 
 #### Custom Skills Path
 
@@ -440,17 +486,17 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   36 Tools  │   │ 72 Resources│   │  3 Prompts  │       │
+│   │   38 Tools  │   │  Resources  │   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
-│   │ • 24 skills │   │ • templates │   │ • kickoff   │       │
+│   │ • 25 skills │   │ • templates │   │ • kickoff   │       │
 │   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
-│   │ • 7 utils   │   │ • skills    │   │ • quick-prd │       │
+│   │ • 8 utils   │   │ • skills    │   │ • quick-prd │       │
 │   │             │   │             │   │             │       │
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
 │                                                             │
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │              Embedded PM-Skills Library             │   │
-│   │     24 skills × (SKILL.md + TEMPLATE + EXAMPLE)     │   │
+│   │     25 skills × (SKILL.md + TEMPLATE + EXAMPLE)     │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -463,7 +509,7 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 
 ### Tools
 
-PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **24 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while the **7 utility tools** (like `pm_list_skills`, `pm_search_skills`) help you discover and validate skills. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
+PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **25 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while **5 workflow tools** and **8 utility tools** help you orchestrate and validate skill usage. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
 
 Every skill tool accepts these parameters:
 
@@ -543,6 +589,12 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | `pm_lessons_log`      | Build organizational memory              |
 | `pm_refinement_notes` | Capture backlog refinement outcomes      |
 | `pm_pivot_decision`   | Evidence-based pivot/persevere framework |
+
+#### 🧭 Foundation - *Cross-cutting capability*
+
+| Tool         | Description                                                                  |
+| ------------ | ---------------------------------------------------------------------------- |
+| `pm_persona` | Generate product or marketing personas with explicit assumptions and evidence |
 
 ### 🔗 Workflow Bundles - *Multi-skill workflows*
 
@@ -642,7 +694,7 @@ npm install -g pm-skills-mcp
 **Install a pinned release:**
 
 ```bash
-npm install -g pm-skills-mcp@2.4.3
+npm install -g pm-skills-mcp@2.5.0
 ```
 
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
@@ -652,11 +704,12 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md)
 - [`docs/releases/Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md)
 - [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
-- Published release tag: [`v2.4.3`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.4.3)
+- Published release tag: [`v2.5.0`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.5.0)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -669,8 +722,8 @@ pm-skills-mcp/
 │   ├── config.ts             # Configuration management
 │   ├── cache.ts              # Skill caching layer
 │   ├── skills/               # Skill loader and parser
-│   ├── tools/                # MCP tool handlers (36 tools)
-│   ├── resources/            # MCP resource handlers (72 resources)
+│   ├── tools/                # MCP tool handlers (38 tools)
+│   ├── resources/            # MCP resource handlers (skills/templates/examples + optional personas)
 │   ├── prompts/              # MCP prompt definitions (3 prompts)
 │   ├── workflows/            # Workflow bundle logic
 │   └── types/                # TypeScript type definitions
@@ -678,7 +731,7 @@ pm-skills-mcp/
 │   ├── deliver-prd/          # Example: phase-prefixed skill directories
 │   ├── define-hypothesis/    # Each skill has SKILL.md + references/
 │   ├── discover-interview-synthesis/
-│   └── ...                   # 24 skills total
+│   └── ...                   # 25 skills total
 ├── docs/                     # Documentation
 │   ├── getting-started.md    # Complete setup and first-use guide
 │   ├── integration-guide.md  # Client-specific configuration
@@ -689,7 +742,7 @@ pm-skills-mcp/
 │   └── reference/            # Reference documentation
 │       ├── project-structure.md
 │       └── repository-governance.md
-├── tests/                    # Vitest test suites (76 tests)
+├── tests/                    # Vitest test suites (81 tests)
 ├── scripts/                  # Build and utility scripts
 ├── dist/                     # Compiled JavaScript output
 ├── .github/                  # CI/CD workflows
@@ -709,22 +762,23 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.5.0** | 2026-03-02 | Persona tool support + taxonomy contract updates + 2.5.0 pin alignment |
 | **2.4.3** | 2026-02-16 | Patch release to include post-`v2.4.2` documentation/release-link updates |
 | **2.4.2** | 2026-02-16 | Governance + structure-doc alignment with pm-skills `v2.4.2` |
 | **2.4.1** | 2026-02-16 | Patch version/pin parity with pm-skills `v2.4.1` |
 | **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
 | **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
 | **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
-| **1.0.0** | 2026-01-21 | First stable release with 36 tools, 72 resources, caching     |
+| **1.0.0** | 2026-01-21 | First stable release baseline with MCP tooling, resources, and caching |
 | **0.1.2** | 2026-01-20 | CI/CD infrastructure, branch migration to main                |
 | **0.1.1** | 2026-01-20 | GitHub Actions CI/CD, ESLint + Prettier, npm package setup    |
-| **0.1.0** | 2026-01-20 | Initial implementation with all 24 PM skills as MCP tools     |
+| **0.1.0** | 2026-01-20 | Initial implementation baseline for PM-skills MCP integration  |
 
 ### Roadmap
 
 See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues) for planned features.
 
-- [x] Core MCP server with all 24 PM skills
+- [x] Core MCP server with all 25 PM skills
 - [x] Workflow bundle tools
 - [x] MCP resources for direct skill access
 - [x] MCP prompts for guided workflows
@@ -741,7 +795,7 @@ See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues
 
 ### Testing
 
-The project uses [Vitest](https://vitest.dev/) for testing with 76 tests across multiple test files.
+The project uses [Vitest](https://vitest.dev/) for testing with 81 tests across multiple test files.
 
 ```bash
 # Run all tests
@@ -894,7 +948,7 @@ To report a vulnerability, please email security concerns privately rather than 
 <!-- ========== NEW: Acknowledgments ========== -->
 ### Acknowledgments
 
-- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The skill library that powers this MCP server. All 24 PM skills, templates, and examples come from pm-skills.
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The skill library that powers this MCP server. All 25 PM skills, templates, and examples come from pm-skills.
 - **[Model Context Protocol](https://modelcontextprotocol.io)** - The protocol that makes this possible
 - **[Anthropic](https://anthropic.com)** - For creating MCP and Claude
 <!-- ========== END NEW ========== -->

@@ -589,7 +589,7 @@ ls -la $PM_SKILLS_PATH
 
 **Check 3:** Verify skill has required files
 ```bash
-ls -la $PM_SKILLS_PATH/deliver/prd/
+ls -la $PM_SKILLS_PATH/deliver-prd/
 # Should show: SKILL.md  references/
 ```
 

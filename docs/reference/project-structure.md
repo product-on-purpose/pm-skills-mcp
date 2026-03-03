@@ -90,7 +90,7 @@ src/
 
 ## `/skills/` — Embedded PM Skills
 
-Contains the 24 PM skills from [pm-skills](https://github.com/product-on-purpose/pm-skills), embedded at build time.
+Contains the 25 PM skills from [pm-skills](https://github.com/product-on-purpose/pm-skills), embedded at build time.
 
 ### Organization
 
@@ -296,7 +296,7 @@ High-churn agent working files (`SESSION-LOG`, `TODO`, `PLANNING`) are ignored b
 │                              ▼                              │
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │           /skills/ (Embedded PM Skills)              │   │
-│   │     24 skills × (SKILL.md + TEMPLATE + EXAMPLE)      │   │
+│   │     25 skills × (SKILL.md + TEMPLATE + EXAMPLE)      │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
