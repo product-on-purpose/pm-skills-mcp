@@ -70,11 +70,7 @@ export const SKILL_PHASES: SkillPhase[] = [
 /**
  * All valid classifications as array for iteration
  */
-export const SKILL_CLASSIFICATIONS: SkillClassification[] = [
-  'domain',
-  'foundation',
-  'utility',
-];
+export const SKILL_CLASSIFICATIONS: SkillClassification[] = ['domain', 'foundation', 'utility'];
 
 /**
  * Tool output format preference

@@ -20,8 +20,15 @@ jobs:
       - name: Resolve pinned pm-skills source
         id: source
         run: |
-          echo "repo=$(node -p 'require(\"./pm-skills-source.json\").pmSkillsRepository')" >> "$GITHUB_OUTPUT"
-          echo "ref=$(node -p 'require(\"./pm-skills-source.json\").pmSkillsRef')" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          repo=$(node -p 'require("./pm-skills-source.json").pmSkillsRepository')
+          ref=$(node -p 'require("./pm-skills-source.json").pmSkillsRef')
+          if [ -z "$repo" ] || [ -z "$ref" ]; then
+            echo "pm-skills-source.json must include pmSkillsRepository and pmSkillsRef" >&2
+            exit 1
+          fi
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
       - name: Clone pm-skills (pinned ref)
         run: |
@@ -43,6 +50,8 @@ jobs:
         run: npm ci
 
       - name: Embed skills
+        env:
+          PM_INCLUDE_PERSONAS: 'false'
         run: npm run embed-skills ../pm-skills/skills
 
       - name: Build

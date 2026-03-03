@@ -140,6 +140,8 @@ describe('listResources', () => {
       },
     ]);
 
-    expect(resources.find((r) => r.uri === 'pm-skills://personas/product/core-product-pm')).toBeDefined();
+    expect(
+      resources.find((r) => r.uri === 'pm-skills://personas/product/core-product-pm')
+    ).toBeDefined();
   });
 });

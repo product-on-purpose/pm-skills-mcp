@@ -63,7 +63,10 @@ type ParsedResourceUri = ParsedSkillResourceUri | ParsedPersonaResourceUri;
 /**
  * Build a skill resource URI (flat format)
  */
-export function buildResourceUri(type: Exclude<ResourceType, 'persona'>, skillName: string): string {
+export function buildResourceUri(
+  type: Exclude<ResourceType, 'persona'>,
+  skillName: string
+): string {
   const typeMap: Record<Exclude<ResourceType, 'persona'>, string> = {
     skill: 'skills',
     template: 'templates',
