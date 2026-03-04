@@ -10,6 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - No unreleased changes documented yet.
 
+## [2.5.1] - 2026-03-04
+
+### Changed
+- Canonicalized tracked Claude continuity workspace to `AGENTS/claude/` by renaming `AGENTS/claude-opus-4.5/`.
+- Updated project-structure docs to reflect canonical `AGENTS/claude` path.
+- Advanced package/runtime version metadata to `2.5.1`:
+  - `package.json`
+  - `package-lock.json`
+  - `src/config.ts`
+- Rolled source-pin metadata forward for direct tracking with `pm-skills v2.5.1`:
+  - `pm-skills-source.json`
+  - `pmSkillsRef=v2.5.1`
+  - `pmSkillsVersion/outputContractVersion/configContractVersion=2.5.1`
+
+### Release Notes
+- Patch release focused on AGENTS continuity-path canonicalization and pin/version parity.
+- No MCP tool/resource/prompt behavior changes from `v2.5.0`.
+
 ## [2.5.0] - 2026-03-02
 
 ### Breaking Changes
