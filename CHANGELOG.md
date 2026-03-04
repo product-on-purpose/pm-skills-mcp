@@ -10,6 +10,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - No unreleased changes documented yet.
 
+## [2.5.2] - 2026-03-04
+
+### Changed
+- Rewrote public release-facing docs for clearer user-first language.
+- Removed internal planning shorthand from release-facing `v2.5.0` documentation.
+- Advanced package/runtime version metadata to `2.5.2`:
+  - `package.json`
+  - `package-lock.json`
+  - `src/config.ts`
+- Rolled source-pin metadata forward for direct tracking with `pm-skills v2.5.2`:
+  - `pm-skills-source.json`
+  - `pmSkillsRef=v2.5.2`
+  - `pmSkillsVersion/outputContractVersion/configContractVersion=2.5.2`
+- Added release note artifact:
+  - `docs/releases/Release_v2.5.2.md`
+
+### Release Notes
+- Patch release focused on public documentation quality and release-communication clarity.
+- No MCP tool/resource/prompt behavior changes from `v2.5.1`.
+
 ## [2.5.1] - 2026-03-04
 
 ### Changed
@@ -31,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.5.0] - 2026-03-02
 
 ### Breaking Changes
-- `v2.5.0` follows the approved D6 compatibility-signaling exception posture: release labels stay aligned while MCP contract-impacting changes are explicitly documented.
+- `v2.5.0` includes explicit MCP contract changes while keeping version alignment with `pm-skills`.
 - Skill taxonomy is now two-axis: `classification` is explicit, and `phase` can be `null` for non-domain (`foundation`/`utility`) skills.
 - `pm_list_skills` and `pm_search_skills` outputs now include classification semantics and may report `Phase: n/a` for non-phase skills.
 - Tool derivation now strips both workflow-phase and classification prefixes and hard-fails on derived-name collisions.
@@ -44,9 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ship persona skill support with `pm_persona` aligned to `pm-skills` `foundation-persona`.
 - Keep `pm_list_personas` compatibility utility in runtime while default CI/publish payload embeds no persona files (`PM_INCLUDE_PERSONAS=false`).
 - Keep runtime inventory at 38 tools (25 skills + 5 workflows + 8 utilities) and default 75 resources (skills/templates/examples only).
-- Defer `F-03` and `F-04` persona-resource shipment claims from `v2.5.0` to a future release.
-- Enforce D10 embed invariants in `scripts/embed-skills.js` using `EMB-*` hard-fail/warning semantics.
-- Enforce D9 categorized drift findings in `pm-skills/.github/scripts/validate-mcp-sync.js` using `INV-*`, `CLS-*`, `NAM-*`, `CMD-*`, and `CTR-*` severities.
+- Defer persona archetype resource-library shipment and full persona-resource parity claims to a future release.
+- Harden embed validation invariants in `scripts/embed-skills.js` with explicit fail/warn checks.
+- Enforce categorized drift findings in `pm-skills/.github/scripts/validate-mcp-sync.js` for inventory, classification, naming, command, and contract consistency.
 - Pin `pm-skills-source.json` to published `pm-skills` ref `5586c98c0d0ca77c763440b58d266d2029ae2719` with `pmSkillsVersion/outputContractVersion/configContractVersion = 2.5.0`.
 
 ## [2.4.3] - 2026-02-16
