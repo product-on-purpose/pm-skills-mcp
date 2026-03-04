@@ -10,6 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - No unreleased changes documented yet.
 
+## [2.6.0] - 2026-03-04
+
+### Changed
+- Advanced package/runtime version metadata to `2.6.0`:
+  - `package.json`
+  - `package-lock.json`
+  - `src/config.ts`
+- Rolled source-pin metadata forward for direct tracking with `pm-skills v2.6.0`:
+  - `pm-skills-source.json`
+  - `pmSkillsRef=v2.6.0`
+  - `pmSkillsVersion/outputContractVersion/configContractVersion=2.6.0`
+- Added release note artifact:
+  - `docs/releases/Release_v2.6.0.md`
+
+### Release Notes
+- Maintenance release to keep `pm-skills-mcp` version and source-pin metadata aligned with `pm-skills v2.6.0`.
+- No MCP tool/resource/prompt behavior changes from `v2.5.2`.
+
 ## [2.5.2] - 2026-03-04
 
 ### Changed

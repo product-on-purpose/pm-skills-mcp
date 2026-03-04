@@ -694,7 +694,7 @@ npm install -g pm-skills-mcp
 **Install a pinned release:**
 
 ```bash
-npm install -g pm-skills-mcp@2.5.2
+npm install -g pm-skills-mcp@2.6.0
 ```
 
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
@@ -704,6 +704,7 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.6.0.md`](docs/releases/Release_v2.6.0.md)
 - [`docs/releases/Release_v2.5.2.md`](docs/releases/Release_v2.5.2.md)
 - [`docs/releases/Release_v2.5.1.md`](docs/releases/Release_v2.5.1.md)
 - [`docs/releases/Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md)
@@ -711,7 +712,7 @@ Latest release notes:
 - [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
-- Published release tag: [`v2.5.2`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.5.2)
+- Published release tag: [`v2.6.0`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.6.0)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -764,6 +765,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.6.0** | 2026-03-04 | Maintenance release for `pm-skills v2.6.0` version/source-pin parity |
 | **2.5.2** | 2026-03-04 | Public release-doc readability cleanup + 2.5.2 source-pin/runtime parity |
 | **2.5.1** | 2026-03-04 | Canonical `AGENTS/claude` continuity path + 2.5.1 source-pin/runtime parity |
 | **2.5.0** | 2026-03-02 | Persona tool support + taxonomy contract updates + 2.5.0 pin alignment |
