@@ -198,7 +198,7 @@ Session continuity for AI coding assistants.
 
 ```
 AGENTS/
-├── claude-opus-4.5/
+├── claude/
 │   ├── CONTEXT.md            # Tracked continuity state
 │   └── DECISIONS.md          # Tracked durable decisions
 └── [other agent dirs]
