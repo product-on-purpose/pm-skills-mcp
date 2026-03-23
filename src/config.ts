@@ -106,8 +106,8 @@ export function loadConfig(): ServerConfig {
  */
 export const SERVER_INFO = {
   name: 'pm-skills-mcp',
-  version: '2.6.0',
-  description: 'MCP server exposing 25 product management skills as tools',
+  version: '2.7.0',
+  description: 'MCP server exposing 27 product management skills as tools',
 } as const;
 
 /**

@@ -119,7 +119,7 @@ PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-s
 **Not sure which to use?** See the [Comparison](#comparison) section below.
 <!-- ========== END ENHANCED ========== -->
 
-**_One connection. 25 skills. Any MCP client._**
+**_One connection. 27 skills. Any MCP client._**
 
 ### Why MCP?
 
@@ -486,9 +486,9 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   38 Tools  │   │  Resources  │   │  3 Prompts  │       │
+│   │   40 Tools  │   │  Resources  │   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
-│   │ • 25 skills │   │ • templates │   │ • kickoff   │       │
+│   │ • 27 skills │   │ • templates │   │ • kickoff   │       │
 │   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
 │   │ • 8 utils   │   │ • skills    │   │ • quick-prd │       │
 │   │             │   │             │   │             │       │
@@ -496,7 +496,7 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 │                                                             │
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │              Embedded PM-Skills Library             │   │
-│   │     25 skills × (SKILL.md + TEMPLATE + EXAMPLE)     │   │
+│   │     27 skills × (SKILL.md + TEMPLATE + EXAMPLE)     │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -509,7 +509,7 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 
 ### Tools
 
-PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **25 skill tools** (like `pm_prd`, `pm_hypothesis`) generate PM artifacts, while **5 workflow tools** and **8 utility tools** help you orchestrate and validate skill usage. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
+PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **27 skill tools** (like `pm_prd`, `pm_hypothesis`, `pm_acceptance_criteria`, `pm_pm_skill_builder`) generate PM artifacts, while **5 workflow tools** and **8 utility tools** help you orchestrate and validate skill usage. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
 
 Every skill tool accepts these parameters:
 
@@ -694,7 +694,7 @@ npm install -g pm-skills-mcp
 **Install a pinned release:**
 
 ```bash
-npm install -g pm-skills-mcp@2.6.0
+npm install -g pm-skills-mcp@2.7.0
 ```
 
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
@@ -704,15 +704,15 @@ From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versio
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
 Latest release notes:
+- [`docs/releases/Release_v2.7.0.md`](docs/releases/Release_v2.7.0.md)
 - [`docs/releases/Release_v2.6.0.md`](docs/releases/Release_v2.6.0.md)
-- [`docs/releases/Release_v2.5.2.md`](docs/releases/Release_v2.5.2.md)
 - [`docs/releases/Release_v2.5.1.md`](docs/releases/Release_v2.5.1.md)
 - [`docs/releases/Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md)
 - [`docs/releases/Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md)
 - [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
 - [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
 - [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
-- Published release tag: [`v2.6.0`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.6.0)
+- Published release tag: [`v2.7.0`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.7.0)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -725,7 +725,7 @@ pm-skills-mcp/
 │   ├── config.ts             # Configuration management
 │   ├── cache.ts              # Skill caching layer
 │   ├── skills/               # Skill loader and parser
-│   ├── tools/                # MCP tool handlers (38 tools)
+│   ├── tools/                # MCP tool handlers (40 tools)
 │   ├── resources/            # MCP resource handlers (skills/templates/examples + optional personas)
 │   ├── prompts/              # MCP prompt definitions (3 prompts)
 │   ├── workflows/            # Workflow bundle logic
@@ -734,7 +734,7 @@ pm-skills-mcp/
 │   ├── deliver-prd/          # Example: phase-prefixed skill directories
 │   ├── define-hypothesis/    # Each skill has SKILL.md + references/
 │   ├── discover-interview-synthesis/
-│   └── ...                   # 25 skills total
+│   └── ...                   # 27 skills total
 ├── docs/                     # Documentation
 │   ├── getting-started.md    # Complete setup and first-use guide
 │   ├── integration-guide.md  # Client-specific configuration
@@ -765,6 +765,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.7.0** | 2026-03-22 | 2 new skill tools (`pm_acceptance_criteria`, `pm_pm_skill_builder`), 27 skills, 40 tools |
 | **2.6.0** | 2026-03-04 | Maintenance release for `pm-skills v2.6.0` version/source-pin parity |
 | **2.5.2** | 2026-03-04 | Public release-doc readability cleanup + 2.5.2 source-pin/runtime parity |
 | **2.5.1** | 2026-03-04 | Canonical `AGENTS/claude` continuity path + 2.5.1 source-pin/runtime parity |

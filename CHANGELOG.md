@@ -5,10 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.7.0] - 2026-03-22
+
+### Added
+- **2 new skill tools** from `pm-skills v2.7.0`:
+  - `pm_acceptance_criteria` — Given/When/Then acceptance criteria generation (Deliver phase, specification category)
+  - `pm_pm_skill_builder` — interactive PM skill creation with gap analysis, classification, and staging workflow (Utility classification, coordination category)
+- First utility-classified skill tool in the MCP server.
 
 ### Changed
-- No unreleased changes documented yet.
+- Re-embedded all skills from `pm-skills v2.7.0` (27 skills, 81 files).
+- Tool count: 40 tools (27 skills + 5 workflows + 8 utilities), up from 38.
+- Resource count: 81 (27 skills x 3 types), up from 75.
+- Advanced package/runtime version metadata to `2.7.0`:
+  - `package.json`
+  - `src/config.ts`
+- Rolled source-pin metadata forward for direct tracking with `pm-skills v2.7.0`:
+  - `pm-skills-source.json`
+  - `pmSkillsRef=v2.7.0`
+  - `pmSkillsVersion/outputContractVersion/configContractVersion=2.7.0`
+
+### Release Notes
+- First MCP release with a utility skill tool. `pm_pm_skill_builder` produces Skill Implementation Packets as text; file writing is client-dependent (works in Cursor/Claude Code, informational in Claude Desktop).
+- `pm_acceptance_criteria` fills the last gap in the Deliver phase tool set.
+- No breaking changes to existing tool names, parameters, or resource URIs.
 
 ## [2.6.0] - 2026-03-04
 
