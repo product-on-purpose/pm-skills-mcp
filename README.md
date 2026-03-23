@@ -703,16 +703,7 @@ npm install -g pm-skills-mcp@2.7.0
 From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versions.
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
-Latest release notes:
-- [`docs/releases/Release_v2.7.0.md`](docs/releases/Release_v2.7.0.md)
-- [`docs/releases/Release_v2.6.0.md`](docs/releases/Release_v2.6.0.md)
-- [`docs/releases/Release_v2.5.1.md`](docs/releases/Release_v2.5.1.md)
-- [`docs/releases/Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md)
-- [`docs/releases/Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md)
-- [`docs/releases/Release_v2.4.2.md`](docs/releases/Release_v2.4.2.md)
-- [`docs/releases/Release_v2.4.1.md`](docs/releases/Release_v2.4.1.md)
-- [`docs/releases/Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md)
-- Published release tag: [`v2.7.0`](https://github.com/product-on-purpose/pm-skills-mcp/releases/tag/v2.7.0)
+Latest: [`docs/releases/Release_v2.7.0.md`](docs/releases/Release_v2.7.0.md) | [Previous release details](#previous-release-details) | [Full changelog](#changelog)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -759,6 +750,48 @@ pm-skills-mcp/
 
 
 
+### Previous Release Details
+
+<a id="previous-release-details"></a>
+
+<details>
+<summary>v2.6.0 - Maintenance: pm-skills v2.6.0 version parity</summary>
+
+- Version and source-pin metadata aligned with `pm-skills v2.6.0`.
+- No MCP tool/resource/prompt behavior changes.
+- Release note: [`docs/releases/Release_v2.6.0.md`](docs/releases/Release_v2.6.0.md).
+
+</details>
+<details>
+<summary>v2.5.x - Persona tool support + taxonomy contract updates</summary>
+
+**v2.5.2** — Public release-doc readability cleanup.
+**v2.5.1** — Canonical `AGENTS/claude` continuity path.
+**v2.5.0** — Persona skill tool (`pm_persona`), two-axis classification model (`phase` + `classification`), embed validation hardening. Tool count: 38.
+- Release notes: [`Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md) through [`Release_v2.5.2.md`](docs/releases/Release_v2.5.2.md).
+
+</details>
+<details>
+<summary>v2.4.x - Direct version tracking with pm-skills</summary>
+
+**v2.4.3** — Release metadata/link alignment patch.
+**v2.4.2** — Governance + structure-doc alignment.
+**v2.4.1** — Version/pin parity patch.
+**v2.4.0** — Adopted direct version tracking with `pm-skills`. Added `pm-skills-source.json` for reproducible embeds. Resource URI contract tests. Tool count: 36.
+- Release notes: [`Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md) through [`Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md).
+
+</details>
+<details>
+<summary>v2.1.0 and earlier</summary>
+
+**v2.1.0** — Flat skill structure alignment with pm-skills v2.x. Resource URIs flattened.
+**v1.1.0** — Comprehensive documentation suite, platform compatibility.
+**v1.0.0** — First stable release: 36 tools, caching, community governance.
+**v0.1.x** — Initial implementation: MCP server, CI/CD, npm packaging.
+- See [CHANGELOG.md](CHANGELOG.md) for full detail.
+
+</details>
+
 ### Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for full version history.
@@ -766,26 +799,18 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
 | **2.7.0** | 2026-03-22 | 2 new skill tools (`pm_acceptance_criteria`, `pm_pm_skill_builder`), 27 skills, 40 tools |
-| **2.6.0** | 2026-03-04 | Maintenance release for `pm-skills v2.6.0` version/source-pin parity |
-| **2.5.2** | 2026-03-04 | Public release-doc readability cleanup + 2.5.2 source-pin/runtime parity |
-| **2.5.1** | 2026-03-04 | Canonical `AGENTS/claude` continuity path + 2.5.1 source-pin/runtime parity |
-| **2.5.0** | 2026-03-02 | Persona tool support + taxonomy contract updates + 2.5.0 pin alignment |
-| **2.4.3** | 2026-02-16 | Patch release to include post-`v2.4.2` documentation/release-link updates |
-| **2.4.2** | 2026-02-16 | Governance + structure-doc alignment with pm-skills `v2.4.2` |
-| **2.4.1** | 2026-02-16 | Patch version/pin parity with pm-skills `v2.4.1` |
-| **2.4.0** | 2026-02-16 | Direct version tracking with pm-skills + pinned source metadata |
-| **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x            |
-| **1.1.0** | 2026-01-21 | Comprehensive documentation suite, platform compatibility     |
-| **1.0.0** | 2026-01-21 | First stable release baseline with MCP tooling, resources, and caching |
-| **0.1.2** | 2026-01-20 | CI/CD infrastructure, branch migration to main                |
-| **0.1.1** | 2026-01-20 | GitHub Actions CI/CD, ESLint + Prettier, npm package setup    |
-| **0.1.0** | 2026-01-20 | Initial implementation baseline for PM-skills MCP integration  |
+| **2.6.0** | 2026-03-04 | Maintenance: pm-skills v2.6.0 version/source-pin parity |
+| **2.5.0** | 2026-03-02 | Persona tool + taxonomy contract updates + embed hardening |
+| **2.4.0** | 2026-02-16 | Direct version tracking + pinned source metadata |
+| **2.1.0** | 2026-01-27 | Flat skill structure alignment with pm-skills v2.x |
+| **1.0.0** | 2026-01-21 | First stable release: 36 tools, caching, governance |
+| **0.1.0** | 2026-01-20 | Initial MCP server implementation |
 
 ### Roadmap
 
 See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues) for planned features.
 
-- [x] Core MCP server with all 25 PM skills
+- [x] Core MCP server with all 27 PM skills
 - [x] Workflow bundle tools
 - [x] MCP resources for direct skill access
 - [x] MCP prompts for guided workflows
