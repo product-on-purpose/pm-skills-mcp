@@ -52,6 +52,6 @@ When referencing files in documentation:
 - `skills/` - Embedded skills (gitignored, populated at build)
 
 ### MCP Protocol
-- Tools: One per PM skill (24 total)
-- Resources: Skill templates and examples
-- Prompts: Pre-configured skill invocations
+- Tools: 42 total (29 skill tools + 5 workflow tools + 8 utility tools)
+- Resources: Skill templates and examples (87 resources)
+- Prompts: Pre-configured skill invocations (3 prompts)
