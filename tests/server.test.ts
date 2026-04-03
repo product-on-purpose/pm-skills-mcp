@@ -53,7 +53,7 @@ describe('PMSkillsServer with phase filter', () => {
     const server = new PMSkillsServer(config);
     await server.initialize();
 
-    expect(server.getSkillsCount()).toBe(5); // Only deliver phase skills
+    expect(server.getSkillsCount()).toBe(6); // Only deliver phase skills
   });
 });
 
