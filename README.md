@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center">Open-source MCP with /pm-skills included 25 best-practice product management skills plus workflows, instantly accessible to any AI via Model Context Protocol.</h4>
+<h4 align="center">Open-source MCP server exposing 29 best-practice product management skills plus workflows and lifecycle tools, instantly accessible to any AI via Model Context Protocol.</h4>
 
 <p align="center">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/issues/new?labels=bug">Report a Bug</a>
@@ -24,7 +24,7 @@
     <img src="https://img.shields.io/npm/v/pm-skills-mcp?style=flat-square&color=blue" alt="npm version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-38-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-42-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
@@ -38,7 +38,7 @@
 </p>
 
 <!-- ========== NEW: Skill Library Cross-Reference Callout ========== -->
-> **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills)—the open-source skill library you can fork and modify.
+> **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills)—the open-source skill library you can fork and modify. Browse the full catalog, interactive showcase, and setup guides at [product-on-purpose.github.io/pm-skills](https://product-on-purpose.github.io/pm-skills/).
 
 <!-- ========== END NEW ========== -->
 
@@ -111,15 +111,13 @@ npm install -g pm-skills-mcp
 
 ## The Big Idea
 
-**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills)... a collection of 25 battle-tested product management skills... into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
+**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills) — a collection of 29 best-practice product management skills — into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
 
-<!-- ========== ENHANCED: Additional ecosystem context ========== -->
-PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 25 battle-tested product management skills. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access.
+PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 29 PM skills organized by the Triple Diamond framework. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access. The pm-skills library now includes **lifecycle tools** (Create, Validate, Iterate) and a [documentation site](https://product-on-purpose.github.io/pm-skills/) with an interactive showcase.
 
-**Not sure which to use?** See the [Comparison](#comparison) section below.
-<!-- ========== END ENHANCED ========== -->
+**Not sure which to use?** See the [Comparison](#comparison-pm-skills-mcp-this-repo-vs-pm-skills) section below, or the [MCP Setup Guide](https://product-on-purpose.github.io/pm-skills/guides/mcp-setup/) on the docs site.
 
-**_One connection. 27 skills. Any MCP client._**
+**_One connection. 29 skills. Any MCP client._**
 
 ### Why MCP?
 
@@ -138,7 +136,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **38 MCP Tools** - 25 PM skills + 5 workflow bundles + 8 utility tools
+- **42 MCP Tools** - 29 PM skills + 5 workflow bundles + 8 utility tools
 - **MCP Resources** - Skill instructions, templates, and examples via URI, with optional persona resources when enabled
 - **3 MCP Prompts** - Guided conversation starters for common workflows
 - **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
@@ -164,7 +162,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 </p>
 
 - **[Model Context Protocol](https://modelcontextprotocol.io)** - Open standard for AI tool connectivity
-- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The 25 PM skills this server exposes
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The 29 PM skills this server exposes ([docs site](https://product-on-purpose.github.io/pm-skills/))
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe implementation
 - **[Vitest](https://vitest.dev/)** - Fast, modern testing framework
 

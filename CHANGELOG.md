@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.1] - 2026-04-04
+
+### Changed
+- **Documentation parity** with pm-skills v2.8.1:
+  - README updated: skill counts (25→29), tool counts (38→42), added docs site link, showcase reference, lifecycle tools mention
+  - CHANGELOG: added missing v2.8.0 entry and this v2.8.1 parity entry
+  - Cross-links to pm-skills documentation site at `product-on-purpose.github.io/pm-skills/`
+
+### Release Notes
+- Documentation-only release — no code, tool, or embedding changes.
+- Aligns MCP repo documentation with the pm-skills v2.8.0 skill additions (validate + iterate) and the v2.8.1 docs site launch.
+- The pm-skills docs site now includes a dedicated [MCP Setup Guide](https://product-on-purpose.github.io/pm-skills/guides/mcp-setup/) and [MCP Integration Guide](https://product-on-purpose.github.io/pm-skills/guides/mcp-integration/).
+
+## [2.8.0] - 2026-04-03
+
+### Added
+- **2 new skill tools** from `pm-skills v2.8.0`:
+  - `pm_pm_skill_validate` — audit a skill against structural conventions and quality criteria (Utility classification)
+  - `pm_pm_skill_iterate` — apply targeted improvements from feedback or validation reports (Utility classification)
+
+### Changed
+- Re-embedded all skills from `pm-skills v2.8.0` (29 skills, 87 files).
+- Tool count: 42 tools (29 skills + 5 workflows + 8 utilities), up from 40.
+- Resource count: 87 (29 skills x 3 types), up from 81.
+- Source pin updated: `pmSkillsRef=v2.8.0`, all contract versions to `2.8.0`.
+- Test fixtures updated: deliver phase count 5→6 (catching up with v2.7.0's acceptance-criteria skill).
+
+### Release Notes
+- Completes the PM skill lifecycle in MCP: Create (`pm_pm_skill_builder`) → Validate (`pm_pm_skill_validate`) → Iterate (`pm_pm_skill_iterate`).
+- Both new tools derive their names from the `utility-` prefix stripping in `deriveToolName` — no server code changes were needed.
+- 81 tests passing.
+
 ## [2.7.0] - 2026-03-22
 
 ### Added
