@@ -24,7 +24,7 @@
     <img src="https://img.shields.io/npm/v/pm-skills-mcp?style=flat-square&color=blue" alt="npm version">
   </a>
   <a href="#tools">
-    <img src="https://img.shields.io/badge/tools-42-brightgreen.svg?style=flat-square" alt="Tools">
+    <img src="https://img.shields.io/badge/tools-48-brightgreen.svg?style=flat-square" alt="Tools">
   </a>
   <a href="https://modelcontextprotocol.io">
     <img src="https://img.shields.io/badge/protocol-MCP-purple.svg?style=flat-square" alt="MCP">
@@ -72,7 +72,7 @@
   - [How It Works](#how-it-works)
   - [Tools](#tools)
   - [The Skills](#the-skills)
-  - [🔗 Workflow Bundles - *Multi-skill workflows*](#-workflow-bundles---multi-skill-workflows)
+  - [🔗 Workflows - *Multi-skill workflows*](#-workflows---multi-skill-workflows)
   - [🛠️ Utility Tools](#️-utility-tools)
   - [MCP Resources](#mcp-resources)
   - [Prompts](#prompts)
@@ -136,10 +136,10 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
 
 ### Key Features
 
-- **42 MCP Tools** - 29 PM skills + 5 workflow bundles + 8 utility tools
+- **48 MCP Tools** - 29 PM skills + 11 workflows + 8 utility tools
 - **MCP Resources** - Skill instructions, templates, and examples via URI, with optional persona resources when enabled
 - **3 MCP Prompts** - Guided conversation starters for common workflows
-- **5 Workflow Bundles** - Pre-built multi-skill workflows for common scenarios
+- **11 Workflows** - Pre-built multi-skill workflows for common scenarios
 - **81 Automated Tests** - Comprehensive test coverage with Vitest
 - **Zero Configuration** - Works out of the box with embedded skills
 - **Universal Compatibility** - Claude Desktop, Cursor, Continue, and any MCP client
@@ -201,7 +201,7 @@ See the [Integration Guide](docs/integration-guide.md) for detailed setup instru
 | **Skill invocation** | MCP tool calls | Slash commands (Claude Code) |
 | **Auto-discovery** | MCP protocol (Claude Desktop, Cursor) | AGENTS.md (Copilot, Cursor, Windsurf) |
 | **Template access** | URI-based resources | Navigate file system |
-| **Workflow bundles** | Tool-based execution | Manual orchestration |
+| **Workflows** | Tool-based execution | Manual orchestration |
 | **Customization** | Set `PM_SKILLS_PATH` to custom folder | Edit files directly |
 | **Updates** | `npm update pm-skills-mcp` | `git pull` |
 
@@ -484,10 +484,10 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│   │   40 Tools  │   │  Resources  │   │  3 Prompts  │       │
+│   │   48 Tools  │   │  Resources  │   │  3 Prompts  │       │
 │   │             │   │             │   │             │       │
-│   │ • 27 skills │   │ • templates │   │ • kickoff   │       │
-│   │ • 5 flows   │   │ • examples  │   │ • lean      │       │
+│   │ • 29 skills │   │ • templates │   │ • kickoff   │       │
+│   │ • 11 flows  │   │ • examples  │   │ • lean      │       │
 │   │ • 8 utils   │   │ • skills    │   │ • quick-prd │       │
 │   │             │   │             │   │             │       │
 │   └─────────────┘   └─────────────┘   └─────────────┘       │
@@ -507,7 +507,7 @@ See the [pm-skills authoring guide](https://github.com/product-on-purpose/pm-ski
 
 ### Tools
 
-PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **27 skill tools** (like `pm_prd`, `pm_hypothesis`, `pm_acceptance_criteria`, `pm_pm_skill_builder`) generate PM artifacts, while **5 workflow tools** and **8 utility tools** help you orchestrate and validate skill usage. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
+PM-Skills MCP wraps each skill from [pm-skills](https://github.com/product-on-purpose/pm-skills) as an MCP tool. The **29 skill tools** (like `pm_prd`, `pm_hypothesis`, `pm_acceptance_criteria`, `pm_pm_skill_builder`) generate PM artifacts, while **11 workflow tools** and **8 utility tools** help you orchestrate and validate skill usage. See the [Comparison](#comparison) section for when to use MCP tools vs file-based slash commands.
 
 Every skill tool accepts these parameters:
 
@@ -594,15 +594,21 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | ------------ | ---------------------------------------------------------------------------- |
 | `pm_persona` | Generate product or marketing personas with explicit assumptions and evidence |
 
-### 🔗 Workflow Bundles - *Multi-skill workflows*
+### 🔗 Workflows - *Multi-skill workflows*
 
-| Tool                           | Effort        | Description                                        |
-| ------------------------------ | ------------- | -------------------------------------------------- |
-| `pm_workflow_feature_kickoff`  | standard      | problem → hypothesis → solution → PRD → stories    |
-| `pm_workflow_lean_startup`     | comprehensive | hypothesis → experiment → results → pivot decision |
-| `pm_workflow_triple_diamond`   | comprehensive | Full discovery to delivery sequence                |
-| `pm_workflow_quick_prd`        | quick         | Fast problem → PRD workflow                        |
-| `pm_workflow_experiment_cycle` | standard      | hypothesis → experiment → results → lessons        |
+| Tool                                  | Effort        | Description                                        |
+| ------------------------------------- | ------------- | -------------------------------------------------- |
+| `pm_workflow_feature_kickoff`         | standard      | problem → hypothesis → solution → PRD → stories    |
+| `pm_workflow_lean_startup`            | comprehensive | hypothesis → experiment → results → pivot decision |
+| `pm_workflow_triple_diamond`          | comprehensive | Full discovery to delivery sequence                |
+| `pm_workflow_quick_prd`               | quick         | Fast problem → PRD workflow                        |
+| `pm_workflow_experiment_cycle`        | standard      | hypothesis → experiment → results → lessons        |
+| `pm_workflow_customer_discovery`      | standard      | research → JTBD → opportunities → problem statement|
+| `pm_workflow_sprint_planning`         | quick         | refinement → stories → edge cases                  |
+| `pm_workflow_product_strategy`        | comprehensive | competitive → stakeholders → opportunities → solution → ADR |
+| `pm_workflow_post_launch_learning`    | comprehensive | instrumentation → dashboard → results → retro → lessons |
+| `pm_workflow_stakeholder_alignment`   | standard      | stakeholders → problem → solution → launch readiness|
+| `pm_workflow_technical_discovery`     | standard      | spike → ADR → design rationale                     |
 
 ### 🛠️ Utility Tools
 
@@ -610,7 +616,7 @@ Use pm_user_stories with topic "dark mode" format "concise" includeExample true
 | ------------------- | ---------------------------------------------------------------- |
 | `pm_list_skills`    | List all available PM skill tools                                |
 | `pm_list_resources` | List all available MCP resources                                 |
-| `pm_list_workflows` | List all workflow bundles with steps                             |
+| `pm_list_workflows` | List all workflows with steps                                    |
 | `pm_list_prompts`   | List available conversation prompts                              |
 | `pm_validate`       | Validate artifact against skill template                         |
 | `pm_search_skills`  | Search skills by keyword across names, descriptions, and content |
@@ -714,10 +720,10 @@ pm-skills-mcp/
 │   ├── config.ts             # Configuration management
 │   ├── cache.ts              # Skill caching layer
 │   ├── skills/               # Skill loader and parser
-│   ├── tools/                # MCP tool handlers (40 tools)
+│   ├── tools/                # MCP tool handlers (48 tools)
 │   ├── resources/            # MCP resource handlers (skills/templates/examples + optional personas)
 │   ├── prompts/              # MCP prompt definitions (3 prompts)
-│   ├── workflows/            # Workflow bundle logic
+│   ├── workflows/            # Workflow definitions
 │   └── types/                # TypeScript type definitions
 ├── skills/                   # Embedded PM skills (flat, copied from pm-skills v2.x)
 │   ├── deliver-prd/          # Example: phase-prefixed skill directories
@@ -809,12 +815,12 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 See the [open issues](https://github.com/product-on-purpose/pm-skills-mcp/issues) for planned features.
 
 - [x] Core MCP server with all 27 PM skills
-- [x] Workflow bundle tools
+- [x] Workflow tools (11 workflows)
 - [x] MCP resources for direct skill access
 - [x] MCP prompts for guided workflows
 - [x] Automated npm publishing
 - [x] Skill versioning and compatibility tracking
-- [ ] Additional workflow bundles
+- [ ] Additional workflows
 - [ ] Custom skill contribution support
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -842,7 +848,7 @@ npm run test:coverage
 
 - Skill loader and parser
 - Tool handler and response formatting
-- Workflow bundle execution
+- Workflow execution
 - Prompt registration
 - Output validation
 - Server initialization

@@ -18,7 +18,7 @@ import {
   loadPersonaResources,
   type PersonaResource,
 } from './resources/index.js';
-import { listWorkflowBundles, formatWorkflowOutput } from './workflows/index.js';
+import { listWorkflows, formatWorkflowOutput } from './workflows/index.js';
 import { registerPrompts, listPrompts } from './prompts/index.js';
 
 /**
@@ -129,7 +129,7 @@ export class PMSkillsServer {
     this.registerSearchSkillsTool();
     this.registerCacheStatsTool();
 
-    // Register workflow bundle tools
+    // Register workflow tools
     this.workflowCount = this.registerWorkflowTools();
     this.registerListWorkflowsTool();
 
@@ -576,24 +576,24 @@ Returns:
   }
 
   /**
-   * Register all workflow bundle tools
+   * Register all workflow tools
    */
   private registerWorkflowTools(): number {
-    const bundles = listWorkflowBundles();
+    const workflows = listWorkflows();
     const workflowParamsSchema = {
       topic: z.string().describe('The subject or feature for this workflow'),
       context: z.string().optional().describe('Additional context, constraints, or requirements'),
     };
 
-    for (const bundle of bundles) {
-      const toolName = `${TOOL_CONFIG.prefix}workflow_${bundle.id.replace(/-/g, '_')}`;
-      const stepList = bundle.steps
+    for (const workflow of workflows) {
+      const toolName = `${TOOL_CONFIG.prefix}workflow_${workflow.id.replace(/-/g, '_')}`;
+      const stepList = workflow.steps
         .map((s) => `${s.order}. ${s.toolName}${s.optional ? ' (optional)' : ''}`)
         .join('\n');
 
-      const description = `${bundle.name} workflow - ${bundle.description}
+      const description = `${workflow.name} workflow - ${workflow.description}
 
-**Effort Level:** ${bundle.effort}
+**Effort Level:** ${workflow.effort}
 
 **Steps:**
 ${stepList}
@@ -609,7 +609,7 @@ Returns:
 
       this.server.tool(toolName, description, workflowParamsSchema, async (params) => {
         try {
-          const output = formatWorkflowOutput(bundle, this.skills, params.topic, params.context);
+          const output = formatWorkflowOutput(workflow, this.skills, params.topic, params.context);
           return createSuccessResponse(output);
         } catch (error) {
           if (error instanceof Error) {
@@ -620,16 +620,16 @@ Returns:
       });
     }
 
-    return bundles.length;
+    return workflows.length;
   }
 
   /**
    * Register a tool to list all available workflows
    */
   private registerListWorkflowsTool(): void {
-    const description = `List all available PM-Skills workflow bundles.
+    const description = `List all available PM-Skills workflows.
 
-Workflow bundles are pre-defined sequences of skills for common PM workflows like feature kickoff, lean validation, and experimentation.
+Workflows are pre-defined sequences of skills for common PM workflows like feature kickoff, lean validation, and experimentation.
 
 Use this tool to discover available workflows before invoking a specific workflow tool.
 
@@ -637,28 +637,28 @@ Returns:
   Markdown formatted list of all workflows with their descriptions and steps.`;
 
     this.server.tool(`${TOOL_CONFIG.prefix}list_workflows`, description, async () => {
-      const bundles = listWorkflowBundles();
+      const workflows = listWorkflows();
 
       const lines: string[] = [];
-      lines.push('# PM-Skills Workflow Bundles');
+      lines.push('# PM-Skills Workflows');
       lines.push('');
-      lines.push(`Total: ${bundles.length} workflows`);
+      lines.push(`Total: ${workflows.length} workflows`);
       lines.push('');
       lines.push(
         'Workflows are pre-defined sequences of skills. Call a workflow tool to get the full plan.'
       );
       lines.push('');
 
-      for (const bundle of bundles) {
-        const toolName = `${TOOL_CONFIG.prefix}workflow_${bundle.id.replace(/-/g, '_')}`;
-        lines.push(`## ${bundle.name}`);
+      for (const workflow of workflows) {
+        const toolName = `${TOOL_CONFIG.prefix}workflow_${workflow.id.replace(/-/g, '_')}`;
+        lines.push(`## ${workflow.name}`);
         lines.push('');
         lines.push(`**Tool:** \`${toolName}\``);
-        lines.push(`**Effort:** ${bundle.effort}`);
-        lines.push(`**Description:** ${bundle.description}`);
+        lines.push(`**Effort:** ${workflow.effort}`);
+        lines.push(`**Description:** ${workflow.description}`);
         lines.push('');
         lines.push('**Steps:**');
-        for (const step of bundle.steps) {
+        for (const step of workflow.steps) {
           const optional = step.optional ? ' *(optional)*' : '';
           lines.push(`${step.order}. \`${step.toolName}\` - ${step.purpose}${optional}`);
         }

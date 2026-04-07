@@ -44,7 +44,7 @@ src/
 ├── tools/                # MCP tool handlers
 ├── resources/            # MCP resource handlers
 ├── prompts/              # MCP prompt definitions
-├── workflows/            # Workflow bundle logic
+├── workflows/            # Workflow definitions
 └── types/                # TypeScript type definitions
 ```
 
@@ -74,11 +74,11 @@ src/
 |------|---------|
 | `index.ts` | Prompt definitions. Guided conversation starters for workflows. |
 
-#### `/src/workflows/` — Workflow Bundles
+#### `/src/workflows/` — Workflows
 
 | File | Purpose |
 |------|---------|
-| `index.ts` | Workflow bundle logic. Chains multiple skills into guided sequences. |
+| `index.ts` | Workflow definitions. Chains multiple skills into guided sequences. |
 
 #### `/src/types/` — TypeScript Types
 

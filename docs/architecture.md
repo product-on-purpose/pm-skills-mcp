@@ -15,7 +15,7 @@ This document describes the internal architecture of pm-skills-mcp for contribut
   - [Tool Handler (tools/)](#tool-handler-tools)
   - [Resource Server (resources/)](#resource-server-resources)
   - [Prompt Server (prompts/)](#prompt-server-prompts)
-  - [Workflow Bundles (workflows/)](#workflow-bundles-workflows)
+  - [Workflows (workflows/)](#workflows-workflows)
   - [Cache Layer (cache.ts)](#cache-layer-cachets)
   - [Configuration (config.ts)](#configuration-configts)
   - [Types (types/)](#types-types)
@@ -44,7 +44,7 @@ PM-Skills MCP is a Model Context Protocol server that exposes product management
 │                                                             │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
 │   │ Tool Handler│   │Resource Srv │   │ Prompt Srv  │       │
-│   │  (38 tools) │   │(resources)  │   │ (3 prompts) │       │
+│   │  (48 tools) │   │(resources)  │   │ (3 prompts) │       │
 │   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘       │
 │          │                 │                 │              │
 │          └─────────────────┼─────────────────┘              │
@@ -84,7 +84,7 @@ PM-Skills MCP is a Model Context Protocol server that exposes product management
 | Tool Handler | `src/tools/` | Tool invocation logic, output formatting |
 | Resource Server | `src/resources/` | Expose skills as MCP resources |
 | Prompt Server | `src/prompts/` | Conversation prompts for workflows |
-| Workflows | `src/workflows/` | Multi-skill workflow bundles |
+| Workflows | `src/workflows/` | Multi-skill workflows |
 | Cache | `src/cache.ts` | In-memory skill caching |
 | Config | `src/config.ts` | Environment and default configuration |
 | Types | `src/types/` | TypeScript type definitions |
@@ -108,7 +108,7 @@ src/
 ├── prompts/
 │   └── index.ts          # MCP prompt definitions
 ├── workflows/
-│   └── index.ts          # Workflow bundle logic
+│   └── index.ts          # Workflow definitions
 └── types/
     └── index.ts          # Shared TypeScript interfaces
 ```
@@ -148,7 +148,7 @@ await server.getServer().connect(transport);
 1. Load all skills via `loadAllSkills()`
 2. Register a tool for each skill using stable `pm_*` names derived from skill names (phase prefix removed)
 3. Register utility tools (list, search, validate)
-4. Register workflow bundle tools
+4. Register workflow tools
 5. Register MCP prompts
 6. Register MCP resources
 
@@ -297,7 +297,7 @@ registerPrompts(server: McpServer): number {
 }
 ```
 
-### Workflow Bundles (workflows/)
+### Workflows (workflows/)
 
 **Responsibility:** Chain multiple skills into guided sequences.
 
@@ -309,10 +309,16 @@ registerPrompts(server: McpServer): number {
 | `quick-prd` | problem-statement → prd |
 | `experiment-cycle` | hypothesis → experiment-design → experiment-results → lessons-log |
 | `triple-diamond` | All 24 phase skills in order |
+| `customer-discovery` | interview-synthesis → jtbd-canvas → opportunity-tree → problem-statement |
+| `sprint-planning` | refinement-notes → user-stories → edge-cases |
+| `product-strategy` | competitive-analysis → stakeholder-summary → opportunity-tree → solution-brief → adr |
+| `post-launch-learning` | instrumentation-spec → dashboard-requirements → experiment-results → retrospective → lessons-log |
+| `stakeholder-alignment` | stakeholder-summary → problem-statement → solution-brief → launch-checklist |
+| `technical-discovery` | spike-summary → adr → design-rationale |
 
 **Workflow execution:**
 ```typescript
-formatWorkflowOutput(bundleName: string, topic: string): string {
+formatWorkflowOutput(workflow: Workflow, skills: Map, topic: string): string {
   // Get workflow definition
   // Build output with ordered skill sequence
   // Return formatted guidance
@@ -472,7 +478,7 @@ main()
   │     │
   │     ├─► registerUtilityTools() × 7
   │     │
-  │     ├─► registerWorkflowTools() × 5
+  │     ├─► registerWorkflowTools() × 11
   │     │
   │     ├─► registerPrompts() × 3
   │     │
@@ -522,7 +528,7 @@ Client                              Server
   │◄── initializeResult ───────────────┤
   │                                    │
   ├─── tools/list ────────────────────►│
-  │◄── tools/list result (38 tools) ───┤
+  │◄── tools/list result (48 tools) ───┤
   │                                    │
   ├─── tools/call (pm_prd) ───────────►│
   │◄── tool result (skill content) ────┤
@@ -562,14 +568,17 @@ Client                              Server
 
 1. **Define workflow** in `src/workflows/index.ts`:
    ```typescript
-   const MY_WORKFLOW: WorkflowBundle = {
-     name: 'my-workflow',
+   const myWorkflow: Workflow = {
+     id: 'my-workflow',
+     name: 'My Workflow',
      description: 'My custom workflow',
-     skills: ['skill-1', 'skill-2', 'skill-3'],
+     effort: 'standard',
+     useCases: ['Example use case'],
+     steps: [/* ... */],
    };
    ```
 
-2. **Register in WORKFLOW_BUNDLES** array
+2. **Register in WORKFLOWS** record
 
 3. **Tool is automatically registered** as `pm_workflow_my_workflow`
 
@@ -644,7 +653,7 @@ tests/
 ├── handler.test.ts       # Tool invocation handling
 ├── validator.test.ts     # Artifact validation
 ├── prompts.test.ts       # Prompt registration
-├── workflows.test.ts     # Workflow bundle logic
+├── workflows.test.ts     # Workflow definitions
 ├── cache.test.ts         # Cache behavior
 └── server.test.ts        # Server initialization
 ```

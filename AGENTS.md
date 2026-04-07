@@ -120,7 +120,7 @@ Document strategic pivot/persevere decision with evidence and rationale.
 |------|-------------|
 | `pm_list_skills` | List all available PM skill tools |
 | `pm_list_resources` | List all available MCP resources |
-| `pm_list_workflows` | List all workflow bundles with steps |
+| `pm_list_workflows` | List all workflows with steps |
 | `pm_list_prompts` | List available conversation prompts |
 | `pm_validate` | Validate artifact against skill template |
 | `pm_search_skills` | Search skills by keyword across names, descriptions, and content |

@@ -47,7 +47,7 @@ Add this to your MCP client configuration:
 }
 ```
 
-Restart your AI assistant. Done! You now have access to 25 PM skills, 5 workflow bundles, and 8 utility tools.
+Restart your AI assistant. Done! You now have access to 29 PM skills, 11 workflows, and 8 utility tools.
 
 **Try it:**
 > "Use the pm_prd tool to create a PRD for adding dark mode to our app"
@@ -107,7 +107,7 @@ When you configure an MCP server, your AI gains new capabilities-in this case, 2
 
 MCP exposes three types of capabilities:
 
-#### Tools (38 total)
+#### Tools (48 total)
 
 Tools are **actions the AI can invoke**. Each PM skill is exposed as a tool:
 
@@ -119,7 +119,7 @@ Tools are **actions the AI can invoke**. Each PM skill is exposed as a tool:
 | `pm_experiment_design` | A/B test plan |
 | ... | 21 more skills |
 
-Plus workflow bundles (`pm_workflow_feature_kickoff`, etc.) and utility tools (`pm_list_skills`, `pm_search_skills`, etc.).
+Plus workflows (`pm_workflow_feature_kickoff`, etc.) and utility tools (`pm_list_skills`, `pm_search_skills`, etc.).
 
 #### Resources
 
@@ -420,7 +420,7 @@ The AI maintains context and builds on previous artifacts.
 
 ## Working with Workflows
 
-**Workflow bundles** chain multiple skills into guided sequences for common scenarios.
+**Workflows** chain multiple skills into guided sequences for common scenarios.
 
 ### Available Workflows
 
@@ -431,6 +431,12 @@ The AI maintains context and builds on previous artifacts.
 | `pm_workflow_quick_prd` | problem → PRD | Requirements are clear |
 | `pm_workflow_experiment_cycle` | hypothesis → experiment → results → lessons | Running experiments |
 | `pm_workflow_triple_diamond` | All 24 phase skills in sequence | Comprehensive product development |
+| `pm_workflow_customer_discovery` | research → JTBD → opportunities → problem | Validating a problem space |
+| `pm_workflow_sprint_planning` | refinement → stories → edge cases | Preparing sprint-ready stories |
+| `pm_workflow_product_strategy` | competitive → stakeholders → opportunities → solution → ADR | Strategic initiative framing |
+| `pm_workflow_post_launch_learning` | instrumentation → dashboard → results → retro → lessons | Post-ship evaluation |
+| `pm_workflow_stakeholder_alignment` | stakeholders → problem → solution → launch readiness | Building leadership buy-in |
+| `pm_workflow_technical_discovery` | spike → ADR → design rationale | Evaluating technical feasibility |
 
 ### Using a Workflow
 
@@ -616,7 +622,7 @@ Use the utility tools to discover what's available:
 
 ```
 pm_list_skills      → See all 25 skills with descriptions
-pm_list_workflows   → See all workflow bundles with steps
+pm_list_workflows   → See all workflows with steps
 pm_list_resources   → See all available resources
 pm_search_skills    → Search skills by keyword
 ```
@@ -670,7 +676,7 @@ Found a bug? Have an idea? Want to add a skill?
 "Use pm_hypothesis to create a testable hypothesis for [assumption]"
 "Use pm_workflow_feature_kickoff for [new feature]"
 "Search PM skills for [keyword]"
-"List all workflow bundles"
+"List all workflows"
 ```
 
 ### Config Template

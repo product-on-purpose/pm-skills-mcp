@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - 2026-04-06
+
+### Added
+- **6 new workflow tools** aligned with pm-skills v2.9.0 workflows:
+  - `pm_workflow_customer_discovery` -- research to validated problem
+  - `pm_workflow_sprint_planning` -- backlog to sprint-ready stories
+  - `pm_workflow_product_strategy` -- strategic initiative framing with competitive context
+  - `pm_workflow_post_launch_learning` -- measurement, evaluation, and learning capture
+  - `pm_workflow_stakeholder_alignment` -- building leadership buy-in
+  - `pm_workflow_technical_discovery` -- feasibility evaluation and architecture decisions
+
+### Changed
+- **Source refactor: bundles to workflows** -- renamed internal types and functions for consistency with pm-skills v2.9.0:
+  - `WorkflowBundle` interface renamed to `Workflow`
+  - `WORKFLOW_BUNDLES` constant renamed to `WORKFLOWS`
+  - `listWorkflowBundles()` / `getWorkflowBundle()` renamed to `listWorkflows()` / `getWorkflow()`
+  - Comments and variable names updated throughout `src/workflows/`, `src/server.ts`, `src/config.ts`
+- Tool count: 48 tools (29 skills + 11 workflows + 8 utilities), up from 42.
+- Version bumped to `2.9.0` in `package.json` and `src/config.ts`.
+- Tests updated: workflow count assertions raised from 5 to 11, 6 new workflow ID assertions added.
+- Documentation updated: README, AGENTS.md, architecture, getting-started, and integration-guide reflect new workflow count and terminology.
+
+### Release Notes
+- No breaking changes to MCP tool names -- all existing `pm_workflow_*` tools remain unchanged.
+- 6 new workflow tools extend coverage to customer discovery, sprint planning, product strategy, post-launch learning, stakeholder alignment, and technical discovery.
+- Internal rename from "bundles" to "workflows" aligns MCP server terminology with pm-skills v2.9.0.
+
 ## [2.8.2] - 2026-04-04
 
 ### Changed

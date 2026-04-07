@@ -40,7 +40,7 @@ Moving from cloned pm-skills to pm-skills-mcp.
 | Need to clone/update repo | `npm update -g pm-skills-mcp` |
 | Navigate file structure | AI invokes tools directly |
 | Slash commands only in Claude Code | Works in any MCP client |
-| Manual skill chaining | Workflow bundle tools |
+| Manual skill chaining | Workflow tools |
 
 ### Before You Start
 
@@ -298,7 +298,7 @@ Complete mapping of slash commands to MCP tools.
 | `/refinement-notes` | `pm_refinement_notes` |
 | `/pivot-decision` | `pm_pivot_decision` |
 
-### Workflow Bundles
+### Workflows
 
 | Slash Command | MCP Tool |
 |--------------|----------|
@@ -307,6 +307,12 @@ Complete mapping of slash commands to MCP tools.
 | (manual chaining) | `pm_workflow_quick_prd` |
 | (manual chaining) | `pm_workflow_experiment_cycle` |
 | (manual chaining) | `pm_workflow_triple_diamond` |
+| (manual chaining) | `pm_workflow_customer_discovery` |
+| (manual chaining) | `pm_workflow_sprint_planning` |
+| (manual chaining) | `pm_workflow_product_strategy` |
+| (manual chaining) | `pm_workflow_post_launch_learning` |
+| (manual chaining) | `pm_workflow_stakeholder_alignment` |
+| (manual chaining) | `pm_workflow_technical_discovery` |
 
 ### Invocation Syntax Comparison
 
@@ -389,7 +395,7 @@ You've extensively customized multiple skills.
 
 3. **Train on new workflow**
    - Share command-to-tool mapping
-   - Demonstrate workflow bundles
+   - Demonstrate workflows
    - Show pm_list_skills and pm_search_skills utilities
 
 4. **Phased rollout**

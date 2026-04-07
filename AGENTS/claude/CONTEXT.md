@@ -53,7 +53,7 @@ src/
 ├── skills/loader.ts   # Skill parsing with cache
 ├── tools/             # Tool handlers and schemas
 ├── resources/         # MCP resource registration
-├── workflows/         # Workflow bundle definitions
+├── workflows/         # Workflow definitions
 └── prompts/           # MCP prompt definitions
 ```
 
@@ -62,7 +62,7 @@ src/
 |------|-------------|
 | `pm_list_skills` | List all available skills |
 | `pm_list_resources` | List all MCP resources |
-| `pm_list_workflows` | List workflow bundles |
+| `pm_list_workflows` | List workflows |
 | `pm_list_prompts` | List available prompts |
 | `pm_validate` | Validate artifact against template |
 | `pm_search_skills` | Keyword search across skills |
