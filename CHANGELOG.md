@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.3] - 2026-05-05
+
+### Notice: Maintenance Mode Patch (security advisories cleared)
+
+This release validates the maintenance-mode commitment in v2.9.2 by patching the open Dependabot advisories that accumulated against the v2.9.0 dependency tree. All 8 open advisories (and 2 additional advisories surfaced by `npm audit` but missing from the Dependabot open view) cleared via transitive version bumps.
+
+### Security
+
+- `npm audit fix` clears all open advisories via transitive bumps. All advisories are moderate severity except the vite WebSocket advisory which was high severity:
+  - `hono` 4.12.10 to 4.12.17 (clears 6 advisories: JSX attribute injection, NBSP cookie name bypass, IPv4-mapped IPv6 IP matching in `ipRestriction()`, missing `setCookie()` name validation, `serveStatic` repeated-slashes middleware bypass, `toSSG()` path traversal).
+  - `@hono/node-server` 1.19.12 to 1.19.14 (clears 1 advisory: `serveStatic` repeated-slashes middleware bypass).
+  - `vite` 6.4.1 to 6.4.2 (clears 2 advisories: optimized-deps `.map` path traversal, dev-server WebSocket arbitrary file read).
+  - `postcss` 8.5.6 to 8.5.14 (clears 1 advisory: XSS via unescaped `</style>` in stringify output).
+- Post-fix `npm audit` reports zero vulnerabilities.
+- All bumps are transitive. `package.json` direct dependencies and devDependencies are unchanged.
+
+### Fixed
+
+- `tests/loader.test.ts`: catalog assertions corrected for the 40-skill embedded library. `measure` phase distribution updated from 4 to 5 (the v2.9.2 maintenance-mode re-embed brought in `measure-okr-grader` as a fifth measure-phase skill, but the corresponding test assertion was not updated). The `deliver` plus `measure` phase-filter expectation updated from 10 to 11. Test suite is now fully green at 81 of 81 passing.
+- `package-lock.json`: top-level `version` metadata field synced from a stale `2.8.1` to the current release version. Latent metadata-drift cleanup that pre-dated this release; benign but worth correcting.
+- `CHANGELOG.md`: retroactive em-dash sweep on 28 occurrences in entries from v2.6.0 and earlier. The project no-em-dash rule was codified in `CLAUDE.md` on 2026-04-13 with a retroactive clause ("when editing an existing document, sweep the entire file"); pm-skills-mcp's CHANGELOG had not been swept since the rule landed. Replaced the U+2014 character (rendered as space-then-em-dash-then-space in prose) with ` - ` (space-hyphen-space). No semantic content changed.
+
+### Changed
+
+- `src/config.ts` and `package.json`: version bumped to `2.9.3`.
+
+### Note
+
+This is a security-patch release in maintenance mode. The embedded skill catalog (40 skills), workflow tools (11), and utility tools (8) are unchanged from v2.9.2. Total tools remain 59. The maintenance-mode posture documented in v2.9.1 and v2.9.2 stands: active feature development is paused pending demonstrated demand; security patches and critical bug fixes will continue.
+
 ## [2.9.2] - 2026-05-05
 
 ### Notice: Maintenance Mode (corrected counts from v2.9.1)
@@ -100,7 +130,7 @@ This release also publishes the previously-tagged `v2.9.0` content that did not 
   - Cross-links to pm-skills documentation site at `product-on-purpose.github.io/pm-skills/`
 
 ### Release Notes
-- Documentation-only release — no code, tool, or embedding changes.
+- Documentation-only release - no code, tool, or embedding changes.
 - Aligns MCP repo documentation with the pm-skills v2.8.0 skill additions (validate + iterate) and the v2.8.1 docs site launch.
 - The pm-skills docs site now includes a dedicated [MCP Setup Guide](https://product-on-purpose.github.io/pm-skills/guides/mcp-setup/) and [MCP Integration Guide](https://product-on-purpose.github.io/pm-skills/guides/mcp-integration/).
 
@@ -108,8 +138,8 @@ This release also publishes the previously-tagged `v2.9.0` content that did not 
 
 ### Added
 - **2 new skill tools** from `pm-skills v2.8.0`:
-  - `pm_pm_skill_validate` — audit a skill against structural conventions and quality criteria (Utility classification)
-  - `pm_pm_skill_iterate` — apply targeted improvements from feedback or validation reports (Utility classification)
+  - `pm_pm_skill_validate` - audit a skill against structural conventions and quality criteria (Utility classification)
+  - `pm_pm_skill_iterate` - apply targeted improvements from feedback or validation reports (Utility classification)
 
 ### Changed
 - Re-embedded all skills from `pm-skills v2.8.0` (29 skills, 87 files).
@@ -120,15 +150,15 @@ This release also publishes the previously-tagged `v2.9.0` content that did not 
 
 ### Release Notes
 - Completes the PM skill lifecycle in MCP: Create (`pm_pm_skill_builder`) → Validate (`pm_pm_skill_validate`) → Iterate (`pm_pm_skill_iterate`).
-- Both new tools derive their names from the `utility-` prefix stripping in `deriveToolName` — no server code changes were needed.
+- Both new tools derive their names from the `utility-` prefix stripping in `deriveToolName` - no server code changes were needed.
 - 81 tests passing.
 
 ## [2.7.0] - 2026-03-22
 
 ### Added
 - **2 new skill tools** from `pm-skills v2.7.0`:
-  - `pm_acceptance_criteria` — Given/When/Then acceptance criteria generation (Deliver phase, specification category)
-  - `pm_pm_skill_builder` — interactive PM skill creation with gap analysis, classification, and staging workflow (Utility classification, coordination category)
+  - `pm_acceptance_criteria` - Given/When/Then acceptance criteria generation (Deliver phase, specification category)
+  - `pm_pm_skill_builder` - interactive PM skill creation with gap analysis, classification, and staging workflow (Utility classification, coordination category)
 - First utility-classified skill tool in the MCP server.
 
 ### Changed
@@ -355,30 +385,30 @@ This release also publishes the previously-tagged `v2.9.0` content that did not 
 
 ### Added
 - **Comprehensive Documentation Suite** (Issues #8, #9, #10, #11)
-  - `docs/getting-started.md` — Complete setup guide with core concepts, platform setup, first tool walkthrough, workflows, and troubleshooting
-  - `docs/integration-guide.md` — Client-specific setup for Claude Desktop, Claude Code, Cursor, Continue, Cline, Windsurf with troubleshooting
-  - `docs/customization.md` — Environment variable overrides, fork workflow, skill structure requirements, testing custom skills
-  - `docs/migration-guide.md` — File-based ↔ MCP migration, command-to-tool mapping table, hybrid approach
-  - `docs/architecture.md` — Server internals, component breakdown, data flow diagrams, extension points, performance considerations
-- **README Guides section** — New section with links and descriptions for all 5 documentation guides
-- **Platform Compatibility table** — Expanded "Works with..." section with 11 platforms, status indicators, and integration types
-- **Project Structure section** — Tree diagram in README.md showing repository layout including new docs/
-- **docs/reference/project-structure.md** — Comprehensive documentation with full `/src/` module breakdown, test suite descriptions, MCP server architecture diagram
-- **README header callout** — Cross-reference to pm-skills for customization and slash commands
-- **README "Using Both Together" section** — Guide for using pm-skills fork with pm-skills-mcp
-- **README fork workflow** — Configuration section for using custom pm-skills fork
-- **README Acknowledgments section** — Credits for pm-skills, MCP, and Anthropic
-- **README Releases section** — Added under Project Status with npm/GitHub badges
+  - `docs/getting-started.md` - Complete setup guide with core concepts, platform setup, first tool walkthrough, workflows, and troubleshooting
+  - `docs/integration-guide.md` - Client-specific setup for Claude Desktop, Claude Code, Cursor, Continue, Cline, Windsurf with troubleshooting
+  - `docs/customization.md` - Environment variable overrides, fork workflow, skill structure requirements, testing custom skills
+  - `docs/migration-guide.md` - File-based ↔ MCP migration, command-to-tool mapping table, hybrid approach
+  - `docs/architecture.md` - Server internals, component breakdown, data flow diagrams, extension points, performance considerations
+- **README Guides section** - New section with links and descriptions for all 5 documentation guides
+- **Platform Compatibility table** - Expanded "Works with..." section with 11 platforms, status indicators, and integration types
+- **Project Structure section** - Tree diagram in README.md showing repository layout including new docs/
+- **docs/reference/project-structure.md** - Comprehensive documentation with full `/src/` module breakdown, test suite descriptions, MCP server architecture diagram
+- **README header callout** - Cross-reference to pm-skills for customization and slash commands
+- **README "Using Both Together" section** - Guide for using pm-skills fork with pm-skills-mcp
+- **README fork workflow** - Configuration section for using custom pm-skills fork
+- **README Acknowledgments section** - Credits for pm-skills, MCP, and Anthropic
+- **README Releases section** - Added under Project Status with npm/GitHub badges
 
 ### Changed
-- **README.md Getting Started** — Added intro paragraph with link to getting-started.md, added Claude Code and Cursor/VS Code sections with config file paths
-- **README.md Usage > Tools** — Added intro explaining pm-skills relationship (24 skill tools vs 6 utility tools), enhanced parameter table with detailed descriptions and example invocations
-- **README.md "Works with..."** — Consolidated Quick Start by Platform into Getting Started, replaced with link to Integration Guide
-- **Table of Contents** — Restructured with Guides section and updated heading anchors
-- **README "The Big Idea"** — Added ecosystem context explaining pm-skills relationship
-- **README Comparison section** — Expanded to "PM-Skills Ecosystem" with comprehensive feature table
-- **README Table of Contents** — Updated with new sections (Using Both Together, Acknowledgments, Releases)
-- **README formatting** — Standardized em dashes to hyphens throughout
+- **README.md Getting Started** - Added intro paragraph with link to getting-started.md, added Claude Code and Cursor/VS Code sections with config file paths
+- **README.md Usage > Tools** - Added intro explaining pm-skills relationship (24 skill tools vs 6 utility tools), enhanced parameter table with detailed descriptions and example invocations
+- **README.md "Works with..."** - Consolidated Quick Start by Platform into Getting Started, replaced with link to Integration Guide
+- **Table of Contents** - Restructured with Guides section and updated heading anchors
+- **README "The Big Idea"** - Added ecosystem context explaining pm-skills relationship
+- **README Comparison section** - Expanded to "PM-Skills Ecosystem" with comprehensive feature table
+- **README Table of Contents** - Updated with new sections (Using Both Together, Acknowledgments, Releases)
+- **README formatting** - Standardized em dashes to hyphens throughout
 
 ## [1.0.0] - 2026-01-21
 

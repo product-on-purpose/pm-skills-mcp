@@ -129,7 +129,7 @@ describe('groupSkillsByPhase', () => {
     expect(grouped.get('define')?.length).toBe(4);
     expect(grouped.get('develop')?.length).toBe(4);
     expect(grouped.get('deliver')?.length).toBe(6);
-    expect(grouped.get('measure')?.length).toBe(4);
+    expect(grouped.get('measure')?.length).toBe(5);
     expect(grouped.get('iterate')?.length).toBe(4);
   });
 });
@@ -142,7 +142,7 @@ describe('loadAllSkills with phase filter', () => {
     };
     const skills = await loadAllSkills(config);
 
-    expect(skills.size).toBe(10); // 6 deliver + 4 measure
+    expect(skills.size).toBe(11); // 6 deliver + 5 measure
 
     for (const skill of skills.values()) {
       expect(['deliver', 'measure']).toContain(skill.phase);
