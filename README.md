@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Project Status: Active">
+  <img src="https://img.shields.io/badge/Status-Maintenance%20Mode-yellow?style=flat-square" alt="Project Status: Maintenance Mode">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square" alt="License">
   </a>
@@ -38,9 +38,18 @@
 </p>
 
 <!-- ========== NEW: Skill Library Cross-Reference Callout ========== -->
-> **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills)—the open-source skill library you can fork and modify. Browse the full catalog, interactive showcase, and setup guides at [product-on-purpose.github.io/pm-skills](https://product-on-purpose.github.io/pm-skills/).
+> **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills), the open-source skill library you can fork and modify. Browse the full catalog, interactive showcase, and setup guides at [product-on-purpose.github.io/pm-skills](https://product-on-purpose.github.io/pm-skills/).
 
 <!-- ========== END NEW ========== -->
+
+> [!IMPORTANT]
+> **Maintenance Mode (effective 2026-05-04)**
+>
+> Active development on `pm-skills-mcp` is paused pending demonstrated demand. The current release (v2.9.1) remains fully functional and continues to expose 29 PM skills, 11 workflows, and 8 utility tools via the Model Context Protocol. Security patches and critical bug fixes will continue to be addressed; new skill parity with the upstream [`pm-skills`](https://github.com/product-on-purpose/pm-skills) library is on hold.
+>
+> **For new users:** the file-based install path documented in the [main `pm-skills` repository](https://github.com/product-on-purpose/pm-skills) is under active maintenance and is the recommended path going forward.
+>
+> **To register interest in resumed development:** [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
 
 ---
 
@@ -111,7 +120,7 @@ npm install -g pm-skills-mcp
 
 ## The Big Idea
 
-**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills) — a collection of 29 best-practice product management skills — into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
+**PM-Skills MCP** is an MCP server that transforms [PM-Skills](https://github.com/product-on-purpose/pm-skills), a collection of 29 best-practice product management skills, into programmatically accessible tools, resources, and prompts for any AI assistant that speaks the Model Context Protocol.
 
 PM-Skills MCP is built on [pm-skills](https://github.com/product-on-purpose/pm-skills), an open-source collection of 29 PM skills organized by the Triple Diamond framework. While pm-skills offers file-based access with slash commands and AGENTS.md discovery, pm-skills-mcp wraps those same skills in an MCP server for programmatic access. The pm-skills library now includes **lifecycle tools** (Create, Validate, Iterate) and a [documentation site](https://product-on-purpose.github.io/pm-skills/) with an interactive showcase.
 
@@ -513,7 +522,7 @@ Every skill tool accepts these parameters:
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `topic` | **Yes** | The subject or feature to create this artifact for. Be specific—"user authentication for mobile app" is better than "auth". |
+| `topic` | **Yes** | The subject or feature to create this artifact for. Be specific: "user authentication for mobile app" is better than "auth". |
 | `context` | No | Additional requirements, constraints, or background. Use this for business context, technical constraints, or stakeholder needs. |
 | `format` | No | Output verbosity: `full` (default, includes all guidance), `concise` (template + key points), or `template-only` (just structure). |
 | `includeExample` | No | Set to `true` to include a completed example for reference. Helpful when learning a new skill. |
@@ -685,6 +694,16 @@ Comprehensive documentation for setup, customization, and understanding pm-skill
 
 ## Project Status
 
+### Development Status
+
+**Maintenance mode as of 2026-05-04.** Active feature development is paused pending demonstrated demand. The project will continue to receive security patches and critical bug fixes; new skill parity with the upstream [`pm-skills`](https://github.com/product-on-purpose/pm-skills) library is on hold pending a sustained signal of multi-team adoption.
+
+**Resumption criteria.** A sustained signal of demand via GitHub Discussion engagement, install-volume growth, or direct contact from teams adopting the server in production workflows.
+
+**Recommended path for new users.** The file-based install via the [main `pm-skills` repository](https://github.com/product-on-purpose/pm-skills) remains under active maintenance and is the supported path going forward. The main repository carries current parity with the latest pm-skills releases (40 skills as of v2.13.0).
+
+**To register interest:** [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
+
 ### Releases
 
 All releases are available on the [GitHub Releases](https://github.com/product-on-purpose/pm-skills-mcp/releases) page.
@@ -769,29 +788,29 @@ pm-skills-mcp/
 <details>
 <summary>v2.5.x - Persona tool support + taxonomy contract updates</summary>
 
-**v2.5.2** — Public release-doc readability cleanup.
-**v2.5.1** — Canonical `AGENTS/claude` continuity path.
-**v2.5.0** — Persona skill tool (`pm_persona`), two-axis classification model (`phase` + `classification`), embed validation hardening. Tool count: 38.
+**v2.5.2** - Public release-doc readability cleanup.
+**v2.5.1** - Canonical `AGENTS/claude` continuity path.
+**v2.5.0** - Persona skill tool (`pm_persona`), two-axis classification model (`phase` + `classification`), embed validation hardening. Tool count: 38.
 - Release notes: [`Release_v2.5.0.md`](docs/releases/Release_v2.5.0.md) through [`Release_v2.5.2.md`](docs/releases/Release_v2.5.2.md).
 
 </details>
 <details>
 <summary>v2.4.x - Direct version tracking with pm-skills</summary>
 
-**v2.4.3** — Release metadata/link alignment patch.
-**v2.4.2** — Governance + structure-doc alignment.
-**v2.4.1** — Version/pin parity patch.
-**v2.4.0** — Adopted direct version tracking with `pm-skills`. Added `pm-skills-source.json` for reproducible embeds. Resource URI contract tests. Tool count: 36.
+**v2.4.3** - Release metadata/link alignment patch.
+**v2.4.2** - Governance + structure-doc alignment.
+**v2.4.1** - Version/pin parity patch.
+**v2.4.0** - Adopted direct version tracking with `pm-skills`. Added `pm-skills-source.json` for reproducible embeds. Resource URI contract tests. Tool count: 36.
 - Release notes: [`Release_v2.4.0.md`](docs/releases/Release_v2.4.0.md) through [`Release_v2.4.3.md`](docs/releases/Release_v2.4.3.md).
 
 </details>
 <details>
 <summary>v2.1.0 and earlier</summary>
 
-**v2.1.0** — Flat skill structure alignment with pm-skills v2.x. Resource URIs flattened.
-**v1.1.0** — Comprehensive documentation suite, platform compatibility.
-**v1.0.0** — First stable release: 36 tools, caching, community governance.
-**v0.1.x** — Initial implementation: MCP server, CI/CD, npm packaging.
+**v2.1.0** - Flat skill structure alignment with pm-skills v2.x. Resource URIs flattened.
+**v1.1.0** - Comprehensive documentation suite, platform compatibility.
+**v1.0.0** - First stable release: 36 tools, caching, community governance.
+**v0.1.x** - Initial implementation: MCP server, CI/CD, npm packaging.
 - See [CHANGELOG.md](CHANGELOG.md) for full detail.
 
 </details>

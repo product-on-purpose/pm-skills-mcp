@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.1] - 2026-05-04
+
+### Notice: Maintenance Mode
+
+Active development on `pm-skills-mcp` is now paused pending demonstrated demand. The project enters maintenance mode effective with this release. Security patches and critical bug fixes will continue to be addressed; new skill parity with the upstream `pm-skills` library is on hold pending a sustained signal of multi-team adoption.
+
+For day-to-day PM-skills usage, the file-based install path documented in the main [`pm-skills`](https://github.com/product-on-purpose/pm-skills) repository remains under active maintenance and is the recommended path for new users.
+
+To register interest in resumed development, [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
+
+### Changed
+
+- README: status badge updated from `Status-Active` to `Status-Maintenance Mode`.
+- README: maintenance-mode notice block added near the top of the document.
+- README: `Project Status` section adds a `Development Status` subsection documenting the pause, resumption criteria, and recommended path for new users.
+- `src/config.ts`: `SERVER_INFO.description` corrected from "27 product management skills" to "29 product management skills" for accuracy with current embedded skill count, with a maintenance-mode flag appended for visibility in MCP client tool listings.
+- Version bumped to `2.9.1` in `package.json` and `src/config.ts`.
+
+### Encompassed v2.9.0 changes
+
+This release also publishes the previously-tagged `v2.9.0` content that did not reach npm at the time of tagging. v2.9.0 added 6 new workflow tools and renamed the internal `WorkflowBundle` type to `Workflow`. See the `## [2.9.0]` entry below for the full v2.9.0 detail. Effective tool count remains 48 (29 skills + 11 workflows + 8 utilities).
+
 ## [2.9.0] - 2026-04-06
 
 ### Added
