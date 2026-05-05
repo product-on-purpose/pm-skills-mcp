@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.2] - 2026-05-05
+
+### Notice: Maintenance Mode (corrected counts from v2.9.1)
+
+This release is the v2.9.1 maintenance mode announcement republished with corrected embedded skill counts. v2.9.1 was tagged on 2026-05-04 but never reached npm; the publish step (which runs `npm run embed-skills` as part of `prepublishOnly`) revealed that the embed script copies the upstream `pm-skills` library live at build time. Since `pm-skills` has grown to 40 skills since v2.9.0 was tagged in April 2026, the v2.9.1 announcement files (which claimed 29 skills, the count at v2.9.0 build time) were no longer accurate.
+
+v2.9.2 corrects all "29 skills / 48 tools" references to reflect the actual v2.9.2 build:
+
+- **Embedded skills: 40** (full current pm-skills catalog at build time, up from 29 at v2.9.0)
+- **Workflows: 11** (unchanged from v2.9.0)
+- **Utility tools: 8** (unchanged)
+- **Total tools: 59** (up from 48 at v2.9.0)
+
+The maintenance mode announcement otherwise stands as documented in v2.9.1: active feature development is paused pending demonstrated demand; security patches and critical bug fixes will continue; new skill parity with the upstream `pm-skills` library is on hold after this build. v2.9.2 is the canonical maintenance-mode release that ships to npm.
+
+For day-to-day PM-skills usage, the file-based install path documented in the main [`pm-skills`](https://github.com/product-on-purpose/pm-skills) repository remains under active maintenance and is the recommended path for new users.
+
+To register interest in resumed development, [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
+
+### Changed (from v2.9.1)
+
+- README.md, CLAUDE.md: skill count 29 → 40, total tool count 48 → 59 across all sites (tagline, badges, banner, key features, project structure, ASCII architecture diagram, roadmap milestones).
+- `src/config.ts`: `SERVER_INFO.description` updated to "40 product management skills".
+- `src/config.ts` and `package.json`: version bumped to `2.9.2`.
+
+### Note on v2.9.1
+
+Tag `v2.9.1` was created on 2026-05-04 and pushed to GitHub but never published to npm. It remains in git for reference but is not a usable release. v2.9.2 supersedes it.
+
 ## [2.9.1] - 2026-05-04
 
 ### Notice: Maintenance Mode
