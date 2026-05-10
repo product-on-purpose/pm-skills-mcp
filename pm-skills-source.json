@@ -1,8 +1,10 @@
 {
   "pmSkillsRepository": "product-on-purpose/pm-skills",
-  "pmSkillsRef": "v2.8.0",
-  "pmSkillsVersion": "2.8.0",
-  "outputContractVersion": "2.8.0",
-  "configContractVersion": "2.8.0",
-  "updated": "2026-04-03"
+  "pmSkillsRef": "v2.14.0",
+  "pmSkillsVersion": "2.14.0",
+  "outputContractVersion": "2.14.0",
+  "configContractVersion": "2.14.0",
+  "updated": "2026-05-10",
+  "maintenance": true,
+  "maintenanceNote": "MCP entered maintenance mode 2026-05-04 (M-22 decision + v2.9.2 announcement). Catalog of 40 skills frozen at v2.9.2 build time (which embedded the then-current v2.13.0-era catalog). Subsequent pm-skills releases (v2.13.1, v2.14.0) do not re-embed; pmSkillsVersion + outputContractVersion + configContractVersion are tracked here as metadata reflecting the latest pm-skills repo version compatible with the frozen catalog. Validate MCP Sync runs in observe-only mode (no CI fail) per the maintenance posture; see pm-skills/.github/workflows/validate-mcp-sync.yml and pm-skills CONTRIBUTING.md MCP Sync Guardrail section."
 }
