@@ -45,7 +45,7 @@
 > [!IMPORTANT]
 > **Maintenance Mode (effective 2026-05-04)**
 >
-> Active development on `pm-skills-mcp` is paused pending demonstrated demand. The current release (v2.9.2) remains fully functional and exposes the full pm-skills catalog of 40 PM skills, 11 workflows, and 8 utility tools (59 tools total) via the Model Context Protocol. Security patches and critical bug fixes will continue to be addressed; new skill parity with the upstream [`pm-skills`](https://github.com/product-on-purpose/pm-skills) library is on hold.
+> Active development on `pm-skills-mcp` is paused pending demonstrated demand. The latest release is **v2.9.3** (security patch shipped 2026-05-05; embedded catalog frozen at the v2.9.2 build) which remains fully functional and exposes a catalog of 40 PM skills, 11 workflows, and 8 utility tools (59 tools total) via the Model Context Protocol. Security patches and critical bug fixes will continue to be addressed; new skill parity with the upstream [`pm-skills`](https://github.com/product-on-purpose/pm-skills) library is on hold, so the catalog will continue to drift from `pm-skills` as new skills are added there.
 >
 > **For new users:** the file-based install path documented in the [main `pm-skills` repository](https://github.com/product-on-purpose/pm-skills) is under active maintenance and is the recommended path going forward.
 >
@@ -300,7 +300,7 @@ The recommended client for pm-skills-mcp. Add to your Claude Desktop configurati
 }
 ```
 
-Restart Claude Desktop. You now have access to all 25 PM skills as tools.
+Restart Claude Desktop. You now have access to all 40 PM skills as tools (catalog frozen at the v2.9.2 build; see Maintenance Mode notice above).
 
 </details>
 
@@ -336,7 +336,7 @@ Navigate to Settings → Features → MCP Servers, then add:
 }
 ```
 
-Restart Cursor. The 25 PM skill tools will be available in AI chat.
+Restart Cursor. The 40 PM skill tools will be available in AI chat (catalog frozen at the v2.9.2 build; see Maintenance Mode notice above).
 
 </details>
 
@@ -412,7 +412,7 @@ Any MCP-compatible client can use pm-skills-mcp. The general pattern:
 
 1. Configure an MCP server with command `npx` and args `["pm-skills-mcp"]`
 2. Restart the client
-3. All 25 PM skills become available as tools
+3. All 40 PM skills become available as tools (catalog frozen at the v2.9.2 build; see Maintenance Mode notice above)
 
 See the [Integration Guide](docs/integration-guide.md) for detailed instructions for all platforms.
 
@@ -700,7 +700,7 @@ Comprehensive documentation for setup, customization, and understanding pm-skill
 
 **Resumption criteria.** A sustained signal of demand via GitHub Discussion engagement, install-volume growth, or direct contact from teams adopting the server in production workflows.
 
-**Recommended path for new users.** The file-based install via the [main `pm-skills` repository](https://github.com/product-on-purpose/pm-skills) remains under active maintenance and is the supported path going forward. The main repository carries current parity with the latest pm-skills releases (40 skills as of v2.13.0).
+**Recommended path for new users.** The file-based install via the [main `pm-skills` repository](https://github.com/product-on-purpose/pm-skills) remains under active maintenance and is the supported path going forward. The main repository carries current parity with the latest pm-skills releases.
 
 **To register interest:** [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
 
@@ -717,7 +717,7 @@ npm install -g pm-skills-mcp
 **Install a pinned release:**
 
 ```bash
-npm install -g pm-skills-mcp@2.7.0
+npm install -g pm-skills-mcp@2.9.3
 ```
 
 [![npm version](https://img.shields.io/npm/v/pm-skills-mcp?style=for-the-badge&label=npm)](https://www.npmjs.com/package/pm-skills-mcp)
@@ -726,7 +726,7 @@ npm install -g pm-skills-mcp@2.7.0
 From `v2.4.0` onward, `pm-skills-mcp` directly tracks `pm-skills` release versions.
 Pinned source compatibility metadata is declared in `pm-skills-source.json` for each release.
 
-Latest: [`docs/releases/Release_v2.7.0.md`](docs/releases/Release_v2.7.0.md) | [Previous release details](#previous-release-details) | [Full changelog](#changelog)
+Latest: **v2.9.3** (security patch; 2026-05-05; catalog frozen at v2.9.2 build under maintenance mode). See [GitHub Releases](https://github.com/product-on-purpose/pm-skills-mcp/releases) for the v2.9.x line. | [Previous release details](#previous-release-details) | [Full changelog](#changelog)
 
 ### Project Structure
 See [docs/reference/project-structure.md](docs/reference/project-structure.md) for detailed descriptions.
@@ -821,6 +821,10 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 | Version   | Date       | Highlights                                                    |
 | --------- | ---------- | ------------------------------------------------------------- |
+| **2.9.3** | 2026-05-05 | Security patch: Dependabot alert cleanup (8 alerts closed). Catalog frozen at v2.9.2 build. |
+| **2.9.2** | 2026-05-04 | Maintenance-mode declaration. 40 skills embedded; final new-skill embedding under active development. |
+| **2.9.0** | 2026-04-06 | Workflow-tool parity with pm-skills (11 workflows), 59 tools total |
+| **2.8.0** | 2026-04-03 | Lifecycle skill embedding (Create, Validate, Iterate) |
 | **2.7.0** | 2026-03-22 | 2 new skill tools (`pm_acceptance_criteria`, `pm_pm_skill_builder`), 27 skills, 40 tools |
 | **2.6.0** | 2026-03-04 | Maintenance: pm-skills v2.6.0 version/source-pin parity |
 | **2.5.0** | 2026-03-02 | Persona tool + taxonomy contract updates + embed hardening |
@@ -1003,7 +1007,7 @@ To report a vulnerability, please email security concerns privately rather than 
 <!-- ========== NEW: Acknowledgments ========== -->
 ### Acknowledgments
 
-- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The skill library that powers this MCP server. All 25 PM skills, templates, and examples come from pm-skills.
+- **[PM-Skills](https://github.com/product-on-purpose/pm-skills)** - The skill library that powers this MCP server. All 40 PM skills, templates, and examples come from pm-skills (embedded catalog frozen at the v2.9.2 build under maintenance mode).
 - **[Model Context Protocol](https://modelcontextprotocol.io)** - The protocol that makes this possible
 - **[Anthropic](https://anthropic.com)** - For creating MCP and Claude
 <!-- ========== END NEW ========== -->
