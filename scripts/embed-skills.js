@@ -38,7 +38,13 @@ const INCLUDE_PERSONAS = (process.env.PM_INCLUDE_PERSONAS || '').toLowerCase() =
 const ROOT_FILES = ['SKILL.md'];
 const REFERENCE_FILES = ['TEMPLATE.md', 'EXAMPLE.md'];
 const SKILL_PHASES = ['discover', 'define', 'develop', 'deliver', 'measure', 'iterate'];
-const SKILL_CLASSIFICATIONS = ['domain', 'foundation', 'utility'];
+// 2026-05-17: 'tool' added to acknowledge v2.15.0 classification:tool
+// taxonomy (15 sprint-skill members shipped under tool-foundation-sprint-*
+// and tool-design-sprint-* prefixes plus tool-note-and-vote).
+// pm-skills-mcp catalog remains frozen at v2.9.2 build (M-22 maintenance
+// mode); known-classification recognition prevents EMB-004 hard-fails on
+// upstream taxonomy that the MCP tooling does not yet embed-route.
+const SKILL_CLASSIFICATIONS = ['domain', 'foundation', 'utility', 'tool'];
 const ALLOWED_ROOT_ENTRIES = new Set(['SKILL.md', 'references']);
 
 /**
@@ -147,18 +153,36 @@ function validateSkillDirectory(sourcePath, skillDir) {
   const hasValidPhase = phase.length > 0 && SKILL_PHASES.includes(phase);
   const hasValidClassification =
     classification.length > 0 && SKILL_CLASSIFICATIONS.includes(classification);
+  const hasUnknownClassification =
+    classification.length > 0 && !SKILL_CLASSIFICATIONS.includes(classification);
 
   if (!hasValidPhase && !hasValidClassification) {
-    errors.push(
-      createInvariant(
-        'EMB-004',
-        'hard-fail',
-        `Skill '${skillDir}' must provide a valid phase or classification.`,
-        `Set phase (${SKILL_PHASES.join(', ')}) or classification (${SKILL_CLASSIFICATIONS.join(
-          ', '
-        )}) in frontmatter.`
-      )
-    );
+    if (hasUnknownClassification) {
+      // M-22 maintenance-mode posture: pm-skills upstream may introduce
+      // new classifications faster than pm-skills-mcp catches up. Soften
+      // unknown-classification to warning so embed still completes and
+      // the MCP catalog stays roughly in sync. Adds the new value to
+      // SKILL_CLASSIFICATIONS when pm-skills-mcp un-freezes from M-22.
+      warnings.push(
+        createInvariant(
+          'EMB-004',
+          'warning',
+          `Skill '${skillDir}' uses unknown classification '${classification}' (known: ${SKILL_CLASSIFICATIONS.join(', ')}); embedding under maintenance-mode posture.`,
+          `Add '${classification}' to SKILL_CLASSIFICATIONS in scripts/embed-skills.js when MCP un-freezes from M-22.`
+        )
+      );
+    } else {
+      errors.push(
+        createInvariant(
+          'EMB-004',
+          'hard-fail',
+          `Skill '${skillDir}' must provide a valid phase or classification.`,
+          `Set phase (${SKILL_PHASES.join(', ')}) or classification (${SKILL_CLASSIFICATIONS.join(
+            ', '
+          )}) in frontmatter.`
+        )
+      );
+    }
   }
 
   if (fs.existsSync(referencesPath)) {
