@@ -302,8 +302,7 @@ const experimentCycle: Workflow = {
 const customerDiscovery: Workflow = {
   id: 'customer-discovery',
   name: 'Customer Discovery',
-  description:
-    'Transform raw research into a clear, validated problem worth solving.',
+  description: 'Transform raw research into a clear, validated problem worth solving.',
   effort: 'standard',
   useCases: [
     'Starting a new product initiative',
@@ -348,8 +347,7 @@ const customerDiscovery: Workflow = {
 const sprintPlanning: Workflow = {
   id: 'sprint-planning',
   name: 'Sprint Planning',
-  description:
-    'Prepare sprint-ready stories with edge case coverage from a backlog or PRD.',
+  description: 'Prepare sprint-ready stories with edge case coverage from a backlog or PRD.',
   effort: 'quick',
   useCases: [
     'Preparing stories for sprint planning',
@@ -440,8 +438,7 @@ const productStrategy: Workflow = {
 const postLaunchLearning: Workflow = {
   id: 'post-launch-learning',
   name: 'Post-Launch Learning',
-  description:
-    'Set up measurement, evaluate results, and capture learnings after a feature ships.',
+  description: 'Set up measurement, evaluate results, and capture learnings after a feature ships.',
   effort: 'comprehensive',
   useCases: [
     'Post-launch feature evaluation',
@@ -493,8 +490,7 @@ const postLaunchLearning: Workflow = {
 const stakeholderAlignment: Workflow = {
   id: 'stakeholder-alignment',
   name: 'Stakeholder Alignment',
-  description:
-    'Build a compelling case for leadership buy-in before committing resources.',
+  description: 'Build a compelling case for leadership buy-in before committing resources.',
   effort: 'standard',
   useCases: [
     'Pitching a new initiative to leadership',
@@ -539,8 +535,7 @@ const stakeholderAlignment: Workflow = {
 const technicalDiscovery: Workflow = {
   id: 'technical-discovery',
   name: 'Technical Discovery',
-  description:
-    'Evaluate technical feasibility and document architecture decisions.',
+  description: 'Evaluate technical feasibility and document architecture decisions.',
   effort: 'standard',
   useCases: [
     'Evaluating a new technology or approach',
