@@ -123,10 +123,29 @@ function validateSkillDirectory(sourcePath, skillDir) {
   const name = typeof frontmatter.name === 'string' ? frontmatter.name.trim() : '';
   const description =
     typeof frontmatter.description === 'string' ? frontmatter.description.trim() : '';
-  const phase = typeof frontmatter.phase === 'string' ? frontmatter.phase.trim() : '';
+  // v2.17.0 upstream spec migration: phase/classification/version moved under
+  // metadata: per agentskills.io. Read from metadata first, fall back to
+  // top-level so this embedder tolerates both old and new SKILL.md structures.
+  const meta =
+    frontmatter.metadata && typeof frontmatter.metadata === 'object' ? frontmatter.metadata : {};
+  const phase =
+    typeof meta.phase === 'string'
+      ? meta.phase.trim()
+      : typeof frontmatter.phase === 'string'
+        ? frontmatter.phase.trim()
+        : '';
   const classification =
-    typeof frontmatter.classification === 'string' ? frontmatter.classification.trim() : '';
-  const version = typeof frontmatter.version === 'string' ? frontmatter.version.trim() : '';
+    typeof meta.classification === 'string'
+      ? meta.classification.trim()
+      : typeof frontmatter.classification === 'string'
+        ? frontmatter.classification.trim()
+        : '';
+  const version =
+    typeof meta.version === 'string'
+      ? meta.version.trim()
+      : typeof frontmatter.version === 'string'
+        ? frontmatter.version.trim()
+        : '';
 
   if (!name || !description) {
     errors.push(
