@@ -1,13 +1,13 @@
 <a id="readme-top"></a>
 
-<h1 align="center">
+<h1>
   <a href="https://github.com/product-on-purpose/pm-skills-mcp">PM-Skills MCP</a>
   <br>
 </h1>
 
-<h4 align="center">Open-source MCP server exposing 40 best-practice product management skills plus workflows and lifecycle tools, instantly accessible to any AI via Model Context Protocol.</h4>
+<h4>Open-source MCP server exposing 40 best-practice product management skills plus workflows and lifecycle tools, instantly accessible to any AI via Model Context Protocol.</h4>
 
-<p align="center">
+<p>
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/issues/new?labels=bug">Report a Bug</a>
   ·
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/issues/new?labels=enhancement">Request a Feature</a>
@@ -15,7 +15,7 @@
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/discussions">Ask a Question</a>
 </p>
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/Status-Maintenance%20Mode-yellow?style=flat-square" alt="Project Status: Maintenance Mode">
   <a href="https://github.com/product-on-purpose/pm-skills-mcp/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square" alt="License">
@@ -37,6 +37,19 @@
   </a>
 </p>
 
+---
+
+<p>
+  <a href="#the-big-idea">About</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#project-status">Status</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#community">Community</a>
+</p>
+
+---
+
 <!-- ========== NEW: Skill Library Cross-Reference Callout ========== -->
 > **Want to customize skills or use slash commands?** This server is powered by [pm-skills](https://github.com/product-on-purpose/pm-skills), the open-source skill library you can fork and modify. Browse the full catalog, interactive showcase, and setup guides at [product-on-purpose.github.io/pm-skills](https://product-on-purpose.github.io/pm-skills/).
 
@@ -52,15 +65,6 @@
 > **To register interest in resumed development:** [open a GitHub Discussion](https://github.com/product-on-purpose/pm-skills-mcp/discussions).
 
 ---
-
-<p align="center">
-  <a href="#the-big-idea">About</a> •
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#project-status">Status</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#community">Community</a>
-</p>
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
