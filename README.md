@@ -37,8 +37,6 @@
   </a>
 </p>
 
----
-
 <p>
   <a href="#the-big-idea">About</a> •
   <a href="#getting-started">Getting Started</a> •
