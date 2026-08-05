@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/product-on-purpose-pm-skills-mcp-badge.png)](https://mseep.ai/app/product-on-purpose-pm-skills-mcp)
+
 <a id="readme-top"></a>
 
 <h1>
